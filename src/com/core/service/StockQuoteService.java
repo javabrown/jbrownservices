@@ -19,7 +19,7 @@ public class StockQuoteService {
         if(price != null){
             return price.doubleValue();
         }
-        return 42.00;
+        return 42.00;//
     }
 
     public void update(String symbol, double price) {
