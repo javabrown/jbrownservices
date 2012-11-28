@@ -1,4 +1,4 @@
-package com.core.service;
+package com.jbrown.core.service;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -11,7 +11,7 @@ import org.apache.axiom.attachments.Attachments;
 import org.apache.axis2.context.MessageContext;
 
 
-public class StockQuoteService {
+public class JBrownServices {
     private HashMap map = new HashMap();
 
     public double getPrice(String symbol) {

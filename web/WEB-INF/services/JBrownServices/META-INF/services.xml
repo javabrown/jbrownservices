@@ -1,4 +1,4 @@
-<service name="StockQuoteService" scope="application">
+<service name="JBrownServices" scope="application">
 	
 	<description>
 		   Sample Service
@@ -13,7 +13,7 @@
 	</messageReceivers>
 	
 	<parameter name="ServiceClass">
-		     com.core.service.StockQuoteService
+		     com.jbrown.core.service.JBrownServices
  </parameter>
  
  

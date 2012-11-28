@@ -2,5 +2,8 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/poi-3.0.1-FINAL-20070705.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/poi-3.6-20091214.jar"/>
+	<classpathentry kind="lib" path="web/WEB-INF/lib/poi-ooxml.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

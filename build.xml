@@ -21,7 +21,7 @@
 	<target name="deploy" depends="clean">
 		<mkdir dir="${dir.classes}" />
 		<javac srcdir="${dir.src}" destdir="${dir.classes}" fork="true" debug="true" classpathref="javac.classpath" />
-		<jar destfile="dist/myservices.war">
+		<jar destfile="dist/jbrownservices.war">
 			<fileset dir="web" />
 		</jar>
 		<copy todir="c:\tomcat\webapps">
