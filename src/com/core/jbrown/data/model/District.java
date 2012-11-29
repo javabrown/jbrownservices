@@ -2,9 +2,9 @@ package com.core.jbrown.data.model;
 
 public class District {
 	String districtName;
-	Post[] posts;
+	PostOffice[] posts;
 
-	public District(String districtName, Post[] posts) {
+	public District(String districtName, PostOffice[] posts) {
 		this.districtName = districtName;
 		this.posts = posts;
 	}
@@ -13,7 +13,7 @@ public class District {
 		return districtName;
 	}
 
-	public Post[] getPosts() {
+	public PostOffice[] getPostOffices() {
 		return posts;
 	}
 
