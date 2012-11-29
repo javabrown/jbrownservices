@@ -1,20 +1,39 @@
 package com.core.jbrown.data.model;
 
-public class District {
-	String districtName;
-	PostOffice[] posts;
+import java.io.Serializable;
 
-	public District(String districtName, PostOffice[] posts) {
+public class District implements DistrictI, Serializable{
+	private static final long serialVersionUID = 1L;
+	String stateId;
+	String districtId;
+	String districtName;
+	PostalI[] postOffices;
+
+	public District(String districtId, String stateId, String districtName,
+			PostOffice[] postOffices) {
+		this.districtId = districtId;
+		this.stateId = stateId;
 		this.districtName = districtName;
-		this.posts = posts;
+		this.postOffices = postOffices;
 	}
 
+	@Override
+	public String getDistrictId() {
+		return districtId;
+	}
+	
+	@Override
 	public String getDistrictName() {
 		return districtName;
 	}
 
-	public PostOffice[] getPostOffices() {
-		return posts;
+	@Override
+	public PostalI[] getPostOffices() {
+		return postOffices;
 	}
 
+	@Override
+	public String getStateId() {
+		return stateId;
+	}
 }

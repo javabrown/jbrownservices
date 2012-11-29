@@ -1,12 +1,14 @@
 package com.core.jbrown.data.model;
 
-public class Country {
+import java.io.Serializable;
+
+public class Country implements CountryI, Serializable{
+	private static final long serialVersionUID = 1L;
 	private String isoCode;
 	private String countryName;
 	private State[] states;
 
 	public Country(String isoCode, String countryName, State[] states) {
-		super();
 		this.isoCode = isoCode;
 		this.countryName = countryName;
 		this.states = states;
