@@ -24,7 +24,7 @@
 		<jar destfile="dist/jbrownservices.war">
 			<fileset dir="web" />
 		</jar>
-		<copy todir="c:\tomcat\webapps">
+		<copy todir="/mysoftwares/tomcat-6/webapps">
 			<fileset dir="dist" excludes="**/*.java,**/.jar" />
 		</copy>
 	</target>
@@ -48,7 +48,7 @@
    	        classname="org.apache.axis2.tool.ant.AntCodegenTask" 
    	        classpathref="axis2.classpath" /> 
       <axis2-wsdl2java 
-         	  wsdlfilename="http://localhost:8080/myservices/services/StockQuoteService?wsdl" 
+         	  wsdlfilename="http://localhost:8080/myservices/services/JBrownServices?wsdl" 
     	       output="serviceClientSrc" 
       	     namespaceToPackages="com.core.service=service.core.com.xsd"
       /> 
