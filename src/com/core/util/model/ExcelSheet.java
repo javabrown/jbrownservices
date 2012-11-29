@@ -37,11 +37,22 @@ public class ExcelSheet implements Serializable{
 	public String getTitle(){
 		return _title;
 	}
+	
 	public ExcelColumn getColumn() {
 		return _column;
 	}
 	public ExcelRow[] getRows() {
 		return _rows;
+	}
+	
+	public String[] getRowsForAColumn(String columnName) {
+		int index = _column.getColumnIndex(columnName);
+		List<String> rowsForAColumn = new ArrayList<String>();
+
+		for (ExcelRow row : _rows) {
+			rowsForAColumn.add(row.getCellValue(index));
+		}
+		return rowsForAColumn.toArray(new String[0]);
 	}
 	
 	public void loadExcelSheet(String title, String excelFile){
