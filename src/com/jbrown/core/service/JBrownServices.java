@@ -10,6 +10,8 @@ import javax.activation.DataHandler;
 import org.apache.axiom.attachments.Attachments;
 import org.apache.axis2.context.MessageContext;
 
+import com.jbrown.cache.BrownDataCache;
+
 
 public class JBrownServices {
     private HashMap map = new HashMap();
@@ -44,5 +46,9 @@ public class JBrownServices {
 			ex.printStackTrace();
 		}
 		return "File saved succesfully.";
+	}
+	
+	public String[] getAllCities(){
+		return BrownDataCache.getInstance().getAllCities();
 	}
 }

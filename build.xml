@@ -1,6 +1,18 @@
 <?xml version="1.0" ?>
 <project name="myservices" default="deploy" basedir=".">
 	
+ <condition property="isMac">
+   <os family="mac" />
+ </condition>
+
+ <condition property="isWindows">
+   <os family="windows" />
+ </condition>
+
+ <condition property="isUnix">
+   <os family="unix" />
+ </condition>
+	
 	<property name="dir.src" value="src" />
 	<property name="dir.classes" value="web/WEB-INF/classes" />
 	<property name="dir.serviceclient.classes" value="serviceTestClasses" />
@@ -18,16 +30,44 @@
 		  <delete file="dist\*.jar, *.war" failonerror="true" includeemptydirs="true" />
 	</target>
 
-	<target name="deploy" depends="clean">
-		<mkdir dir="${dir.classes}" />
-		<javac srcdir="${dir.src}" destdir="${dir.classes}" fork="true" debug="true" classpathref="javac.classpath" />
-		<jar destfile="dist/jbrownservices.war">
-			<fileset dir="web" />
-		</jar>
-		<copy todir="/mysoftwares/tomcat-6/webapps">
-			<fileset dir="dist" excludes="**/*.java,**/.jar" />
-		</copy>
+	
+	
+	<target name="deploy" depends="clean, deployOnMac, deployOnWindows">
+						<!--<mkdir dir="${dir.classes}" />
+						<javac srcdir="${dir.src}" destdir="${dir.classes}" fork="true" debug="true" classpathref="javac.classpath" />
+						<jar destfile="dist/jbrownservices.war">
+							<fileset dir="web" />
+						</jar>
+						<copy todir="/mysoftwares/tomcat-6/webapps">
+							<fileset dir="dist" excludes="**/*.java,**/.jar" />
+						</copy>-->
 	</target>
+	
+	
+ <target name="deployOnMac" if="isMac">
+   <echo message="Came into the Mac target" />
+				<mkdir dir="${dir.classes}" />
+				<javac srcdir="${dir.src}" destdir="${dir.classes}" fork="true" debug="true" classpathref="javac.classpath" />
+				<jar destfile="dist/jbrownservices.war">
+					<fileset dir="web" />
+				</jar>
+				<copy todir="/mysoftwares/tomcat-6/webapps">
+					<fileset dir="dist" excludes="**/*.java,**/.jar" />
+				</copy>
+ </target>
+
+ <target name="deployOnWindows" if="isWindows">
+   <echo message="Came into the Windows target" />
+			<mkdir dir="${dir.classes}" />
+			<javac srcdir="${dir.src}" destdir="${dir.classes}" fork="true" debug="true" classpathref="javac.classpath" />
+			<jar destfile="dist/jbrownservices.war">
+				<fileset dir="web" />
+			</jar>
+			<copy todir="c:/tomcat/webapps">
+				<fileset dir="dist" excludes="**/*.java,**/.jar" />
+			</copy>
+ </target>
+	
 	
 	
 	<path id="axis2.classpath">
