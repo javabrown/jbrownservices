@@ -1,0 +1,10 @@
+<source>
+
+<services>
+
+  <service name="RailEurope" address="White Plains"></service>
+  <service name="DatCore" address="Philadelphia"></service>
+
+</services>
+
+</source> 

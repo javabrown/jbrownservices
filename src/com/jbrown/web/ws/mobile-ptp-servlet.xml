@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+-->
+
+<!--
+  - Application context definition for "springapp" DispatcherServlet.
+-->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+     http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <bean id="requestHandler"
+    class="com.raileurope.web.web.ptp.PtpRequestHandler">
+  </bean>
+  
+  <bean id="resultsHandler" 
+    class="com.raileurope.web.web.ptp.PtpResultsHandler">    
+  </bean>
+  
+   <bean id="mobileResultsHandler"
+    class="com.raileurope.web.web.ptp.MobileResultsHandler">  
+  </bean>
+  
+  <bean id="tripRequestHandler"
+    class="com.raileurope.web.web.ptp.TripRequestHandler">
+  </bean>
+  
+  <bean id="passHolderRequestHandler"
+    class="com.raileurope.web.web.ptp.PassHolderRequestHandler">
+  </bean>
+
+  <bean id="portionResultsHandler"
+    class="com.raileurope.web.web.ptp.PortionResultsHandler">
+  </bean>
+  
+  <bean id="scheduleResultsHandler"
+     class="com.raileurope.web.web.ptp.ScheduleResultsHandler">
+    <property name="itineraryPassFinder">
+      <ref bean="itineraryPassFinder"/>
+    </property>    
+  </bean>
+
+  <bean id="passResultsHandler"
+    class="com.raileurope.web.web.ptp.PassResultsHandler">
+    <property name="itineraryPassFinder">
+      <ref bean="itineraryPassFinder"/>
+    </property>    
+  </bean>
+  
+  <bean id="portionCriteriaHandler"
+    class="com.raileurope.web.web.ptp.PortionCriteriaHandler">
+  </bean>
+  <bean id="passHolderCriteriaHandler"
+    class="com.raileurope.web.web.ptp.PassHolderCriteriaHandler">
+  </bean>
+
+  <bean id="fareupgradeHandler"
+    class="com.raileurope.web.web.ptp.FareUpgradeHandler">
+  </bean>
+    
+  <bean id="rtCompatiblityHandler"
+    class="com.raileurope.web.web.ptp.RTCompatibilityHandler">
+  </bean>
+  
+  <bean id="addCartHandler" 
+    class="com.raileurope.web.web.ptp.AddToCartHandler">
+  </bean>
+
+  <bean id="segmentDetailHandler"
+    class="com.raileurope.web.web.ptp.SegmentDetailHandler">
+  </bean>
+  
+  <bean id="fareRulesHandler"
+    class="com.raileurope.web.web.ptp.FareRulesHandler">
+  </bean>
+
+  <bean id="earlierHandler"
+    class="com.raileurope.web.web.ptp.EarlierHandler">
+  </bean>
+
+  <bean id="laterHandler"
+    class="com.raileurope.web.web.ptp.LaterHandler">
+  </bean>
+
+  <bean id="fareDebugHandler"
+    class="com.raileurope.web.web.ptp.FareDebugHandler">
+  </bean>
+
+  <bean id="accommodationsHandler"
+    class="com.raileurope.web.web.ptp.AccommodationsHandler">
+  </bean>
+
+  <bean id="bookingHorizonHandler"
+     class="com.raileurope.web.web.ptp.BookingHorizonHandler">
+    <property name="titleKey"><value>BookingHorizon.title</value></property>
+    <property name="contents">
+      <value>../errors.jsp</value>
+    </property>
+    <property name="layout"><value>ptp_layout.jsp</value></property>
+    <property name="navigator"><ref bean="basicNavigator"/></property>
+    <property name="handler">
+      <ref bean="bookingHorizonUpdateHandler"/>
+    </property>
+    <property name="displayListeners">
+      <list>
+        <ref local="ptpSessionExpiredListener"/>
+      </list>
+    </property>    
+  </bean>
+  
+  <bean id="dynamicHandler" class="com.raileurope.web.web.RequestHandler">
+    <property name="titleKey"><value>BookingHorizon.title</value></property>
+    <property name="contents">
+      <value>../env.jsp</value>
+    </property>
+    <property name="layout"><value>dynamic_layout.jsp</value></property>
+    <property name="navigator"><ref bean="basicNavigator"/></property>   
+  </bean>
+  
+
+  <bean id="bookingHorizonSuccessHandler"
+     class="com.raileurope.web.web.RequestHandler">
+    <property name="titleKey">
+      <value>BookingHorizonSuccess.title</value>
+    </property>
+     <property name="layout"><value>ptp_layout.jsp</value></property>
+    <property name="contents">
+      <value>../portion_request_content.jsp</value>
+    </property>
+  </bean>
+
+  <bean id="ptpSessionExpiredListener"
+    class="com.raileurope.web.web.ptp.SessionExpiredDisplayListener">
+    <property name="errorPage"><value>../errors.jsp</value></property>    
+    <property name="layout"><value>layout.jsp</value></property>
+  </bean>
+
+  <bean id="accommodationsFareRulesHandler"
+    class="com.raileurope.web.web.ptp.AccommodationsAndFareRulesHandler">
+  </bean>
+
+  <bean id="amtrakFareRulesHandler"
+    class="com.raileurope.web.web.ptp.AmtrakFareRulesHandler">
+  </bean>
+   <bean id="mobilePortionResultsHandler"
+    class="com.raileurope.web.web.ptp.MobilePortionResultsHandler">
+  </bean>
+
+  <bean id="portionAccommodationsFareRulesHandler"
+    class="com.raileurope.web.web.ptp.PortionAccommAndFareRulesHandler">
+  </bean>
+
+  <bean id="portionAccommodationsRulesHandler"
+    class="com.raileurope.web.web.ptp.PortionAccommodationRulesHandler">
+  </bean>
+  
+  <bean id="displayController" 
+    class="com.raileurope.web.web.DisplayController">
+  </bean>
+  
+  <bean id="cmsPtpSearchFormHandler" class="com.raileurope.web.web.RequestHandler">
+    <property name="view"><value>cms-ptp-search</value></property>
+    <property name="navigator"><ref bean="basicNavigator"/></property>    
+  </bean>
+  
+  <bean id="cmsPassReservationFormHandler" class="com.raileurope.web.web.RequestHandler">
+    <property name="view"><value>cms-pass-reservation</value></property>
+    <property name="navigator"><ref bean="basicNavigator"/></property>    
+  </bean>
+
+  <bean id="urlMapping"
+    class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+    <property name="mappings">
+      <props>
+
+        <prop key="/**/check_schedules.htm">tripRequestHandler</prop>
+        <prop key="/**/check_fares.htm">tripRequestHandler</prop>
+        
+        <prop key="/**/passholderrequest.htm">passHolderRequestHandler</prop>
+        
+        <prop key="/**/index.htm">requestHandler</prop> 
+
+        <prop key="/**/request.htm">requestHandler</prop>
+
+        <prop key="/**/results.htm">resultsHandler</prop>
+        
+        <prop key="/**/mresults.htm">mobileResultsHandler</prop>
+                
+        <prop key="/**/schedules.htm">resultsHandler</prop>
+        
+        <prop key="/**/add_to_cart.htm">addCartHandler</prop>
+        
+        <prop key="/**/segment_detail.htm">segmentDetailHandler</prop>
+
+        <prop key="/**/fare_rules.htm">fareRulesHandler</prop>
+        
+        <prop key="/**/mobileportionresult.htm">mobilePortionResultsHandler</prop>
+
+        <prop key="/**/earlier.htm">earlierHandler</prop>        
+
+        <prop key="/**/later.htm">laterHandler</prop>                
+
+        <prop key="/**/fare_debug.htm">fareDebugHandler</prop>
+
+        <prop key="/**/accommodations.htm">accommodationsHandler</prop>
+
+        <prop key="/**/booking_horizon.htm">bookingHorizonHandler</prop>
+
+        <prop key="/**/booking_horizon_success.htm">
+          bookingHorizonSuccessHandler
+        </prop>
+
+        <prop key="/**/accommodations_fare_rules.htm">
+          accommodationsFareRulesHandler
+        </prop>
+        
+         <prop key="/**/amtrak_fare_rules.htm">
+          amtrakFareRulesHandler
+        </prop>
+        <prop key="/**/portion_accommodations_fare_rules.htm">
+          portionAccommodationsFareRulesHandler
+        </prop>
+        
+        <prop key="/**/portion_accommodations_rules.htm">
+          portionAccommodationsRulesHandler
+        </prop>        
+                        
+        <prop key="/**/dynamic_ssi.htm">dynamicHandler</prop>
+                
+        <prop key="/**/portionresult.htm">portionResultsHandler</prop>
+        
+        <prop key="/**/scheduleresult.htm">scheduleResultsHandler</prop>
+        
+        <prop key="/**/passresult.htm">passResultsHandler</prop>
+        
+        <prop key="/**/portioncriteria.htm">portionCriteriaHandler</prop>
+        
+        <prop key="/**/passholdercriteria.htm">passHolderCriteriaHandler</prop>        
+        
+        <prop key="/**/rtcompatibility.htm">rtCompatiblityHandler</prop>
+        
+        <prop key="/**/fareupgrade.htm">fareupgradeHandler</prop>
+      </props>
+    </property>
+    
+    <property name="interceptors">
+      <list>
+        <ref local="ptpInterceptor" />
+      </list>
+    </property>
+  </bean>
+
+  <bean id="viewResolver"
+    class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <property name="viewClass">
+      <value>
+        org.springframework.web.servlet.view.InternalResourceView
+      </value>
+    </property>
+    <property name="prefix">
+      <value>/WEB-INF/mobile-jsp/</value>
+    </property>
+    <property name="suffix">
+      <value>.jsp</value>
+    </property>
+  </bean>
+
+
+  <bean id="ptpInterceptor"
+    class="com.raileurope.web.web.ptp.PtpInterceptor">
+  </bean>
+  
+</beans>

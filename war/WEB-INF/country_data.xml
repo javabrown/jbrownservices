@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+          "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<bean id="countryData" class="com.jbrown.web.resources.CountryData">			
+    <property name="dataFiles">
+      <map>
+        <entry key="IN">
+          <value>tsv/indian-postal-code.tsv</value>
+        </entry>
+        <entry key="ISO_COUNTRY">
+          <value>tsv/iso-country-codes.tsv</value>
+        </entry>
+        <entry key="PK">
+          <value>tsv/pak-postal-code.tsv</value>
+        </entry>
+        <entry key="US">
+          <value>tsv/usa-postal-code.tsv</value>
+        </entry>        
+      </map>
+    </property>
+	</bean>
+</beans>

@@ -1,0 +1,765 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns="http://java.sun.com/xml/ns/javaee"
+   xmlns:web="http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+   xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+   version="2.4">
+
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>
+      /WEB-INF/biz_context.xml
+      /WEB-INF/web_beans.xml
+    </param-value>
+  </context-param>
+
+  <filter>
+    <filter-name>logFilter</filter-name>
+    <filter-class>com.raileurope.web.web.LogFilter</filter-class>
+    <init-param>
+      <param-name>isActive</param-name>
+      <param-value>false</param-value>
+    </init-param>
+    <init-param>
+      <param-name>logFileName</param-name>
+      <param-value>../logs/request-response.log</param-value>
+    </init-param>
+  </filter>
+
+  <!-- Add for A-B testing
+  <filter>
+    <filter-name>pageSelectFilter</filter-name>
+    <filter-class>
+      org.springframework.web.filter.DelegatingFilterProxy
+    </filter-class>
+    <init-param>
+      <param-name>targetBeanName</param-name>
+      <param-value>pageSelectFilter</param-value>
+    </init-param>
+  </filter>
+  -->
+
+  <filter>
+    <filter-name>initialFilter</filter-name>
+    <filter-class>
+      org.springframework.web.filter.DelegatingFilterProxy
+    </filter-class>
+    <init-param>
+      <param-name>targetBeanName</param-name>
+      <param-value>initialFilter</param-value>
+    </init-param>
+  </filter>
+
+  <filter>
+    <filter-name>securityFilter</filter-name>
+    <filter-class>com.raileurope.web.web.SecurityFilter</filter-class>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>logFilter</filter-name>
+    <url-pattern>*.htm</url-pattern>
+  </filter-mapping>
+
+  <filter-mapping>
+    <filter-name>logFilter</filter-name>
+    <url-pattern>*.xml</url-pattern>
+  </filter-mapping>
+
+  <!-- Add for A-B testing
+  <filter-mapping>
+    <filter-name>pageSelectFilter</filter-name>
+    <url-pattern>*.htm</url-pattern>
+  </filter-mapping>
+  -->
+
+  <filter-mapping>
+    <filter-name>initialFilter</filter-name>
+    <url-pattern>*.htm</url-pattern>
+  </filter-mapping>
+
+  <filter-mapping>
+    <filter-name>initialFilter</filter-name>
+    <url-pattern>*.json</url-pattern>
+  </filter-mapping>
+
+  <filter-mapping>
+    <filter-name>securityFilter</filter-name>
+    <url-pattern>*.htm</url-pattern>
+  </filter-mapping>
+
+  <filter-mapping>
+    <filter-name>initialFilter</filter-name>
+    <url-pattern>/pass_prices.jsp</url-pattern>
+  </filter-mapping>
+
+  <listener>
+    <listener-class>
+      org.springframework.web.context.ContextLoaderListener
+    </listener-class>
+  </listener>
+
+  <servlet>
+    <servlet-name>test</servlet-name>
+    <servlet-class>
+      com.raileurope.web.web.TestServlet
+    </servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>shopping</servlet-name>
+    <servlet-class>
+      org.springframework.web.servlet.DispatcherServlet
+    </servlet-class>
+    <load-on-startup>2</load-on-startup>
+  </servlet>
+
+  <servlet>
+    <servlet-name>mobile-shopping</servlet-name>
+    <servlet-class>
+      org.springframework.web.servlet.DispatcherServlet
+    </servlet-class>
+    <load-on-startup>2</load-on-startup>
+  </servlet>
+
+  <servlet>
+    <servlet-name>ws-auth</servlet-name>
+    <servlet-class>
+      org.springframework.web.servlet.DispatcherServlet
+    </servlet-class>
+    <load-on-startup>2</load-on-startup>
+  </servlet>
+
+  <servlet>
+    <servlet-name>ptp</servlet-name>
+    <servlet-class>
+      org.springframework.web.servlet.DispatcherServlet
+    </servlet-class>
+    <load-on-startup>3</load-on-startup>
+  </servlet>
+
+  <servlet>
+    <servlet-name>mobile-ptp</servlet-name>
+    <servlet-class>
+      org.springframework.web.servlet.DispatcherServlet
+    </servlet-class>
+    <load-on-startup>3</load-on-startup>
+  </servlet>
+
+
+  <servlet>
+    <servlet-name>mobile-api</servlet-name>
+    <servlet-class>
+      org.springframework.web.servlet.DispatcherServlet
+    </servlet-class>
+    <load-on-startup>3</load-on-startup>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>city_dropdown</servlet-name>
+    <servlet-class>
+      <!--  com.raileurope.web.web.ptp.CityDropdownHandler-->
+      com.raileurope.web.web.ptp.GeoCityDropdownHandler
+    </servlet-class>
+    <load-on-startup>4</load-on-startup>
+  </servlet>
+
+  <!-- Pass holder city dropdown -->
+  <servlet>
+    <servlet-name>ph_city_dropdown</servlet-name>
+    <servlet-class>
+       com.raileurope.web.web.ptp.PassHolderCityDropdownHandler
+       <!-- com.raileurope.web.web.ptp.GeoCityDropdownHandler -->
+    </servlet-class>
+    <load-on-startup>4</load-on-startup>
+  </servlet>
+
+  <servlet>
+    <servlet-name>atoc_city_check</servlet-name>
+    <servlet-class>
+      com.raileurope.web.web.ptp.AtocCityCheckHandler
+    </servlet-class>
+    <load-on-startup>4</load-on-startup>
+  </servlet>
+  <servlet>
+    <servlet-name>ptp_cache</servlet-name>
+    <servlet-class>
+      com.raileurope.web.web.ptp.PtpCacheViewHandler
+    </servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>amtrak_city_dropdown</servlet-name>
+    <servlet-class>
+      com.raileurope.web.web.ptp.AmtrakCityDropdownHandler
+    </servlet-class>
+    <load-on-startup>4</load-on-startup>
+  </servlet>
+
+  <servlet>
+    <servlet-name>vpm_city_dropdown</servlet-name>
+    <servlet-class>
+      com.raileurope.web.web.ptp.VpmCityDropdownHandler
+    </servlet-class>
+    <load-on-startup>4</load-on-startup>
+  </servlet>
+
+  <servlet>
+    <servlet-name>pass_prices</servlet-name>
+    <servlet-class>
+      com.raileurope.web.web.PassPriceHandler
+    </servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>env</servlet-name>
+    <servlet-class>
+      com.raileurope.web.web.EnvironmentHandler
+    </servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>hotel</servlet-name>
+    <servlet-class>
+      org.springframework.web.servlet.DispatcherServlet
+    </servlet-class>
+    <load-on-startup>6</load-on-startup>
+  </servlet>
+
+  <servlet>
+    <servlet-name>order_search</servlet-name>
+    <servlet-class>
+      org.springframework.web.servlet.DispatcherServlet
+    </servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>misc</servlet-name>
+    <servlet-class>
+      org.springframework.web.servlet.DispatcherServlet
+    </servlet-class>
+    <load-on-startup>7</load-on-startup>
+  </servlet>
+
+  <servlet>
+    <servlet-name>pass_finder</servlet-name>
+    <servlet-class>
+      org.springframework.web.servlet.DispatcherServlet
+    </servlet-class>
+    <load-on-startup>8</load-on-startup>
+  </servlet>
+
+  <servlet>
+    <servlet-name>google_search</servlet-name>
+    <servlet-class>
+      org.springframework.web.servlet.DispatcherServlet
+    </servlet-class>
+    <load-on-startup>9</load-on-startup>
+  </servlet>
+
+  <servlet>
+    <servlet-name>ptp_flow</servlet-name>
+    <servlet-class>
+      org.springframework.web.servlet.DispatcherServlet
+    </servlet-class>
+    <load-on-startup>10</load-on-startup>
+  </servlet>
+
+  <servlet>
+    <servlet-name>tiles</servlet-name>
+    <servlet-class>org.apache.tiles.web.startup.TilesServlet</servlet-class>
+    <load-on-startup>2</load-on-startup>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>test</servlet-name>
+    <url-pattern>/us/test/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>ptp_flow</servlet-name>
+    <url-pattern>/us/ptp_flow/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ptp_flow</servlet-name>
+    <url-pattern>/en/us/ptp_flow/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>ptp_flow</servlet-name>
+    <url-pattern>/es/us/ptp_flow/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>ptp_flow</servlet-name>
+    <url-pattern>/fr/us/ptp_flow/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>ptp_flow</servlet-name>
+    <url-pattern>/canada/ptp_flow/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>ptp_flow</servlet-name>
+    <url-pattern>/en/canada/ptp_flow/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>ptp_flow</servlet-name>
+    <url-pattern>/es/canada/ptp_flow/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>ptp_flow</servlet-name>
+    <url-pattern>/fr/canada/ptp_flow/*</url-pattern>
+  </servlet-mapping>
+
+  <!-- Using a different servlet to get text/xml mime-type.  Initial
+       file-specific patterns for migrating current URLs followed by
+       prefix-matching URL pattern.  Once prefix-matching URL pattern
+       fully deployed in production, remove initial file-specific
+       patterns.
+  -->
+
+  <servlet-mapping>
+    <servlet-name>ws-auth</servlet-name>
+    <url-pattern>/us/shopping/user-account-info.xml</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>ws-auth</servlet-name>
+    <url-pattern>/us/shopping/ws-auth.xml</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>ws-auth</servlet-name>
+    <url-pattern>/us/shopping/errors-soap.xml</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>ws-auth</servlet-name>
+    <url-pattern>/us/ws-auth/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>ws-auth</servlet-name>
+    <url-pattern>/canada/shopping/user-account-info.xml</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>ws-auth</servlet-name>
+    <url-pattern>/canada/shopping/ws-auth.xml</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>ws-auth</servlet-name>
+    <url-pattern>/canada/shopping/errors-soap.xml</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>ws-auth</servlet-name>
+    <url-pattern>/canada/ws-auth/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>shopping</servlet-name>
+    <url-pattern>/us/shopping/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>shopping</servlet-name>
+    <url-pattern>/en/us/shopping/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>shopping</servlet-name>
+    <url-pattern>/es/us/shopping/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>shopping</servlet-name>
+    <url-pattern>/fr/us/shopping/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>shopping</servlet-name>
+    <url-pattern>/canada/shopping/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>shopping</servlet-name>
+    <url-pattern>/en/canada/shopping/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>shopping</servlet-name>
+    <url-pattern>/es/canada/shopping/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>shopping</servlet-name>
+    <url-pattern>/fr/canada/shopping/*</url-pattern>
+  </servlet-mapping>
+
+
+  <!-- mobile shopping -->
+
+  <servlet-mapping>
+    <servlet-name>mobile-shopping</servlet-name>
+    <url-pattern>/us/mobile/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>mobile-shopping</servlet-name>
+    <url-pattern>/en/us/mobile/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>mobile-shopping</servlet-name>
+    <url-pattern>/es/us/mobile/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>mobile-shopping</servlet-name>
+    <url-pattern>/fr/us/mobile/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>mobile-shopping</servlet-name>
+    <url-pattern>/canada/mobile/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>mobile-shopping</servlet-name>
+    <url-pattern>/en/canada/mobile/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>mobile-shopping</servlet-name>
+    <url-pattern>/es/canada/mobile/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>mobile-shopping</servlet-name>
+    <url-pattern>/fr/canada/mobile/*</url-pattern>
+  </servlet-mapping>
+
+
+  <!-- mobile ptp -->
+
+  <servlet-mapping>
+    <servlet-name>mobile-ptp</servlet-name>
+    <url-pattern>/us/mobile-ptp/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>mobile-ptp</servlet-name>
+    <url-pattern>/en/us/mobile-ptp/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>mobile-ptp</servlet-name>
+    <url-pattern>/es/us/mobile-ptp/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>mobile-ptp</servlet-name>
+    <url-pattern>/fr/us/mobile-ptp/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>mobile-ptp</servlet-name>
+    <url-pattern>/canada/mobile-ptp/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>mobile-ptp</servlet-name>
+    <url-pattern>/en/canada/mobile-ptp/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>mobile-ptp</servlet-name>
+    <url-pattern>/es/canada/mobile-ptp/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>mobile-ptp</servlet-name>
+    <url-pattern>/fr/canada/mobile-ptp/*</url-pattern>
+  </servlet-mapping>
+
+  <!-- end mobile -->
+
+
+  <servlet-mapping>
+    <servlet-name>ptp</servlet-name>
+    <url-pattern>/us/ptp/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>ptp</servlet-name>
+    <url-pattern>/en/us/ptp/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>ptp</servlet-name>
+    <url-pattern>/es/us/ptp/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>ptp</servlet-name>
+    <url-pattern>/fr/us/ptp/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>ptp</servlet-name>
+    <url-pattern>/canada/ptp/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>ptp</servlet-name>
+    <url-pattern>/en/canada/ptp/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>ptp</servlet-name>
+    <url-pattern>/es/canada/ptp/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>ptp</servlet-name>
+    <url-pattern>/fr/canada/ptp/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>city_dropdown</servlet-name>
+    <url-pattern>/city_dropdown.jsp</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>ph_city_dropdown</servlet-name>
+    <url-pattern>/ph_city_dropdown.jsp</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>atoc_city_check</servlet-name>
+    <url-pattern>/atoc_city_check.jsp</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>ptp_cache</servlet-name>
+    <url-pattern>/ptp_cache.jsp</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>amtrak_city_dropdown</servlet-name>
+    <url-pattern>/amtrak_city_dropdown.jsp</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>vpm_city_dropdown</servlet-name>
+    <url-pattern>/vpm_city_dropdown.jsp</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>pass_prices</servlet-name>
+    <url-pattern>/pass_prices.jsp</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>env</servlet-name>
+    <url-pattern>/env.jsp</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>hotel</servlet-name>
+    <url-pattern>/us/hotel/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>hotel</servlet-name>
+    <url-pattern>/en/us/hotel/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>hotel</servlet-name>
+    <url-pattern>/es/us/hotel/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>hotel</servlet-name>
+    <url-pattern>/fr/us/hotel/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>hotel</servlet-name>
+    <url-pattern>/canada/hotel/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>hotel</servlet-name>
+    <url-pattern>/en/canada/hotel/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>hotel</servlet-name>
+    <url-pattern>/es/canada/hotel/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>hotel</servlet-name>
+    <url-pattern>/fr/canada/hotel/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>order_search</servlet-name>
+    <url-pattern>/us/order_search/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>pass_finder</servlet-name>
+    <url-pattern>/us/pass_selector/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>pass_finder</servlet-name>
+    <url-pattern>/en/us/pass_selector/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>pass_finder</servlet-name>
+    <url-pattern>/es/us/pass_selector/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>pass_finder</servlet-name>
+    <url-pattern>/fr/us/pass_selector/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>pass_finder</servlet-name>
+    <url-pattern>/canada/pass_selector/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>pass_finder</servlet-name>
+    <url-pattern>/en/canada/pass_selector/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>pass_finder</servlet-name>
+    <url-pattern>/es/canada/pass_selector/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>pass_finder</servlet-name>
+    <url-pattern>/fr/canada/pass_selector/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>misc</servlet-name>
+    <url-pattern>/misc/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>google_search</servlet-name>
+    <url-pattern>/us/gsearch/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>google_search</servlet-name>
+    <url-pattern>/en/us/gsearch/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>google_search</servlet-name>
+    <url-pattern>/es/us/gsearch/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>google_search</servlet-name>
+    <url-pattern>/fr/us/gsearch/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>google_search</servlet-name>
+    <url-pattern>/canada/gsearch/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>google_search</servlet-name>
+    <url-pattern>/en/canada/gsearch/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>google_search</servlet-name>
+    <url-pattern>/es/canada/gsearch/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>google_search</servlet-name>
+    <url-pattern>/fr/canada/gsearch/*</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>mobile-api</servlet-name>
+    <url-pattern>/us/api/*</url-pattern>
+  </servlet-mapping>
+
+  <!-- removing struts-tiles.tld taglib probably no longer used - rkm -->
+
+  <taglib>
+    <taglib-uri>/biz</taglib-uri>
+    <taglib-location>biz.tld</taglib-location>
+  </taglib>
+
+  <taglib>
+    <taglib-uri>/biz-tags</taglib-uri>
+    <taglib-location>biz-tags.tld</taglib-location>
+  </taglib>
+
+  <taglib>
+    <taglib-uri>/ptp</taglib-uri>
+    <taglib-location>ptp.tld</taglib-location>
+  </taglib>
+
+  <taglib>
+    <taglib-uri>/hotel</taglib-uri>
+    <taglib-location>hotel.tld</taglib-location>
+  </taglib>
+
+  <taglib>
+    <taglib-uri>/html_form_tags</taglib-uri>
+    <taglib-location>html-form-tags.tld</taglib-location>
+  </taglib>
+
+  <taglib>
+    <taglib-uri>/nav</taglib-uri>
+    <taglib-location>nav.tld</taglib-location>
+  </taglib>
+
+  <taglib>
+    <taglib-uri>/util</taglib-uri>
+    <taglib-location>util.tld</taglib-location>
+  </taglib>
+
+  <taglib>
+    <taglib-uri>http://jakarta.apache.org/taglibs/i18n-1.0</taglib-uri>
+    <taglib-location>fmt.tld</taglib-location>
+  </taglib>
+
+  <taglib>
+    <taglib-uri>/spring</taglib-uri>
+    <taglib-location>/WEB-INF/spring.tld</taglib-location>
+  </taglib>
+
+  <taglib>
+    <taglib-uri>/google_search</taglib-uri>
+    <taglib-location>/WEB-INF/google_search.tld</taglib-location>
+  </taglib>
+
+  <error-page>
+    <exception-type>javax.servlet.ServletException</exception-type>
+    <location>/WEB-INF/jsp/errors.jsp</location>
+  </error-page>
+
+</web-app>

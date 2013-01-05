@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans     
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+ <import resource="responders.xml"/>
+  
+ <!-- <context:component-scan base-package="com.jbrown.web.ws.gen"/> --> 
+	<mvc:annotation-driven />
+
+	<bean id="restService" init-method="init"
+		class="com.jbrown.web.ws.gen.RestServices">
+		<property name="sharedContext">
+			  <ref bean="brownContext" />
+		</property>
+		<property name="responderFactory">
+			  <ref bean="responderFactory" />
+		</property>
+	</bean>
+	
+	<bean
+		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<property name="mediaTypes">
+			<map>
+				<entry key="xml" value="application/xml" />
+				<entry key="html" value="text/html" />
+			</map>
+		</property>
+		<property name="viewResolvers">
+			<list>
+				<bean class="org.springframework.web.servlet.view.BeanNameViewResolver" />
+				<bean id="viewResolver"
+					class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+					<property name="viewClass"
+						value="org.springframework.web.servlet.view.JstlView" />
+					<property name="prefix" value="/WEB-INF/jsp/" />
+					<property name="suffix" value=".jsp" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+  <!-- <bean id="registrationHandler" class="com.raileurope.web.web.RequestHandler">
+    <property name="view"><value>register_user</value></property>
+    <property name="handler"><ref bean="emptyUpdateHandler"/></property>
+  </bean>
+  
+    <bean id="urlMapping"
+    class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+    <property name="mappings">
+      <props>
+        <prop key="/**/register.json">
+           registrationHandler
+        </prop>   
+      </props>
+    </property>
+    <property name="interceptors">
+      <list>
+        <ref bean="aaapublicInterceptor"/>
+        <ref bean="invoiceDisplayInterceptor"/>
+      </list>
+    </property>
+  </bean> -->	
+
+</beans>

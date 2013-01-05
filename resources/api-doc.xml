@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<api-doc>
+
+  <services>
+
+  <service name="StationCache">
+      <service-description></service-description>
+      <inputs>
+        <input>
+          <name>cityCode</name>
+          <type>String</type>
+          <description>Valid city code</description>
+          <examples>FRPAR</examples>
+          <isOptional>false</isOptional>
+        </input>
+      </inputs>
+
+      <outputs>
+        <output>
+          <name>stationCacheContent</name>
+          <type>
+            <complex>StationCacheContent</complex>
+          </type>
+          <description></description>
+          <examples>--</examples>
+        </output>
+      </outputs>
+
+    </service>
+</services>
+
+ <complexTypes>
+		 <complexType name="StationCacheContent">
+		      <element>
+		        <name>stations</name>
+		        <type multiplicity="true">
+		          <complex>Station</complex>
+		        </type>
+		        <description>All stations for the specified city</description>
+		        <examples>--</examples>
+		      </element>
+		 </complexType>
+   <complexType name="Station">
+        <element>
+          <name>station</name>
+          <type>String</type>
+          <description>All stations for the specified city</description>
+          <examples>--</examples>
+        </element>
+   </complexType>		 
+ </complexTypes>
+ 
+</api-doc>
+
