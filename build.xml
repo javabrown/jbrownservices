@@ -32,7 +32,7 @@
  
 	
 	
-	<target name="deploy" depends="clean, deployOnMac, deployOnWindows">
+	<target name="deploy" depends="clean, mobile-api-gen, deployOnMac, deployOnWindows">
 						<!--<mkdir dir="${dir.classes}" />
 						<javac srcdir="${dir.src}" destdir="${dir.classes}" fork="true" debug="true" classpathref="javac.classpath" />
 						<jar destfile="dist/jbrownservices.war">
@@ -113,5 +113,20 @@
       </java>
 	</target>
 	
+ <!--  Mobile API  -->
+ <property name = "saxon7"
+          value = "org.xmLP.ant.taskdefs.optional.Saxon7Liaison"/>
+ <property name = "saxon7.classpath" value="war/WEB-INF/lib/mtxslt-1.5.jar"/>
+	<property name = "output-dir" value =
+		                "src/com/raileurope/web/mobile/ws/gen"/>
+
+ <target name="mobile-api-gen">
+  <description>Generate endpoint class for mobile rest API</description>
+	 <xslt processor = "${saxon7}"
+	           in = "scripts/api-endpoints.xml"
+	           style = "scripts/api-endpoints.xsl"
+	           out = "${output-dir}/WsInterface.java"
+	           classpath = "${saxon7.classpath}"/>
+ </target>
 
 </project>

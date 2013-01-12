@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<mobile-api>
+	<service>
+		<name>WsInterface</name>
+		<web-methods>
+			<web-method>
+				<name>register</name>
+				<version>1</version>
+				<description>Register new account.</description>
+				<request-type>POST</request-type>
+				<mapping-uri>/user/register</mapping-uri>
+			</web-method>
+
+			<web-method>
+				<name>getUserInfo</name>
+				<version>1</version>
+				<description>Register new account.</description>
+				<request-type>GET</request-type>
+				<mapping-uri>/user/info/{userName}/{email}</mapping-uri>
+				<web-params>
+					<web-param>String userName</web-param>
+					<web-param>String email</web-param>
+				</web-params>
+			</web-method>
+			
+			<web-method>
+				<name>getCountryInfo</name>
+				<version>1</version>
+				<description>Register new account.</description>
+				<request-type>GET</request-type>
+				<mapping-uri>/countryinfo/{countryName}</mapping-uri>
+				<web-params>
+					<web-param>String countryName</web-param>
+				</web-params>
+			</web-method>		
+		 		
+		</web-methods>
+	</service>
+
+	<!-- <service> <name>AuthService1</name> </service> -->
+</mobile-api>
