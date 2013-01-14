@@ -30,9 +30,35 @@
 				<request-type>GET</request-type>
 				<mapping-uri>/countryinfo/{countryName}</mapping-uri>
 				<web-params>
-					<web-param>String countryName</web-param>
+					 <web-param>String countryName</web-param>
 				</web-params>
 			</web-method>		
+
+			<web-method>
+				<name>getStateInfo</name>
+				<version>1</version>
+				<description>Register new account.</description>
+				<request-type>GET</request-type>
+				<mapping-uri>/countryinfo/{countryName}/{stateName}</mapping-uri>
+				<web-params>
+					 <web-param>String countryName</web-param>
+				 	<web-param>String stateName</web-param>
+				</web-params>
+			</web-method>	
+				
+			<web-method>
+				<name>getCityInfo</name>
+				<version>1</version>
+				<description>Register new account.</description>
+				<request-type>GET</request-type>
+				<mapping-uri>/countryinfo/{countryName}/{stateName}/{cityName}</mapping-uri>
+				<web-params>
+					 <web-param>String countryName</web-param>
+				 	<web-param>String stateName</web-param>
+				 	<web-param>String cityName</web-param>				 	
+				</web-params>
+			</web-method>				
+
 		 		
 		</web-methods>
 	</service>

@@ -4,6 +4,5 @@ import java.util.Map;
 
 public interface JsonRequestI {
 	ResponderI getResponder();
-
-	Map<String, String> getAttributes(String postedBody);
+	Map<String, Object> getAttributes();
 }

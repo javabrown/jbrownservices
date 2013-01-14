@@ -1,8 +1,9 @@
-package com.jbrown.web.ws;
+package com.jbrown.web.ws.responder;
 
 import java.util.Map;
 
 import com.jbrown.core.exception.BorwnException;
+import com.jbrown.web.ws.ResponderI;
 
 public class ResponderFactory {
 	private Map<String, ResponderI> _responders;

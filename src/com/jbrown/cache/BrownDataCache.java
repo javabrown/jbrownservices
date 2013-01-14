@@ -37,7 +37,7 @@ public class BrownDataCache implements Serializable {
 
 	public synchronized static void initializeBrownDataCache(RequestI request) {
 		System.out.println("initializeBrownDataCache");
-		if (_instance == null || _instance._dayTracker.isNewDay(false)) {
+		if (_instance == null /*|| _instance._dayTracker.isNewDay(false)*/) {
 			_instance = new BrownDataCache(request);
 		}
 	}
@@ -61,7 +61,7 @@ public class BrownDataCache implements Serializable {
 			for (CountryI country : _countryData) {
 				if (country.getIsoCode().equalsIgnoreCase(countryIsoCode)) {
 					for (StateI state : country.getStates()) {
-						countryList.add("<a href=\""+state.getStateName()+"/\">"+state.getStateName()+"</a>");
+						countryList.add(state.getStateName());
 					}
 				}
 			}
@@ -87,8 +87,9 @@ public class BrownDataCache implements Serializable {
 							List<String> list = new ArrayList<String>();
 
 							for (DistrictI district : state.getDistricts()) {
-								list.add("<a href=\""+district.getDistrictName()+"\">"+district.getDistrictName()+"</a>");
+								list.add(district.getDistrictName());
 							}
+							
 							_stateCityMap.put(key, list.toArray(new String[0]));
 							break;
 						}

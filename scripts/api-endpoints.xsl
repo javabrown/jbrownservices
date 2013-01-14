@@ -78,7 +78,7 @@ public interface <xsl:value-of select="$var" />{
 
 
 	<xsl:template name="api-header">
-package com.raileurope.web.mobile.ws.gen;
+package com.jbrown.web.mobile.ws.gen;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

@@ -2,13 +2,18 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" 
                "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
-	 <bean id="authResponder" class="com.jbrown.web.ws.AuthResponder" />
-	 
-		<bean id="responderFactory" class="com.jbrown.web.ws.ResponderFactory">
+	 <bean id="authResponderBean" 
+	       class="com.jbrown.web.ws.responder.AuthResponder" />
+	  <bean id="geoResponderBean" 
+	        class="com.jbrown.web.ws.responder.CountryInfoResponder" />
+	  
+		 <bean id="responderFactory" 
+		       class="com.jbrown.web.ws.responder.ResponderFactory">
 				<property name="responders">
 						<map>
-								<entry key="authResponder" value-ref="authResponder" />
+								<entry key="authResponder" value-ref="authResponderBean" />
+								<entry key="geoResponder" value-ref="geoResponderBean" />
 						</map>
 				</property>
-		</bean>
+		 </bean>
 </beans>

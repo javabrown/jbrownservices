@@ -6,13 +6,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.jbrown.web.BrownContextI;
+import com.jbrown.web.ws.responder.ResponderFactory;
 
 /**
  * @author rkhan
  * 
  */
-public abstract class ReServices {
-
+public abstract class BrownServices {
 	private BrownContextI _brownContext;
 	private ResponderFactory _responderFactory;
 
@@ -30,7 +30,8 @@ public abstract class ReServices {
 		return _responderFactory;
 	}
 
-	public void init() {
+	public void init(){
+	  System.out.println("Init Called !!");
 	}
 
 	protected void initialize(HttpServletRequest request,

@@ -21,8 +21,10 @@ public abstract class Responder implements ResponderI {
 			}
 		}
 
-		jsonResponse.add("Errors", errors);
-
+		if(errors != null && errors.length > 0){
+		  jsonResponse.add("Errors", errors);
+		}
+		
 		return jsonResponse;
 	}
 

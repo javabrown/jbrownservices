@@ -8,31 +8,36 @@ import com.google.appengine.labs.repackaged.org.json.JSONException;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
 
 public class JsonRequest implements JsonRequestI {
-	private String jsonBody;
+	private Map<String, Object> requestMap;
 	private ResponderI responder;
 
 	public JsonRequest(String jsonBody, ResponderI responder) {
-		this.jsonBody = jsonBody;
+		this.requestMap = getPostAttributes(jsonBody);
 		this.responder = responder;
 	}
-
-	public String getJsonBody() {
-		return jsonBody;
+	
+	public JsonRequest(ResponderI responder, String[]...keyValueParams) {
+		this.requestMap = getGetAttributes(keyValueParams);
+		this.responder = responder;
 	}
-
+	
 	@Override
 	public ResponderI getResponder() {
 		return responder;
 	}
-
+	
 	@Override
-	public Map<String, String> getAttributes(String postedBody) {
+	public Map<String, Object> getAttributes(){
+		return requestMap;
+	}
+	
+	public Map<String, Object> getPostAttributes(String postedBody) {
 		if (postedBody == null) {
 			return null;
 		}
 
 		try {
-			Map<String, String> lowerKeyMap = new HashMap<String, String>();
+			Map<String, Object> lowerKeyMap = new HashMap<String, Object>();
 
 			JSONObject json = new JSONObject(postedBody);
 			Iterator<String> iterator = json.keys();
@@ -48,5 +53,15 @@ public class JsonRequest implements JsonRequestI {
 		}
 		return null;
 	}
-
+	
+	 
+	public Map<String, Object> getGetAttributes(String[]...keyValueParams) {
+		Map<String, Object> lowerKeyMap = new HashMap<String, Object>();
+		
+		for(String[] param : keyValueParams){
+			lowerKeyMap.put(param[0], param[1]);
+		}
+ 
+		return lowerKeyMap;
+	}
 }

@@ -117,16 +117,21 @@
  <property name = "saxon7"
           value = "org.xmLP.ant.taskdefs.optional.Saxon7Liaison"/>
  <property name = "saxon7.classpath" value="war/WEB-INF/lib/mtxslt-1.5.jar"/>
-	<property name = "output-dir" value =
-		                "src/com/raileurope/web/mobile/ws/gen"/>
-
+	<property name = "output-src-dir" value = "src/com/jbrown/web/mobile/ws/gen"/>
+	<property name = "output-gen-dir" value = "temp"/>
+	
  <target name="mobile-api-gen">
-  <description>Generate endpoint class for mobile rest API</description>
-	 <xslt processor = "${saxon7}"
+    <description>Generate endpoint class for mobile rest API</description>
+	   <xslt processor = "${saxon7}"
 	           in = "scripts/api-endpoints.xml"
 	           style = "scripts/api-endpoints.xsl"
-	           out = "${output-dir}/WsInterface.java"
+	           out = "${output-gen-dir}/WsInterface.java"
 	           classpath = "${saxon7.classpath}"/>
+ 	  <echo>Coping generated interface to source dir.</echo>
+   	<copy todir="${output-src-dir}">
+ 					<fileset dir="temp" includes="*.java" excludes="**/*.class,**/.jar" />
+ 		 </copy>
+    	<echo>Done!!</echo>
  </target>
 
 </project>

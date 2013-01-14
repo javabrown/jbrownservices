@@ -13,7 +13,7 @@
 	</servlet>
 
     <servlet>
-        <servlet-name>mobile-api</servlet-name>
+        <servlet-name>api</servlet-name>
         <servlet-class>
             org.springframework.web.servlet.DispatcherServlet
         </servlet-class>
@@ -26,8 +26,8 @@
 	</servlet-mapping>
 
 	<servlet-mapping>
-	   <servlet-name>mobile-api</servlet-name>
-	   <url-pattern>/us/api/*</url-pattern>
+	   <servlet-name>api</servlet-name>
+	   <url-pattern>/api/*</url-pattern>
 	</servlet-mapping>
 		
 	<listener>
