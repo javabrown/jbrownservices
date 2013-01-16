@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jbrown.cache.BrownDataCache;
+import com.jbrown.core.util.SwingUtil;
 import com.jbrown.web.ws.JsonRequest;
 import com.jbrown.web.ws.JsonRequestI;
 import com.jbrown.web.ws.JsonResponseI;
@@ -131,4 +132,15 @@ public class RestServices extends BrownServices implements WsInterface {
 		
 		return new ModelAndView(VIEW, "response", response.toJson());
 	}
+ 
+
+	@Override
+	public ModelAndView getImageForText(@PathVariable String text,
+			@PathVariable int width, @PathVariable int height,
+			HttpServletRequest req, HttpServletResponse res, ModelMap model) {
+		SwingUtil.texttoImage(text, width, height, res);
+		return null;
+	}
+ 
+ 
 }

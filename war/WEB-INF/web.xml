@@ -12,14 +12,22 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 
-    <servlet>
-        <servlet-name>api</servlet-name>
-        <servlet-class>
-            org.springframework.web.servlet.DispatcherServlet
-        </servlet-class>
-        <load-on-startup>3</load-on-startup>
-    </servlet>
-  
+ <servlet>
+   <servlet-name>api</servlet-name>
+   <servlet-class>
+     org.springframework.web.servlet.DispatcherServlet
+   </servlet-class>
+   <load-on-startup>3</load-on-startup>
+ </servlet>
+
+ <servlet>
+   <servlet-name>jpg0</servlet-name>
+   <servlet-class>
+     com.jbrown.web.servlet.ImageServlet
+   </servlet-class>
+   <load-on-startup>3</load-on-startup>
+ </servlet>
+   
 	<servlet-mapping>
 		<servlet-name>mvc-dispatcher</servlet-name>
 		<url-pattern>/</url-pattern>
@@ -29,7 +37,12 @@
 	   <servlet-name>api</servlet-name>
 	   <url-pattern>/api/*</url-pattern>
 	</servlet-mapping>
-		
+
+	<servlet-mapping>
+	   <servlet-name>jpg0</servlet-name>
+	   <url-pattern>/image/jpg</url-pattern>
+	</servlet-mapping>
+			
 	<listener>
 		  <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>

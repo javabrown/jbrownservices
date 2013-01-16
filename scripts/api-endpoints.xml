@@ -55,10 +55,23 @@
 				<web-params>
 					 <web-param>String countryName</web-param>
 				 	<web-param>String stateName</web-param>
-				 	<web-param>String cityName</web-param>				 	
+				 	<web-param>String cityName</web-param>					
 				</web-params>
 			</web-method>				
-
+			
+			<!-- Utility Text2Image -->
+			<web-method>
+				<name>getImageForText</name>
+				<version>1.1</version>
+				<description>Register new account.</description>
+				<request-type>GET</request-type>
+				<mapping-uri>/util/text2image/{text}/{width}/{height}</mapping-uri>
+				<web-params>
+					 <web-param>String text</web-param> 	
+				  <web-param>int width</web-param>
+				 	<web-param>int height</web-param>							 
+				</web-params>
+			</web-method>	
 		 		
 		</web-methods>
 	</service>

@@ -1,0 +1,9 @@
+
+Test url:
+POST
+====
+http://localhost:8080/jbrownservices/us/api/ws/v1/user/register
+
+
+
+http://localhost:8080/jbrownservices/api/ws/v1.1/util/text2image/Raja%20Khan/80/40

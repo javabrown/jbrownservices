@@ -45,5 +45,10 @@ public interface WsInterface{
 	      @PathVariable String countryName,
 	      @PathVariable String stateName,
 	      @PathVariable String cityName,HttpServletRequest req, HttpServletResponse res, ModelMap model);
+     @RequestMapping(value = "/v1.1/util/text2image/{text}/{width}/{height}", method = RequestMethod.GET)
+     public ModelAndView getImageForText(
+	      @PathVariable String text,
+	      @PathVariable int width,
+	      @PathVariable int height,HttpServletRequest req, HttpServletResponse res, ModelMap model);
 }
 			
