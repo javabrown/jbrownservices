@@ -16,4 +16,4 @@ public class ExcelColumn implements Serializable{
 	public String[] getColumnName(){
 		return _columnName;
 	}
-}
+} 
