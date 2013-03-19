@@ -82,5 +82,7 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/spring-security-config-3.2.0.M1.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/spring-security-core-3.2.0.M1.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/spring-security-web-3.2.0.M1.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/brown-capsule.jar"/>
+	<classpathentry kind="lib" path="war/WEB-INF/lib/xstream.jar"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

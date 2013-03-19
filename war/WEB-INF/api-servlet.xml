@@ -13,7 +13,25 @@
  <import resource="responders.xml"/>
   
  <context:component-scan base-package="com.jbrown.web.ws.gen"/> 
-	<mvc:annotation-driven />
+ 
+ <mvc:annotation-driven/>
+ 
+ <mvc:interceptors>
+    <bean class="com.jbrown.web.RestInterceptor"/>
+  </mvc:interceptors>
+  
+ 
+	      <!-- <mvc:interceptors>
+					   <mvc:interceptor>
+						     <mvc:mapping path="/**" />
+						     <bean class="com.jbrown.web.RestInterceptor" />
+					   </mvc:interceptor>
+				</mvc:interceptors> -->
+ 
+ 
+
+ 
+
 
 	<bean id="restService" init-method="init"
 		     class="com.jbrown.web.mobile.ws.gen.RestServices">
@@ -47,4 +65,5 @@
 		</property>
 	</bean>
 	
+
 </beans>

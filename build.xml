@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<project name="myservices" default="deploy" basedir=".">
+<project name="jbrownservices" default="deploy" basedir=".">
 	
  <condition property="isMac">
    <os family="mac" />

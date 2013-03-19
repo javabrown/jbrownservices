@@ -17,6 +17,7 @@ public class ResponderFactory {
 
 		if (responder == null) {
 			throw new BorwnException("No responder found for :" + responderName);
+			//responder = new ErrorResponder();
 		}
 
 		return responder;

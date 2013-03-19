@@ -1,11 +1,7 @@
 package com.jbrown.web.mobile.ws.gen;
 
-import java.util.Arrays;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import net.sf.json.JSONObject;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -15,11 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.jbrown.cache.BrownDataCache;
-import com.jbrown.core.util.SwingUtil;
-import com.jbrown.web.ws.JsonRequest;
-import com.jbrown.web.ws.JsonRequestI;
-import com.jbrown.web.ws.JsonResponseI;
+import com.jbrown.core.util.BrownKeysI;
+import com.jbrown.web.ws.BrownRequest;
+import com.jbrown.web.ws.BrownRequestI;
 import com.jbrown.web.ws.BrownServices;
 import com.jbrown.web.ws.ResponderI;
 import com.jbrown.web.ws.responder.ResponderK;
@@ -33,64 +27,81 @@ import com.jbrown.web.ws.responder.ResponderK;
 
 @Controller
  
-public class RestServices extends BrownServices implements WsInterface {
+public class RestServices extends BrownServices implements WsInterface,
+		BrownKeysI {
+	@Override
+	public ModelAndView register(String body,
+			HttpServletRequest req, HttpServletResponse res) {
+		ResponderI respoder = getResponderFactory().getResponder(
+				ResponderK.AUTH_RESPONDER);
+		BrownRequestI request = super.getBrownRequest(req);
+		
+		//clear all the errors if any. (for auth & register only)
+		request.getErrors().clear(); 
+		
+		request.set(ACTION_K, ACTION_REGISTER_K);
+		
+		respoder.respond(request);
+		return EMPTY_VIEW;
+	}
+
+	@Override
+	public ModelAndView getUserInfo(String userName,
+			@PathVariable String email, HttpServletRequest req,
+			HttpServletResponse res, ModelMap model) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	@Override
-	public ModelAndView register(@RequestBody String body,
-			HttpServletRequest req, HttpServletResponse resp) {
-		initialize(req, resp);
+	public ModelAndView auth(String body, HttpServletRequest req,
+			HttpServletResponse res) {
 		ResponderI respoder = getResponderFactory().getResponder(
-				"authResponder");
-		JsonResponseI response = respoder.respond(new JsonRequest(body,
-				respoder));
-
-		return new ModelAndView(VIEW, "response", response.toJson());
+				ResponderK.AUTH_RESPONDER);
+		BrownRequestI request = super.getBrownRequest(req);
+		
+		//clear all the errors if any. (for auth & register only)
+		request.getErrors().clear(); 
+		
+		request.set(ACTION_K, ACTION_AUTH_K);
+		
+		request.getErrors().clear();
+		respoder.respond(request);
+		return EMPTY_VIEW;
 	}
 
-	@Override
-	public ModelAndView getUserInfo(String userName, String email,
-			HttpServletRequest req, HttpServletResponse res, ModelMap model) {
-		initialize(req, res);
-		ResponderI respoder = getResponderFactory().getResponder(
-				"authResponder");
-		JsonResponseI response = respoder.respond(new JsonRequest(new String(
-				"Raja Khann"), respoder));
 
-		return new ModelAndView(VIEW, "response", response.toJson());
-	}
-
-	@Override
-	public ModelAndView getCountryInfo(@PathVariable String countryName,
-			HttpServletRequest req, HttpServletResponse res, ModelMap model) {
-		initialize(req, res);
+	@RequestMapping(value = "/v1/countryinfo", method = RequestMethod.GET)
+	public ModelAndView getIsoCountries(HttpServletRequest req,
+			HttpServletResponse res, ModelMap model) {
 		ResponderI respoder = getResponderFactory().getResponder(
 				ResponderK.GEO_RESPONDER);
 		
-		String[][] internalRequest = {
-			{"action", "getCountryInfo"},
-			{"countryName", countryName},
-		};
+		BrownRequestI request = super.getBrownRequest(req);
+		request.set(ACTION_K, "getIsoCountries");
 		
-		JsonRequestI request = new JsonRequest(respoder, internalRequest);
+		respoder.respond(request);
 		
-		JsonResponseI response = respoder.respond(request);
-		
-		return new ModelAndView(VIEW, "response", response.toJson());
+		return EMPTY_VIEW;
 	}
 	
-	@RequestMapping(value = "/countryinfo/{countryName}/{stateName}", method = RequestMethod.GET)
-	public String getAllCountry(@PathVariable String countryName,
-			@PathVariable String stateName, ModelMap model) {
-		String[] cities = BrownDataCache.getInstance().getCities(countryName,
-				stateName);
- 
-		
-		JSONObject json = new JSONObject();
-		json.put(stateName, Arrays.toString(cities));
-		model.addAttribute("response", Arrays.toString(cities));
+	@Override
+	public ModelAndView getCountryInfo(@PathVariable String countryName, 
+			HttpServletRequest req, HttpServletResponse res, ModelMap model) {
+		//initialize(req, res);
+		ResponderI respoder = getResponderFactory().getResponder(
+				ResponderK.GEO_RESPONDER);
 
-		return "list";
+		BrownRequestI request = super.getBrownRequest(req);
+		request.set(ACTION_K, "getCountryInfo");
+		request.set(COUNTRY_NAME_K, countryName);
+		
+		
+		respoder.respond(request);
+		
+		return EMPTY_VIEW;
 	}
+	
 
 	@Override
 	public ModelAndView getStateInfo(@PathVariable String countryName,
@@ -98,18 +109,14 @@ public class RestServices extends BrownServices implements WsInterface {
 			HttpServletResponse res, ModelMap model) {
 		ResponderI respoder = getResponderFactory().getResponder(
 				ResponderK.GEO_RESPONDER);
+	
+		BrownRequestI request = super.getBrownRequest(req);
+		request.set("action", "getStateInfo");
+		request.set("countryName", countryName);
+		request.set("stateName", stateName);
 		
-		String[][] internalRequest = {
-				{"action", "getStateInfo"},
-				{"countryName", countryName},
-				{"stateName", stateName},
-			};
-		
-		JsonRequestI request = new JsonRequest(respoder, internalRequest);
-		
-		JsonResponseI response = respoder.respond(request);
-		
-		return new ModelAndView(VIEW, "response", response.toJson());
+		respoder.respond(request);
+		return EMPTY_VIEW;
 	}
 
 	@Override
@@ -118,29 +125,48 @@ public class RestServices extends BrownServices implements WsInterface {
 			HttpServletRequest req, HttpServletResponse res, ModelMap model) {
 		ResponderI respoder = getResponderFactory().getResponder(
 				ResponderK.GEO_RESPONDER);
+
+		BrownRequestI request = super.getBrownRequest(req);//new BrownRequest(req, res);
+		request.set("action", "getCityInfo");
+		request.set("countryName", countryName);
+		request.set("stateName", stateName);
+		request.set("cityName", cityName);
 		
-		String[][] internalRequest = {
-				{"action", "getCityInfo"},
-				{"countryName", countryName},
-				{"stateName", stateName},
-				{"cityName", cityName},
-			};
+		respoder.respond(request);
 		
-		JsonRequestI request = new JsonRequest(respoder, internalRequest);
-		
-		JsonResponseI response = respoder.respond(request);
-		
-		return new ModelAndView(VIEW, "response", response.toJson());
+		return EMPTY_VIEW;
 	}
+//
+//
+//	@Override
+//	public ModelAndView getImageForText(@PathVariable String text,
+//			@PathVariable int width, @PathVariable int height,
+//			HttpServletRequest req, HttpServletResponse res, ModelMap model) {
+//		SwingUtil.texttoImage(text, width, height, res);
+//		return null;
+//	}
  
+	@Override
+	public ModelAndView getLineChart(HttpServletRequest req,
+			HttpServletResponse res, ModelMap model) {
+		// TODO Auto-generated method stub
+		return new ModelAndView("google-chart");
+	}
 
 	@Override
-	public ModelAndView getImageForText(@PathVariable String text,
-			@PathVariable int width, @PathVariable int height,
-			HttpServletRequest req, HttpServletResponse res, ModelMap model) {
-		SwingUtil.texttoImage(text, width, height, res);
-		return null;
+	public ModelAndView getDistance(@PathVariable String countryName1,
+			@PathVariable String countryName2, HttpServletRequest req,
+			HttpServletResponse res, ModelMap model) {
+		ResponderI respoder = getResponderFactory().getResponder(
+				ResponderK.GEO_RESPONDER);
+	
+		BrownRequestI request = super.getBrownRequest(req);
+		request.set(ACTION_K, GEO_GET_DISTANCE_K);
+		request.set("location1", countryName1);
+		request.set("location2", countryName2);
+		
+		respoder.respond(request);
+		return EMPTY_VIEW;
 	}
- 
- 
+
 }

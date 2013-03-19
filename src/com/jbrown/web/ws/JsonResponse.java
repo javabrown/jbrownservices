@@ -3,7 +3,11 @@ package com.jbrown.web.ws;
 import java.util.HashMap;
 import java.util.Map;
 
-public class JsonResponse implements JsonResponseI {
+import org.apache.xmlbeans.impl.common.XmlStreamUtils;
+
+import com.thoughtworks.xstream.XStream;
+
+public class JsonResponse implements BrownResponseI {
 	private Map<String, Object> jsonMap;
 
 	public JsonResponse() {
@@ -21,7 +25,11 @@ public class JsonResponse implements JsonResponseI {
 	}
 
 	@Override
-	public String toJson() {
+	public String transform(OutputFormat format) {
+		if(format.typeOf(OutputFormat.XML_OUTPUT)){
+			return new XStream().toXML(jsonMap);
+		}
+		
 		return JsonUtil.toJSON(jsonMap);
 	}
 

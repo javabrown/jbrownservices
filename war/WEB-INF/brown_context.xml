@@ -15,4 +15,5 @@
     <property name="staticData"><ref bean="staticData"/></property>
   </bean>
   
+  <bean id="brownFilter" class="com.jbrown.web.BrownWsFilter"/>
 </beans>  

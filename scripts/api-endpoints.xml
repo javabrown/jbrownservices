@@ -24,6 +24,26 @@
 			</web-method>
 			
 			<web-method>
+                <name>auth</name>
+                <version>1</version>
+                <description>Authorize an account.</description>
+                <request-type>POST</request-type>
+                <mapping-uri>/user/auth</mapping-uri>
+      </web-method>
+      
+      
+      <web-method>
+        <name>getIsoCountries</name>
+        <version>1</version>
+        <description>Register new account.</description>
+        <request-type>GET</request-type>
+        <mapping-uri>/countryinfo</mapping-uri>
+        <web-params>
+          <!-- none -->
+        </web-params>
+      </web-method> 
+            
+			<web-method>
 				<name>getCountryInfo</name>
 				<version>1</version>
 				<description>Register new account.</description>
@@ -46,6 +66,7 @@
 				</web-params>
 			</web-method>	
 				
+				
 			<web-method>
 				<name>getCityInfo</name>
 				<version>1</version>
@@ -57,10 +78,24 @@
 				 	<web-param>String stateName</web-param>
 				 	<web-param>String cityName</web-param>					
 				</web-params>
-			</web-method>				
+			</web-method>
+			
+			<web-method>
+        <name>getDistance</name>
+        <version>1</version>
+        <description>
+              Calculate the distance between the two locations
+         </description>
+        <request-type>GET</request-type>
+        <mapping-uri>/distance/location-a/{countryName1}/location-b/{countryName1}</mapping-uri>
+        <web-params>
+           <web-param>String countryName1</web-param>
+          <web-param>String countryName2</web-param>      
+        </web-params>
+      </web-method> 				
 			
 			<!-- Utility Text2Image -->
-			<web-method>
+			<!-- <web-method>
 				<name>getImageForText</name>
 				<version>1.1</version>
 				<description>Register new account.</description>
@@ -71,8 +106,16 @@
 				  <web-param>int width</web-param>
 				 	<web-param>int height</web-param>							 
 				</web-params>
-			</web-method>	
-		 		
+			</web-method>	-->
+
+      <web-method>
+        <name>getLineChart</name>
+        <version>2</version>
+        <description>Generate Chart Line</description>
+        <request-type>GET</request-type>
+        <mapping-uri>/ui/linechart</mapping-uri>
+      </web-method> 
+      		 		
 		</web-methods>
 	</service>
 
