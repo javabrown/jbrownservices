@@ -3,7 +3,7 @@
 	<service>
 		<name>WsInterface</name>
 		<web-methods>
-			<web-method>
+			<!-- <web-method>
 				<name>register</name>
 				<version>1</version>
 				<description>Register new account.</description>
@@ -21,8 +21,16 @@
 					<web-param>String userName</web-param>
 					<web-param>String email</web-param>
 				</web-params>
-			</web-method>
+			</web-method> -->
 			
+			<web-method>
+                <name>auth</name>
+                <version>1</version>
+                <description>Authorize an account.</description>
+                <request-type>POST</request-type>
+                <mapping-uri>/user/auth</mapping-uri>
+            </web-method>
+            
 			<web-method>
 				<name>getCountryInfo</name>
 				<version>1</version>
@@ -60,7 +68,7 @@
 			</web-method>				
 			
 			<!-- Utility Text2Image -->
-			<web-method>
+			<!-- <web-method>
 				<name>getImageForText</name>
 				<version>1.1</version>
 				<description>Register new account.</description>
@@ -71,7 +79,7 @@
 				  <web-param>int width</web-param>
 				 	<web-param>int height</web-param>							 
 				</web-params>
-			</web-method>	
+			</web-method>	-->
 		 		
 		</web-methods>
 	</service>

@@ -13,8 +13,8 @@ public class JBrownInitializer extends HttpServlet {
 		ServletContext context = getServletContext();
 		RequestI request = new Request(new RequestContext(context));
 		BrownDataCache.initializeBrownDataCache(request);
-		String[] stateNames = BrownDataCache.getInstance().getStatesName("IN");
+		Object stateNames = BrownDataCache.getInstance().getIndianStates();
 
-		System.out.println(Arrays.toString(stateNames));
+		System.out.println( stateNames );
 	}
 }

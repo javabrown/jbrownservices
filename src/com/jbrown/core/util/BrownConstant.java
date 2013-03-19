@@ -1,10 +1,13 @@
 package com.jbrown.core.util;
 
 public interface BrownConstant {
-  public static final String ISO_INDIA = "IN";
-  public static final String ISO_USA = "US";
-  public static final String ISO_PAKISTAN = "PK";
-  public static final String ISO_COUNTRY = "ISO_COUNTRY";
+  String ISO_INDIA = "IN";
+  String ISO_USA = "US";
+  String ISO_PAKISTAN = "PK";
+  String ISO_COUNTRY = "ISO_COUNTRY";
   
-  public static final String TSV_DIR = "/WEB-INF/";
+  String TSV_DIR = "/WEB-INF/";
+  
+  String HTTP_METHOD_K = "HTTP_METHOD";
+  String HTTP_METHOD_POST_K = "POST";
 }

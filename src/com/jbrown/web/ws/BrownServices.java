@@ -5,6 +5,7 @@ import static javax.servlet.http.HttpServletResponse.SC_OK;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.jbrown.core.util.BrownKeysI;
 import com.jbrown.web.BrownContextI;
 import com.jbrown.web.ws.responder.ResponderFactory;
 
@@ -34,6 +35,11 @@ public abstract class BrownServices {
 	  System.out.println("Init Called !!");
 	}
 
+	public BrownRequestI getBrownRequest(HttpServletRequest request) {
+		return (BrownRequestI) request
+				.getAttribute(BrownKeysI.BROWN_REQUEST_OBJ_K);
+	}
+	
 	protected void initialize(HttpServletRequest request,
 			HttpServletResponse resp) {
 		String STATUS = "responseStatus";

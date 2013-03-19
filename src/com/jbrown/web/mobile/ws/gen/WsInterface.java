@@ -25,14 +25,10 @@ import org.springframework.ui.ModelMap;
 @RequestMapping("/ws")
 public interface WsInterface{
 			
-     @RequestMapping(value = "/v1/user/register", method = RequestMethod.POST)    
-     public ModelAndView register
+     @RequestMapping(value = "/v1/user/auth", method = RequestMethod.POST)    
+     public ModelAndView auth
       (@RequestBody String body, HttpServletRequest req, HttpServletResponse res);
       
-     @RequestMapping(value = "/v1/user/info/{userName}/{email}", method = RequestMethod.GET)
-     public ModelAndView getUserInfo(
-	      @PathVariable String userName,
-	      @PathVariable String email,HttpServletRequest req, HttpServletResponse res, ModelMap model);
      @RequestMapping(value = "/v1/countryinfo/{countryName}", method = RequestMethod.GET)
      public ModelAndView getCountryInfo(
 	      @PathVariable String countryName,HttpServletRequest req, HttpServletResponse res, ModelMap model);
@@ -45,10 +41,5 @@ public interface WsInterface{
 	      @PathVariable String countryName,
 	      @PathVariable String stateName,
 	      @PathVariable String cityName,HttpServletRequest req, HttpServletResponse res, ModelMap model);
-     @RequestMapping(value = "/v1.1/util/text2image/{text}/{width}/{height}", method = RequestMethod.GET)
-     public ModelAndView getImageForText(
-	      @PathVariable String text,
-	      @PathVariable int width,
-	      @PathVariable int height,HttpServletRequest req, HttpServletResponse res, ModelMap model);
 }
 			

@@ -11,22 +11,22 @@
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
+   
+	<servlet>
+	   <servlet-name>api</servlet-name>
+	   <servlet-class>
+	     org.springframework.web.servlet.DispatcherServlet
+	   </servlet-class>
+	   <load-on-startup>3</load-on-startup>
+	</servlet>
 
- <servlet>
-   <servlet-name>api</servlet-name>
-   <servlet-class>
-     org.springframework.web.servlet.DispatcherServlet
-   </servlet-class>
-   <load-on-startup>3</load-on-startup>
- </servlet>
-
- <servlet>
-   <servlet-name>jpg0</servlet-name>
-   <servlet-class>
-     com.jbrown.web.servlet.ImageServlet
-   </servlet-class>
-   <load-on-startup>3</load-on-startup>
- </servlet>
+   <servlet>
+	   <servlet-name>jpg0</servlet-name>
+	   <servlet-class>
+	     com.jbrown.web.servlet.ImageServlet
+	   </servlet-class>
+	   <load-on-startup>3</load-on-startup>
+    </servlet>
    
 	<servlet-mapping>
 		<servlet-name>mvc-dispatcher</servlet-name>
@@ -49,12 +49,33 @@
 	 
 	<context-param>
 		  <param-name>contextConfigLocation</param-name>
-				<param-value>
-				    /WEB-INF/mvc-dispatcher-servlet.xml 
-			     /WEB-INF/spring-security.xml
-			     /WEB-INF/brown_context.xml
-			 </param-value>
+		  <param-value>
+			  /WEB-INF/mvc-dispatcher-servlet.xml 
+			  /WEB-INF/spring-security.xml
+			  /WEB-INF/brown_context.xml
+		  </param-value>
 	</context-param>
+ 
+ 
+ <!-- Basic Brown filter begin-->
+    
+   <filter>
+     <filter-name>appFilter</filter-name>
+     <filter-class>
+         org.springframework.web.filter.DelegatingFilterProxy
+     </filter-class>
+     <init-param>
+       <param-name>targetBeanName</param-name>
+       <param-value>brownFilter</param-value>
+     </init-param>   
+   </filter>
+   
+   <filter-mapping>
+    <filter-name>appFilter</filter-name>
+    <url-pattern>/api/ws/*</url-pattern>
+   </filter-mapping>
+ <!-- Basic Brown filter end -->
+ 
  
  <!-- Spring Security Setting -->
 	<filter>

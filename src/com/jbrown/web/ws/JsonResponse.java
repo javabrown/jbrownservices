@@ -3,7 +3,7 @@ package com.jbrown.web.ws;
 import java.util.HashMap;
 import java.util.Map;
 
-public class JsonResponse implements JsonResponseI {
+public class JsonResponse implements BrownResponseI {
 	private Map<String, Object> jsonMap;
 
 	public JsonResponse() {
