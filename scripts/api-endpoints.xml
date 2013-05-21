@@ -6,7 +6,7 @@
 			<web-method>
 				<name>register</name>
 				<version>1</version>
-				<description>Register new account.</description>
+				<description>Register a new user's account.</description>
 				<request-type>POST</request-type>
 				<mapping-uri>/user/register</mapping-uri>
 			</web-method>
