@@ -39,12 +39,15 @@ public abstract class Responder implements ResponderI, BrownKeysI {
 	void buildResponse(BrownRequestI jsonRequest, BrownResponseI jsonResponse){
 		HttpServletResponse httpResponse = jsonRequest.getHttpServletResponse();
 		try {
-			httpResponse.setContentType(MimeTypesI.PLAIN_TEXT);
+			OutputFormat outputFormat = OutputFormat.getInstance(jsonRequest
+					.getHttpServletRequest().getParameter("output"));
+			
+			//httpResponse.setContentType(MimeTypesI.PLAIN_TEXT);
+			httpResponse.setContentType(outputFormat.getMimeType());
 			httpResponse.setStatus(HttpServletResponse.SC_OK);
 			PrintWriter writer = httpResponse.getWriter();
 
-			OutputFormat outputFormat = OutputFormat.getInstance(jsonRequest
-					.getHttpServletRequest().getParameter("output"));
+
 			writer.print(jsonResponse.transform(outputFormat));
 			
 			writer.flush();

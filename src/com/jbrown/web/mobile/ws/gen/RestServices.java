@@ -1,5 +1,8 @@
 package com.jbrown.web.mobile.ws.gen;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,10 +15,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jbrown.core.util.BrownKeysI;
+import com.jbrown.web.mobile.ws.gen.WsInterface;
 import com.jbrown.web.ws.BrownRequest;
 import com.jbrown.web.ws.BrownRequestI;
 import com.jbrown.web.ws.BrownServices;
 import com.jbrown.web.ws.ResponderI;
+import com.jbrown.web.ws.WsActionType;
 import com.jbrown.web.ws.responder.ResponderK;
 
 /**
@@ -26,7 +31,6 @@ import com.jbrown.web.ws.responder.ResponderK;
  */
 
 @Controller
- 
 public class RestServices extends BrownServices implements WsInterface,
 		BrownKeysI {
 	@Override
@@ -169,4 +173,41 @@ public class RestServices extends BrownServices implements WsInterface,
 		return EMPTY_VIEW;
 	}
 
+	@Override
+	public ModelAndView encode(@RequestBody String body,
+			HttpServletRequest req, HttpServletResponse res) {
+		ResponderI respoder = getResponderFactory().getResponder(
+				ResponderK.UTIL_RESPONDER);
+		BrownRequestI request = super.getBrownRequest(req);  
+		request.set(ACTION_K, ACTION_ENCODE_K);
+
+		respoder.respond(request);
+		return EMPTY_VIEW;
+	}
+
+	@Override
+	public ModelAndView getPublicPhotos(@PathVariable String pattern,
+			@PathVariable String size, HttpServletRequest req,
+			HttpServletResponse res, ModelMap model) {
+
+		ResponderI respoder = getResponderFactory().getResponder(
+				ResponderK.MEDIA_RESPONDER);
+		BrownRequestI request = super.getBrownRequest(req);
+		request.set(ACTION_K, WsActionType.PUBLIC_IMAGES.getActionName());
+
+		respoder.respond(request);
+		return EMPTY_VIEW;
+	}
+
+	@Override
+	public ModelAndView getAllPhotoSizeConstants(HttpServletRequest req,
+			HttpServletResponse res, ModelMap model) {
+		ResponderI respoder = getResponderFactory().getResponder(
+				ResponderK.MEDIA_RESPONDER);
+		BrownRequestI request = super.getBrownRequest(req);
+		request.set(ACTION_K, WsActionType.PUBLIC_IMAGES.getActionName());
+
+		respoder.respond(request);
+		return EMPTY_VIEW;
+	}
 }

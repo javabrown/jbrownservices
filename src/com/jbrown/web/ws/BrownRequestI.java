@@ -6,8 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.jbrown.errors.BrownErrorsI;
+import com.jbrown.web.servlet.RequestI;
 
-public interface BrownRequestI {
+public interface BrownRequestI extends RequestI {
 	HttpServletRequest getHttpServletRequest();
 
 	HttpServletResponse getHttpServletResponse();

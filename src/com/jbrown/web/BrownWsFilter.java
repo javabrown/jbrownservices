@@ -16,6 +16,8 @@ import com.jbrown.core.util.BrownKeysI;
 import com.jbrown.core.util.BrownUtil;
 import com.jbrown.errors.BrownErrors;
 import com.jbrown.errors.BrownErrorsI;
+import com.jbrown.web.servlet.Request;
+import com.jbrown.web.servlet.RequestI;
 import com.jbrown.web.ws.BrownRequest;
 import com.jbrown.web.ws.BrownRequestI;
 import com.jbrown.web.ws.ResponderI;
@@ -27,7 +29,12 @@ import com.jbrown.web.ws.responder.ErrorResponder;
  *
  */
 public class BrownWsFilter implements Filter{
-
+	private BrownContext brownContext;
+	
+	public void setBrownContext(BrownContext brownContext){
+		this.brownContext = brownContext;
+	}
+	
 	@Override
 	public void destroy() {
 		// TODO Auto-generated method stub
@@ -43,7 +50,8 @@ public class BrownWsFilter implements Filter{
 		
 		//Initialize error object
 		BrownErrorsI errors = new BrownErrors();
-		BrownRequestI brownRequest = new BrownRequest(request, response, errors);
+		BrownRequestI brownRequest = new BrownRequest(request, response,
+				errors, this.brownContext);
 		
 		request.setAttribute(BrownKeysI.BROWN_REQUEST_OBJ_K, brownRequest);
 		

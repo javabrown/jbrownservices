@@ -1,13 +1,11 @@
 package com.jbrown.web.ws;
 
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -15,27 +13,31 @@ import javax.servlet.http.HttpSession;
 import com.google.appengine.labs.repackaged.org.json.JSONArray;
 import com.google.appengine.labs.repackaged.org.json.JSONException;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
+import com.jbrown.core.exception.BorwnException;
 import com.jbrown.core.util.BrownConstant;
-import com.jbrown.core.util.BrownKeysI;
 import com.jbrown.core.util.StringUtil;
-import com.jbrown.errors.BrownErrors;
 import com.jbrown.errors.BrownErrorsI;
+import com.jbrown.web.BrownContextI;
 
 public class BrownRequest implements BrownRequestI {
 	private HttpServletRequest request;
 	private HttpServletResponse response;
     private BrownErrorsI errors;
-    
+	private BrownContextI brownContext;
+	
 	private JSONObject json;
 	private Map<String, String[]> requestMap;
 
 	public BrownRequest(HttpServletRequest request,
-			HttpServletResponse response, BrownErrorsI errors) {
+			HttpServletResponse response, BrownErrorsI errors,
+			BrownContextI brownContext) {
+		//ServletContext context = ;
+ 
 		this.request = request;
 		this.response = response;		
 		this.requestMap = new HashMap<String, String[]>();
 		this.errors = errors;
-		
+		this.brownContext = brownContext;
 		
 		this.json = getJson(request, isPost());
 		this.extractJsonAttributes();
@@ -249,5 +251,32 @@ public class BrownRequest implements BrownRequestI {
 			return null;
 		}
 		throw new InternalError("Unknown data found in json request:" + object);
+	}
+
+	@Override
+	public BrownContextI getBrownContext() {
+		return this.brownContext;
+	}
+
+	@Override
+	public InputStream getStaticResorceStream(String lookupResourceKey) {
+		//WebApplicationContext applicationContext = WebApplicationContextUtils
+		//		.getWebApplicationContext(this.request.getSession()
+		//				.getServletContext());
+		
+		ServletContext context = this.request.getSession().getServletContext();
+		Map<String, String> staticDataFiles1 = 
+			getBrownContext().getStaticData().getCountryData().getDataFiles();
+		
+		for(String resourceKey : staticDataFiles1.keySet()){
+			if(lookupResourceKey.equalsIgnoreCase(resourceKey)){
+				String resourceName = staticDataFiles1.get(lookupResourceKey);
+				return context.getResourceAsStream(BrownConstant.TSV_DIR
+						+ resourceName);
+			}
+		}
+		
+		throw new BorwnException("No resource found for the resource-key:"
+				+ lookupResourceKey);
 	}
 }

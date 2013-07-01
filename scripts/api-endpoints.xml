@@ -115,7 +115,43 @@
         <request-type>GET</request-type>
         <mapping-uri>/ui/linechart</mapping-uri>
       </web-method> 
-      		 		
+      
+      <web-method>
+        <name>encode</name>
+        <version>1</version>
+        <description>Generate Chart Line</description>
+        <request-type>POST</request-type>
+        <mapping-uri>/util/encode</mapping-uri>
+        <web-params>
+           <web-param>String textToEncode</web-param>           
+        </web-params>        
+      </web-method>
+      
+      
+      <!-- ******* MEDIA API ************ -->
+      <!-- 1. -->
+      <web-method>
+        <name>getPublicPhotos</name>
+        <version>1</version>
+        <description>Find image services</description>
+        <request-type>GET</request-type>
+        <mapping-uri>/media/search-images/{pattern}/{size}</mapping-uri>
+        <web-params>
+           <web-param>String pattern</web-param>
+          <web-param>String size</web-param>      
+        </web-params>
+      </web-method>
+      
+      <!-- 2. -->
+      <web-method>
+        <name>getAllPhotoSizeConstants</name>
+        <version>1</version>
+        <description>Return the list of available search constants</description>
+        <request-type>GET</request-type>
+        <mapping-uri>/media/all-image-size</mapping-uri>
+      </web-method>
+      
+      
 		</web-methods>
 	</service>
 

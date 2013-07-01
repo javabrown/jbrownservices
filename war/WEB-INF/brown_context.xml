@@ -15,5 +15,8 @@
     <property name="staticData"><ref bean="staticData"/></property>
   </bean>
   
-  <bean id="brownFilter" class="com.jbrown.web.BrownWsFilter"/>
+  <bean id="brownFilter" class="com.jbrown.web.BrownWsFilter">
+     <property name="brownContext"><ref bean="brownContext"/></property>
+  </bean>
+  
 </beans>  

@@ -57,5 +57,15 @@ public interface WsInterface{
 	      @PathVariable String countryName2,HttpServletRequest req, HttpServletResponse res, ModelMap model);
      @RequestMapping(value = "/v2/ui/linechart", method = RequestMethod.GET)
      public ModelAndView getLineChart(HttpServletRequest req, HttpServletResponse res, ModelMap model);
+     @RequestMapping(value = "/v1/util/encode", method = RequestMethod.POST)    
+     public ModelAndView encode
+      (@RequestBody String body, HttpServletRequest req, HttpServletResponse res);
+      
+     @RequestMapping(value = "/v1/media/search-images/{pattern}/{size}", method = RequestMethod.GET)
+     public ModelAndView getPublicPhotos(
+	      @PathVariable String pattern,
+	      @PathVariable String size,HttpServletRequest req, HttpServletResponse res, ModelMap model);
+     @RequestMapping(value = "/v1/media/all-image-size", method = RequestMethod.GET)
+     public ModelAndView getAllPhotoSizeConstants(HttpServletRequest req, HttpServletResponse res, ModelMap model);
 }
 			

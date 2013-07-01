@@ -4,9 +4,11 @@
 
 <beans>
   <import resource="country_data.xml"/>
+  <import resource="providers_data.xml"/>
   
   <bean id="staticData" class="com.jbrown.web.resources.StaticData">
     <property name="countryData"><ref bean="countryData"/></property>
+    <property name="providersData"><ref bean="providersData"/></property>
   </bean>
 
 </beans>

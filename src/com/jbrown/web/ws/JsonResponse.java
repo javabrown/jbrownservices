@@ -26,8 +26,10 @@ public class JsonResponse implements BrownResponseI {
 
 	@Override
 	public String transform(OutputFormat format) {
-		if(format.typeOf(OutputFormat.XML_OUTPUT)){
-			return new XStream().toXML(jsonMap);
+		if(format.typeOf(OutputFormat.XML)){
+			StringBuilder output = new StringBuilder("<?xml version=\"1.0\"?>");
+			output.append(new XStream().toXML(jsonMap));
+			return output.toString();
 		}
 		
 		return JsonUtil.toJSON(jsonMap);
