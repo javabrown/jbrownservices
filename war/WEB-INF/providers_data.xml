@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+          "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<bean id="providersData" class="com.jbrown.web.resources.ProvidersData">
+		<property name="providers">
+			<list>
+			
+				<bean class="com.jbrown.web.resources.ProvidersData.Provider">
+					 <property name="name" value="flickr" />
+					 <property name="data">
+						 <map>
+							  <entry key="apiKey" value="801ba291f728d037ce22b7664975667a"/>
+							  <entry key="secret" value="191bb0fe52cd3017"/>
+							  <entry key="user_id" value="80622574@N07"/>
+							  <entry key="public_url" value="http://api.flickr.com/services/rest/?method=flickr.people.getPublicPhotos&amp;api_key=801ba291f728d037ce22b7664975667a&amp;user_id=80622574@N07"/>
+						 </map>
+					 </property>
+				</bean>
+				
+			</list>
+		</property>
+	</bean>
+</beans>   
