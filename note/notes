@@ -7,3 +7,25 @@ http://localhost:8080/jbrownservices/us/api/ws/v1/user/register
 
 
 http://localhost:8080/jbrownservices/api/ws/v1.1/util/text2image/Raja%20Khan/80/40
+
+
+==
+http://localhost:8080/jbrownservices/api/ws/v1/countryinfo/US/
+
+==
+http://localhost:8080/jbrownservices/api/ws/v1/user/register
+POST:
+{
+   "first_name":"Raja",
+    "last_name" : "Khan",
+    "email" : "getrk@yahoo.com",
+    "password" : "xxx"
+}
+
+===
+http://localhost:8080/jbrownservices/api/ws/v1/user/auth
+POST:
+{
+    "token" : "Rll1T2hoK2ZtNWVsMGI1aXdrQjQ1eDNVOUxEaVJGSEpZRkc5U1FrS3Q5Zz0="
+}
+

@@ -6,6 +6,7 @@ import com.jbrown.web.ws.BrownRequestI;
 public class BrownAuthUtil {
 
 	public static boolean isValidUser(BrownRequestI request) {
+		
 		// String resp = Cookies.getCookieValue(request.getHttpServletRequest(),
 		// BrownKeysI.JAVABROWN_AUTH_K);
 		//
@@ -15,7 +16,8 @@ public class BrownAuthUtil {
 		// && !resp.equalsIgnoreCase(BrownKeysI.INVALID_AUTH_K)) {
 		// return true;
 		// }
-
+		
+		
 		String token = request.getHttpServletRequest().getParameter(
 				BrownKeysI.TOKEN_K);//request.getCache(BrownKeysI.TOKEN_K)
 
