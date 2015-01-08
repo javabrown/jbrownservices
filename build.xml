@@ -1,137 +1,131 @@
 <?xml version="1.0" ?>
 <project name="jbrownservices" default="deploy" basedir=".">
-	
- <condition property="isMac">
-   <os family="mac" />
- </condition>
 
- <condition property="isWindows">
-   <os family="windows" />
- </condition>
+	<condition property="isMac">
+		<os family="mac" />
+	</condition>
 
- <condition property="isUnix">
-   <os family="unix" />
- </condition>
-	
+	<condition property="isWindows">
+		<os family="windows" />
+	</condition>
+
+	<condition property="isUnix">
+		<os family="unix" />
+	</condition>
+
+	<property name="tomcat.dir" value="c:/tomcat-8" />
 	<property name="dir.src" value="src" />
 	<property name="dir.classes" value="war/WEB-INF/classes" />
 	<property name="dir.serviceclient.classes" value="serviceTestClasses" />
-	
+
 	<path id="javac.classpath">
-		  <fileset dir="war/WEB-INF/lib" includes="**/*.jar" />
-		
-			<fileset dir="war/WEB-INF/lib">
-			          <include name="**/*.jar" />
-	  </fileset>
+		<fileset dir="war/WEB-INF/lib" includes="**/*.jar" />
+
+		<fileset dir="war/WEB-INF/lib">
+			<include name="**/*.jar" />
+		</fileset>
 	</path>
 
 	<target name="clean">
-		  <delete dir="${dir.classes}" failonerror="true" includeemptydirs="true" />
-		  <delete file="dist\*.jar, *.war" failonerror="true" includeemptydirs="true" />
+		<delete dir="${dir.classes}" failonerror="true"
+			includeemptydirs="true" />
+		<delete file="dist\*.jar, *.war" failonerror="true"
+			includeemptydirs="true" />
 	</target>
- 
-	
-	
-	<target name="deploy" depends="clean, mobile-api-gen, deployOnMac, deployOnWindows">
-						<!--<mkdir dir="${dir.classes}" />
-						<javac srcdir="${dir.src}" destdir="${dir.classes}" fork="true" debug="true" classpathref="javac.classpath" />
-						<jar destfile="dist/jbrownservices.war">
-							<fileset dir="web" />
-						</jar>
-						<copy todir="/mysoftwares/tomcat-6/webapps">
-							<fileset dir="dist" excludes="**/*.java,**/.jar" />
-						</copy>-->
-	</target>
-	
-	
- <target name="deployOnMac" if="isMac">
-   <echo message="Came into the Mac target" />
-				<mkdir dir="${dir.classes}" />
-				<javac srcdir="${dir.src}" destdir="${dir.classes}" fork="true" debug="true" classpathref="javac.classpath" />
-				<jar destfile="dist/jbrownservices.war">
-					<fileset dir="war" />
-				</jar>
-				<copy todir="/mysoftwares/tomcat-6/webapps">
-					<fileset dir="dist" excludes="**/*.java,**/.jar" />
-				</copy>
- </target>
 
- <target name="deployOnWindows" if="isWindows">
-   <echo message="Came into the Windows target" />
-			<mkdir dir="${dir.classes}" />
-			<javac srcdir="${dir.src}" destdir="${dir.classes}" fork="true" debug="true" classpathref="javac.classpath" />
-			<jar destfile="dist/jbrownservices.war">
-				<fileset dir="war" />
-			</jar>
-			<copy todir="c:/tomcat/webapps">
-				<fileset dir="dist" excludes="**/*.java,**/.jar" />
-			</copy>
- </target>
-	
-	
-	
+
+
+	<target name="deploy"
+		depends="clean, mobile-api-gen, deployOnMac, deployOnWindows">
+		<!--<mkdir dir="${dir.classes}" /> <javac srcdir="${dir.src}" destdir="${dir.classes}" 
+			fork="true" debug="true" classpathref="javac.classpath" /> <jar destfile="dist/jbrownservices.war"> 
+			<fileset dir="web" /> </jar> <copy todir="/mysoftwares/tomcat-6/webapps"> 
+			<fileset dir="dist" excludes="**/*.java,**/.jar" /> </copy> -->
+	</target>
+
+
+	<target name="deployOnMac" if="isMac">
+		<echo message="Came into the Mac target" />
+		<mkdir dir="${dir.classes}" />
+		<javac srcdir="${dir.src}" destdir="${dir.classes}" fork="true"
+			debug="true" classpathref="javac.classpath" />
+		<jar destfile="dist/jbrownservices.war">
+			<fileset dir="war" />
+		</jar>
+		<copy todir="/mysoftwares/tomcat-6/webapps">
+			<fileset dir="dist" excludes="**/*.java,**/.jar" />
+		</copy>
+	</target>
+
+	<target name="deployOnWindows" if="isWindows">
+		<echo message="Came into the Windows target" />
+		<mkdir dir="${dir.classes}" />
+		<javac srcdir="${dir.src}" destdir="${dir.classes}" fork="true"
+			debug="true" classpathref="javac.classpath" />
+		<jar destfile="dist/jbrownservices.war">
+			<fileset dir="war" />
+		</jar>
+		<copy todir="${tomcat.dir}/webapps">
+			<fileset dir="dist" excludes="**/*.java,**/.jar" />
+		</copy>
+	</target>
+
+
+
 	<path id="axis2.classpath">
-        <fileset dir="project-libs\axis2-1.6.0">
-          <include name="**/*.jar" />
-        </fileset>
- </path>
-	
-	
+		<fileset dir="project-libs\axis2-1.6.0">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+
 	<target name="clientTestGenClean">
-	 	<delete dir="${dir.serviceclient.classes}" failonerror="true" includeemptydirs="true" /> 
-		 <delete file="serviceClientSrc/*.java" failonerror="true"  excludesfile="TestMe.java"/>
-   <mkdir dir="${dir.serviceclient.classes}"/>
+		<delete dir="${dir.serviceclient.classes}" failonerror="true"
+			includeemptydirs="true" />
+		<delete file="serviceClientSrc/*.java" failonerror="true"
+			excludesfile="TestMe.java" />
+		<mkdir dir="${dir.serviceclient.classes}" />
 	</target>
-	
-<target name="clientTestGen" depends="clientTestGenClean">
-   <taskdef name="axis2-wsdl2java"
-   	        classname="org.apache.axis2.tool.ant.AntCodegenTask" 
-   	        classpathref="axis2.classpath" /> 
-      <axis2-wsdl2java 
-         	  wsdlfilename="http://localhost:8080/jbrownservices/services/JBrownServices?wsdl" 
-    	       output="serviceClientSrc" 
-      	     namespaceToPackages="com.core.service=service.core.com.xsd"
-      /> 
-	
 
-
-	
-</target>
+	<target name="clientTestGen" depends="clientTestGenClean">
+		<taskdef name="axis2-wsdl2java" classname="org.apache.axis2.tool.ant.AntCodegenTask"
+			classpathref="axis2.classpath" />
+		<axis2-wsdl2java
+			wsdlfilename="http://localhost:8080/jbrownservices/services/JBrownServices?wsdl"
+			output="serviceClientSrc" namespaceToPackages="com.core.service=service.core.com.xsd" />
+	</target>
 
 	<target name="compleGenereatedClient" depends="clientTestGen">
-		<javac srcdir="serviceClientSrc" destdir="${dir.serviceclient.classes}" fork="true" debug="true" classpathref="axis2.classpath" /> 
+		<javac srcdir="serviceClientSrc" destdir="${dir.serviceclient.classes}"
+			fork="true" debug="true" classpathref="axis2.classpath" />
 	</target>
-	
+
 	<target name="clientTest" depends="compleGenereatedClient">
-		   <echo>Now execute TestMe.java</echo>
-		 	  <java classname="TestMe">
-		 	  	 <classpath>
-		 	  	    <path location="${serviceTestClasses}"/>
-		 	  	 	  <pathelement path="${axis2.classpath}"/>
-		 	    </classpath>
-		 	  	
-      </java>
+		<echo>Now execute TestMe.java</echo>
+		<java classname="TestMe">
+			<classpath>
+				<path location="${serviceTestClasses}" />
+				<pathelement path="${axis2.classpath}" />
+			</classpath>
+
+		</java>
 	</target>
-	
- <!--  Mobile API  -->
- <property name = "saxon7"
-          value = "org.xmLP.ant.taskdefs.optional.Saxon7Liaison"/>
- <property name = "saxon7.classpath" value="war/WEB-INF/lib/mtxslt-1.5.jar"/>
-	<property name = "output-src-dir" value = "src/com/jbrown/web/mobile/ws/gen"/>
-	<property name = "output-gen-dir" value = "temp"/>
-	
- <target name="mobile-api-gen">
-    <description>Generate endpoint class for mobile rest API</description>
-	   <xslt processor = "${saxon7}"
-	           in = "scripts/api-endpoints.xml"
-	           style = "scripts/api-endpoints.xsl"
-	           out = "${output-gen-dir}/WsInterface.java"
-	           classpath = "${saxon7.classpath}"/>
- 	  <echo>Coping generated interface to source dir.</echo>
-   	<copy todir="${output-src-dir}">
- 					<fileset dir="temp" includes="*.java" excludes="**/*.class,**/.jar" />
- 		 </copy>
-    	<echo>Done!!</echo>
- </target>
+
+	<!-- Mobile API -->
+	<property name="saxon7" value="org.xmLP.ant.taskdefs.optional.Saxon7Liaison" />
+	<property name="saxon7.classpath" value="war/WEB-INF/lib/mtxslt-1.5.jar" />
+	<property name="output-src-dir" value="src/com/jbrown/web/mobile/ws/gen" />
+	<property name="output-gen-dir" value="temp" />
+
+	<target name="mobile-api-gen">
+		<description>Generate endpoint class for mobile rest API</description>
+		<xslt processor="${saxon7}" in="scripts/api-endpoints.xml" style="scripts/api-endpoints.xsl"
+			out="${output-gen-dir}/WsInterface.java" classpath="${saxon7.classpath}" />
+		<echo>Coping generated interface to source dir.</echo>
+		<copy todir="${output-src-dir}">
+			<fileset dir="temp" includes="*.java" excludes="**/*.class,**/.jar" />
+		</copy>
+		<echo>Done!!</echo>
+	</target>
 
 </project>
