@@ -34,6 +34,7 @@ public interface BrownKeysI {
 	String PASSWORD_K = "password";
 	String TOKEN_K = "token";
 	String DATA_K = "data";
+	String AUTH_CODE_K = "auth-code";
 	
 	String EMPTY_K ="";
 	

@@ -17,12 +17,16 @@ public class BrownAuthUtil {
 		// return true;
 		// }
 		
+		String token = request.getHeadersMap().get(BrownKeysI.AUTH_CODE_K);
 		
-		String token = request.getHttpServletRequest().getParameter(
-				BrownKeysI.TOKEN_K);//request.getCache(BrownKeysI.TOKEN_K)
+		//String token = request.getHttpServletRequest().getParameter(
+		//		BrownKeysI.AUTO_CODE_K);//request.getCache(BrownKeysI.TOKEN_K)
 
 		if (!StringUtil.isEmpty(token)) {
 			return new Authenticator().autheticate(token);
+		}
+		else{
+			System.out.println(BrownKeysI.AUTH_CODE_K+ " missing in Header");
 		}
 
 		return false;

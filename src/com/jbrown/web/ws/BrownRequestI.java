@@ -22,4 +22,6 @@ public interface BrownRequestI extends RequestI {
 	void set(String key, String value);
 	
 	BrownErrorsI getErrors();
+	
+	Map<String, String> getHeadersMap();
 }

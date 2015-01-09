@@ -29,3 +29,6 @@ POST:
     "token" : "Rll1T2hoK2ZtNWVsMGI1aXdrQjQ1eDNVOUxEaVJGSEpZRkc5U1FrS3Q5Zz0="
 }
 
+===
+
+http://localhost:8080/jbrownservices/api/ws/v2/ui/linechart

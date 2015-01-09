@@ -1,6 +1,7 @@
 package com.jbrown.web.ws;
 
 import java.io.InputStream;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -278,5 +279,19 @@ public class BrownRequest implements BrownRequestI {
 		
 		throw new BorwnException("No resource found for the resource-key:"
 				+ lookupResourceKey);
+	}
+	
+	@Override
+	public Map<String, String> getHeadersMap() {
+		Map<String, String> map = new HashMap<String, String>();
+		Enumeration<String> headerNames = request.getHeaderNames();
+
+		while (headerNames.hasMoreElements()) {
+			String key = (String) headerNames.nextElement();
+			String value = request.getHeader(key);
+			map.put(key, value);
+		}
+
+		return map;
 	}
 }
