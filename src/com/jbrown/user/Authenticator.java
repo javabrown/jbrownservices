@@ -1,5 +1,8 @@
 package com.jbrown.user;
 
+import com.core.ext.oauth.FBConnection;
+import com.jbrown.core.util.BrownConstant;
+import com.jbrown.core.util.StringUtil;
 import com.jbrown.ext.crypter.Crypter;
 
 public class Authenticator {
@@ -28,6 +31,10 @@ public class Authenticator {
 		String encryptedString = null;
 		String email = null;
 
+		if(StringUtil.isEmpty(token)){
+			return autheticateFb(token);
+		}
+		
 		try {
 			encryptedString = new Crypter().decrypt(token);
 			email = encryptedString.split("__")[2];
@@ -38,6 +45,23 @@ public class Authenticator {
 			ex.printStackTrace();
 		}
 
+		return false;
+	}
+
+	public boolean autheticateFb(String access_token) {
+		FBConnection conn = new FBConnection(access_token);
+		String email = null;
+		
+		if(conn.getFbUserInfo() != null){
+			email = conn.getFbUserInfo().get(BrownConstant.FB_EMAIL);
+			System.out.println("FB Login Success: "+ conn.getFbUserInfo());
+			
+			return true;
+		}
+		else{
+			System.out.println("FB Login Failed for: "+ access_token);
+		}
+		
 		return false;
 	}
 

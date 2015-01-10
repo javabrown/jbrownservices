@@ -1,8 +1,13 @@
 package com.jbrown.web.ws.responder;
 
+import static com.jbrown.core.util.BrownConstant.FB_ACCESS_TOKEN;
+
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.util.StringUtils;
+
+import com.jbrown.core.util.BrownKeysI;
 import com.jbrown.errors.BrownErrorsI;
 import com.jbrown.user.Authenticator;
 import com.jbrown.web.ws.BrownRequestI;
@@ -25,8 +30,18 @@ public class AuthResponder extends Responder {
 
 	private Map<String, Object> authenticate(BrownRequestI request) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		String token = (String) request.get(TOKEN_K);
-		boolean isValid = new Authenticator().autheticate(token);
+		//String token = (String) request.get(TOKEN_K);
+		String token = request.getHeadersMap().get(BrownKeysI.AUTH_CODE_K);
+		String fbAccessToken = request.getHeadersMap().get(FB_ACCESS_TOKEN);
+		boolean isValid = false;
+		
+		if(!StringUtils.isEmpty(token)){
+			isValid = new Authenticator().autheticate(token);
+		}
+		else if(!StringUtils.isEmpty(fbAccessToken)){
+			isValid = new Authenticator().autheticateFb(fbAccessToken);
+		}
+
 		map.put(RESPONSE_K, isValid);
 		
 		if(isValid){
