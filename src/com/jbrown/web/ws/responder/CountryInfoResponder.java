@@ -38,6 +38,8 @@ public class CountryInfoResponder extends Responder {
 			BrownGeoCapsuleI geoCapsule = BrownDataCache.getInstance()
 					.getBrownGeoCapsule(countryName);
 			
+			//brownRequest.getBrownContext().getStaticData().getCountryData().getDataFiles()
+			
 			List<Map<String, String>> stateList = 
 				geoCapsule.getCapsuleData().getAllStates();
 			map.put(countryName, stateList);

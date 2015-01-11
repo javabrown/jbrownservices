@@ -53,7 +53,7 @@ public class Authenticator {
 		String email = null;
 		
 		if(conn.getFbUserInfo() != null){
-			email = conn.getFbUserInfo().get(BrownConstant.FB_EMAIL);
+			email = conn.getFbUserInfo().getEmail();
 			System.out.println("FB Login Success: "+ conn.getFbUserInfo());
 			
 			return true;

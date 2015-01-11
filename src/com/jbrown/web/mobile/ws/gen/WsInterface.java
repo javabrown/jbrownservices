@@ -33,10 +33,8 @@ public interface WsInterface{
      public ModelAndView getUserInfo(
 	      @PathVariable String userName,
 	      @PathVariable String email,HttpServletRequest req, HttpServletResponse res, ModelMap model);
-     @RequestMapping(value = "/v1/user/auth", method = RequestMethod.POST)    
-     public ModelAndView auth
-      (@RequestBody String body, HttpServletRequest req, HttpServletResponse res);
-      
+     @RequestMapping(value = "/v1/user/auth", method = RequestMethod.GET)
+     public ModelAndView auth(HttpServletRequest req, HttpServletResponse res, ModelMap model);
      @RequestMapping(value = "/v1/countryinfo", method = RequestMethod.GET)
      public ModelAndView getIsoCountries(HttpServletRequest req, HttpServletResponse res, ModelMap model);
      @RequestMapping(value = "/v1/countryinfo/{countryName}", method = RequestMethod.GET)

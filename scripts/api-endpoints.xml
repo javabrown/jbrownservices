@@ -27,7 +27,7 @@
                 <name>auth</name>
                 <version>1</version>
                 <description>Authorize an account.</description>
-                <request-type>POST</request-type>
+                <request-type>GET</request-type>
                 <mapping-uri>/user/auth</mapping-uri>
       </web-method>
       
