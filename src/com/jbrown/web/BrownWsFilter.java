@@ -21,6 +21,7 @@ import com.jbrown.web.servlet.RequestI;
 import com.jbrown.web.ws.BrownRequest;
 import com.jbrown.web.ws.BrownRequestI;
 import com.jbrown.web.ws.ResponderI;
+import com.jbrown.web.ws.responder.AuthResponder;
 import com.jbrown.web.ws.responder.ErrorResponder;
 
 /**
