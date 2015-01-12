@@ -1,19 +1,15 @@
 package com.jbrown.web.ws.responder;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import net.sf.json.JSONObject;
-
 import com.jbrown.cache.BrownDataCache;
 import com.jbrown.errors.BrownErrorsI;
-import com.jbrown.ext.capsule.BrownCapsule;
+import com.jbrown.ext.capsule.geo.data.GeoIndiaCapsule;
 import com.jbrown.ext.capsule.impl.BrownGeoCapsuleI;
 import com.jbrown.web.ws.BrownRequestI;
 import com.jbrown.web.ws.Responder;
-import com.jbrown.web.ws.Error;
 
 public class CountryInfoResponder extends Responder {
 	@Override
@@ -24,11 +20,17 @@ public class CountryInfoResponder extends Responder {
 		 
 		//@0
 		if(action.equalsIgnoreCase("getIsoCountries")){
-			BrownGeoCapsuleI geoCapsule = BrownDataCache.getInstance()
-					.getBrownGeoCapsule("IN");
-			
-			List<Map<String, String>> countries = 
-				geoCapsule.getCapsuleData().getIsoCountries();
+			//BrownGeoCapsuleI geoCapsule = BrownDataCache.getInstance()
+			//		.getBrownGeoCapsule("IN");
+			//CountryData countries = 
+			//		brownRequest.getBrownContext().getStaticData().getCountryData();
+			List<Map<String, String>> countries = null;
+			try {
+				countries = new GeoIndiaCapsule().getAllIndianStates();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			map.put("ISO Countries", countries);
 		}
 		

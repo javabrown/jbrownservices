@@ -7,5 +7,5 @@ public interface BrownResponseI {
 
 	public void addAll(Map<String, Object> jsonMap);
 
-	public String transform(OutputFormat outputFormat);
+	public String transform(OutputFormat outputFormat, String callback);
 }

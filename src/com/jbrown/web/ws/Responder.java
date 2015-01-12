@@ -6,6 +6,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.util.StringUtils;
+
 import com.jbrown.core.util.BrownKeysI;
 import com.jbrown.errors.BrownErrorsI;
 import com.jbrown.web.MimeTypesI;
@@ -38,17 +40,22 @@ public abstract class Responder implements ResponderI, BrownKeysI {
 
 	void buildResponse(BrownRequestI jsonRequest, BrownResponseI jsonResponse){
 		HttpServletResponse httpResponse = jsonRequest.getHttpServletResponse();
+		this.addCrosHeader(httpResponse);
+		
 		try {
 			OutputFormat outputFormat = OutputFormat.getInstance(jsonRequest
 					.getHttpServletRequest().getParameter("output"));
-			
+			String callBack = 
+					jsonRequest.getHttpServletRequest().getParameter("callback");
+
 			//httpResponse.setContentType(MimeTypesI.PLAIN_TEXT);
 			httpResponse.setContentType(outputFormat.getMimeType());
+			
 			httpResponse.setStatus(HttpServletResponse.SC_OK);
 			PrintWriter writer = httpResponse.getWriter();
 
 
-			writer.print(jsonResponse.transform(outputFormat));
+			writer.print(jsonResponse.transform(outputFormat, callBack));
 			
 			writer.flush();
 			writer.close();
@@ -57,7 +64,15 @@ public abstract class Responder implements ResponderI, BrownKeysI {
 			e.printStackTrace();
 		}
 	}
+	
+	private void addCrosHeader(HttpServletResponse response){
+        response.addHeader("Access-Control-Allow-Origin", "*");
+        response.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");
+        response.addHeader("Access-Control-Allow-Headers", "X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept");
+        response.addHeader("Access-Control-Max-Age", "1728000");
+    }
 		
 	protected abstract Map<String, Object> perform(BrownRequestI jsonRequest);
 	protected abstract BrownErrorsI validate(BrownRequestI jsonRequest);
 }
+

@@ -45,7 +45,7 @@ public class BrownDataCache implements Serializable {
 
 	public synchronized static void initializeBrownDataCache(RequestI request) {
 		System.out.println("initializeBrownDataCache");
-		if (_instance == null /*|| _instance._dayTracker.isNewDay(false)*/) {
+		if (_instance == null || _instance._dayTracker.isNewDay(false)) {
 			_instance = new BrownDataCache(request);
 		}
 	}

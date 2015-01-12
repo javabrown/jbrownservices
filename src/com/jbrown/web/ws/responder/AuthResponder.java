@@ -8,7 +8,9 @@ import java.util.Map;
 import org.springframework.util.StringUtils;
 
 import com.jbrown.core.util.BrownKeysI;
+import com.jbrown.core.util.StringUtil;
 import com.jbrown.errors.BrownErrorsI;
+import com.jbrown.errors.BrownMessage;
 import com.jbrown.user.Authenticator;
 import com.jbrown.web.ws.BrownRequestI;
 import com.jbrown.web.ws.Responder;
@@ -69,8 +71,22 @@ public class AuthResponder extends Responder {
 	@Override
 	protected BrownErrorsI validate(BrownRequestI request) {
 		BrownErrorsI errors = request.getErrors();
-		// validation pending
-
+		
+		if(request.getHeadersMap()!= null){
+			String token = request.getHeadersMap().get(BrownKeysI.AUTH_CODE_K);
+			String fbAccessToken = request.getHeadersMap().get(FB_ACCESS_TOKEN);
+			StringBuilder error = new StringBuilder();
+			
+			//if(StringUtil.isEmpty(token)){
+			//	errors.add(AUTH_CODE_K +"");
+			//	errors.add("Error.JSONData");
+			//}
+			
+			if(StringUtil.isEmpty(fbAccessToken)){
+				errors.add(FB_ACCESS_TOKEN + " is missing in request header");
+			}
+		}
+		
 		return errors;
 	}
 }
