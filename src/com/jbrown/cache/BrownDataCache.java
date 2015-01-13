@@ -3,8 +3,10 @@ package com.jbrown.cache;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
+
 import org.apache.commons.collections.map.LRUMap;
 
+import com.jbrown.core.data.CountryData;
 import com.jbrown.core.data.model.CountryI;
 import com.jbrown.core.util.StrKey;
 import com.jbrown.ext.capsule.BrownCapsule;
@@ -14,9 +16,6 @@ import com.jbrown.ext.capsule.impl.BrownGeoCapsuleI;
 import com.jbrown.web.servlet.RequestI;
 
 public class BrownDataCache implements Serializable {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private final int CACHE_SIZE = 1000;
 	private static BrownDataCache _instance;
@@ -28,15 +27,15 @@ public class BrownDataCache implements Serializable {
 													// stateName
 	private Map<StrKey, String[]> _cityPostOfficeMap; // key = countryCode +
 	
-	//private BrownCapsuleI _brownCapsule;
+	private BrownCapsuleI _brownCapsule;
 	
 	// stateName + cityName
 	private BrownDataCache(RequestI request) {
 		_dayTracker = new DayTracker();
 		new LRUMap(CACHE_SIZE);
-		//_countryData = new CountryData(request).getCountryData();
+		_countryData = new CountryData(request).getCountryData();
 		try {
-			//_brownCapsule = new BrownCapsule();
+			_brownCapsule = new BrownCapsule();
 		} catch (Exception ex) {
 			System.out.println("Error while loading brown-capsule");
 			ex.printStackTrace();
@@ -50,13 +49,13 @@ public class BrownDataCache implements Serializable {
 		}
 	}
 
-	public synchronized static BrownDataCache getInstance() {
-		// if (_instance == null || _instance._dayTracker.isNewDay(false)) {
-		// _instance = new BrownDataCache(_request);
-		// }
-		// if (_instance == null || _instance._dayTracker.isNewDay(false)) {
-		// _instance = new BrownDataCache(_request);
-		// }
+	public synchronized static BrownDataCache getInstance(RequestI request) {
+		 if (_instance == null /* || _instance._dayTracker.isNewDay(false)*/) {
+		 _instance = new BrownDataCache(request);
+		 }
+		 if (_instance == null /* || _instance._dayTracker.isNewDay(false) */) {
+		 _instance = new BrownDataCache(request);
+		 }
 		return _instance;
 	}
 	

@@ -7,6 +7,7 @@ import java.util.Map;
 import com.jbrown.cache.BrownDataCache;
 import com.jbrown.errors.BrownErrorsI;
 import com.jbrown.ext.capsule.geo.data.GeoIndiaCapsule;
+import com.jbrown.ext.capsule.geo.data.GeoIsoCountryDataCapsule;
 import com.jbrown.ext.capsule.impl.BrownGeoCapsuleI;
 import com.jbrown.web.ws.BrownRequestI;
 import com.jbrown.web.ws.Responder;
@@ -26,18 +27,18 @@ public class CountryInfoResponder extends Responder {
 			//		brownRequest.getBrownContext().getStaticData().getCountryData();
 			List<Map<String, String>> countries = null;
 			try {
-				countries = new GeoIndiaCapsule().getAllIndianStates();
+				countries = new GeoIsoCountryDataCapsule().getAllIsoCountries();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			map.put("ISO Countries", countries);
+			map.put("ISO-Countries", countries);
 		}
 		
 		//@1
 		if(action.equalsIgnoreCase("getCountryInfo")){
 			String countryName = (String) brownRequest.get("countryName");
-			BrownGeoCapsuleI geoCapsule = BrownDataCache.getInstance()
+			BrownGeoCapsuleI geoCapsule = BrownDataCache.getInstance(brownRequest)
 					.getBrownGeoCapsule(countryName);
 			
 			//brownRequest.getBrownContext().getStaticData().getCountryData().getDataFiles()
@@ -53,7 +54,7 @@ public class CountryInfoResponder extends Responder {
 			String stateName = (String) brownRequest.get("stateName");
 			
 			BrownGeoCapsuleI  geoCapsule = 
-			    BrownDataCache.getInstance().getBrownGeoCapsule(countryName);
+			    BrownDataCache.getInstance(brownRequest).getBrownGeoCapsule(countryName);
 			
 			List<Map<String, String>> stateCityList = 
 				 geoCapsule.getCapsuleData().getCitiesForStateCode(stateName);
@@ -68,7 +69,7 @@ public class CountryInfoResponder extends Responder {
 			String cityName = (String) brownRequest.get("cityName");
 			
 			BrownGeoCapsuleI  geoCapsule = 
-				  BrownDataCache.getInstance().getBrownGeoCapsule(countryName);
+				  BrownDataCache.getInstance(brownRequest).getBrownGeoCapsule(countryName);
 			
 			List<Map<String, String>> stateCityList = geoCapsule
 					.getCapsuleData().getPostalLocationsForCityNameOrZipCode(

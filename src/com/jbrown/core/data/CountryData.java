@@ -47,7 +47,7 @@ public class CountryData {
  
 		
 		CountryI india = indianFile.getCountryInfo();
-		CountryI pak = pakFile.getCountryInfo();
+		CountryI pak = null;//pakFile.getCountryInfo();
 		CountryI usa = usaFile.getCountryInfo();
 		
 		return new CountryI[] { india, pak, usa };
