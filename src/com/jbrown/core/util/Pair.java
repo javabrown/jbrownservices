@@ -2,7 +2,9 @@ package com.jbrown.core.util;
 
 import java.io.Serializable;
 
-public class Pair<L, R> implements Serializable {
+import org.datanucleus.ImplementationCreator;
+
+public class Pair<L, R> implements Serializable{
 	private final L left;
 	private final R right;
 
