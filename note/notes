@@ -44,3 +44,6 @@ http://localhost:8080/jbrownservices/api/ws/v2/ui/linechart
 GEO Services
 http://localhost:8080/jbrownservices/api/ws/v1/countryinfo/US/NY/White Plains/
 
+http://localhost:8080/jbrownservices/api/ws/v1/countryinfo/in/jh/hazaribagh/
+
+http://localhost:8080/jbrownservices/api/ws/v1/countryinfo/in/jh/hazaribagh/?output=json&callback=?
