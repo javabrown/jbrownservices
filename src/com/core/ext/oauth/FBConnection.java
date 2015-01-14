@@ -37,7 +37,6 @@ public class FBConnection {
 	private FacebookUserInfo fetchFbUserInfo(String accessToken) {
 		String jsonResponse = "";
 		JSONObject jsonObject = null;
-		//Map<String, String> userInfoMap = new HashMap<String, String>();
 		FacebookUserInfo facebookUserInfo = null;
 		
 		if (!StringUtil.isEmpty(accessToken)) {
@@ -65,8 +64,10 @@ public class FBConnection {
 				in.close();
 			} catch (IOException e) {
 				e.printStackTrace();
-				throw new RuntimeException("Unable to connect with Facebook "
-						+ e);
+				//throw new RuntimeException("Unable to connect with Facebook "
+				//		+ e);
+				System.out.println("Unable to connect with Facebook" + e);
+				return null;
 			}
 
 			jsonResponse = b.toString();
