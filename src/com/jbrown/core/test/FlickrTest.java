@@ -13,8 +13,8 @@ import com.jbrown.core.util.StringUtil;
  
 
 public class FlickrTest {
-	static final String apiKey = "801ba291f728d037ce22b7664975667a";
-	static final String secret = "191bb0fe52cd3017";
+	static final String apiKey = "xxxxx";
+	static final String secret = "xxxxx";
 	static final String token =null;
 	
 	static final String public_url = "http://api.flickr.com/services/rest/?&method=flickr.people.getPublicPhotos&api_key=801ba291f728d037ce22b7664975667a&user_id=80622574@N07";
