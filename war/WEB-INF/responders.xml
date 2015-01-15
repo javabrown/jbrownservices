@@ -9,13 +9,16 @@
 	   <bean id="mediaResponder" 
 	        class="com.jbrown.web.ws.responder.MediaResponder" />
 	    
+	   <bean id="airportResponderBean"
+	        class="com.jbrown.web.ws.responder.AirportInfoResponder" />
+	   
 		 <bean id="responderFactory" 
 		       class="com.jbrown.web.ws.responder.ResponderFactory">
 				<property name="responders">
 				  <map>
 					  <entry key="authResponder" value-ref="authResponderBean" />
 					  <entry key="geoResponder" value-ref="geoResponderBean" />
-					  <entry key="mediaResponder" value-ref="mediaResponder" />
+					  <entry key="airportResponder" value-ref="airportResponderBean" />
 				  </map>
 				</property>
 		 </bean>

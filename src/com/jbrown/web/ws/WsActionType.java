@@ -5,7 +5,8 @@ import com.jbrown.ext.capsule.CapsuleType;
 public enum WsActionType {
 
 	IMAGE_SIZE_CONSTANTS ("GET_IMAGE_SIZE_CONSTANTS", "MEDIA"),
-	PUBLIC_IMAGES ("PUBLIC_IMAGES", "MEDIA");
+	PUBLIC_IMAGES ("PUBLIC_IMAGES", "MEDIA"),
+	AIRPORT_IATA ("AIRPORT_IATA", "AIRPORT");
 	
 	private final String actionName;
 	private final String serviceCategory;

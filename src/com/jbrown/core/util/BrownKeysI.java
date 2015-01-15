@@ -41,4 +41,6 @@ public interface BrownKeysI {
 	String PROVIDER_FLICKR_K = "flickr";
 	String PROVIDER_FLICKR_PUBLIC_URL_K = "public_url";
 	
+	String IATA = "iata";
+	
 }

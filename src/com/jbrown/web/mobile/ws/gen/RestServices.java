@@ -1,8 +1,5 @@
 package com.jbrown.web.mobile.ws.gen;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jbrown.core.util.BrownKeysI;
-import com.jbrown.web.mobile.ws.gen.WsInterface;
-import com.jbrown.web.ws.BrownRequest;
 import com.jbrown.web.ws.BrownRequestI;
 import com.jbrown.web.ws.BrownServices;
 import com.jbrown.web.ws.ResponderI;
@@ -208,6 +203,18 @@ public class RestServices extends BrownServices implements WsInterface,
 		request.set(ACTION_K, WsActionType.PUBLIC_IMAGES.getActionName());
 
 		respoder.respond(request);
+		return EMPTY_VIEW;
+	}
+
+	@Override
+	public ModelAndView getAirporByIata(@PathVariable String iata,
+			HttpServletRequest req, HttpServletResponse res, ModelMap model) {
+		BrownRequestI request = super.getBrownRequest(req);
+		ResponderI respoder = getResponderFactory().getResponder(
+				ResponderK.AIRPORT_RESPONDER);
+		request.set(IATA, iata);
+		respoder.respond(request);
+		
 		return EMPTY_VIEW;
 	}
 }

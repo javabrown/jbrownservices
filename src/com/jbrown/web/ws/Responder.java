@@ -19,13 +19,13 @@ import com.jbrown.web.MimeTypesI;
 public abstract class Responder implements ResponderI, BrownKeysI {
 
 	@Override
-	public void respond(BrownRequestI jsonRequest) {
+	public void respond(BrownRequestI request) {
 		BrownResponseI jsonResponse = new JsonResponse();
 
-		BrownErrorsI errors = validate(jsonRequest);
+		BrownErrorsI errors = validate(request);
 
 		if (errors == null || errors.nErrors() == 0) {
-			Map<String, Object> response = perform(jsonRequest);
+			Map<String, Object> response = perform(request);
 			if (response != null && response.size() > 0) {
 				jsonResponse.addAll(response);
 			}
@@ -35,10 +35,10 @@ public abstract class Responder implements ResponderI, BrownKeysI {
 		  jsonResponse.add("Errors", errors.getErrorMessages());
 		}
 		
-		buildResponse(jsonRequest, jsonResponse);
+		buildResponse(request, jsonResponse);
 	}
 
-	void buildResponse(BrownRequestI jsonRequest, BrownResponseI jsonResponse){
+	void buildResponse(BrownRequestI jsonRequest, BrownResponseI request){
 		HttpServletResponse httpResponse = jsonRequest.getHttpServletResponse();
 		this.addCrosHeader(httpResponse);
 		
@@ -55,7 +55,7 @@ public abstract class Responder implements ResponderI, BrownKeysI {
 			PrintWriter writer = httpResponse.getWriter();
 
 
-			writer.print(jsonResponse.transform(outputFormat, callBack));
+			writer.print(request.transform(outputFormat, callBack));
 			
 			writer.flush();
 			writer.close();

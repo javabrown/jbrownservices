@@ -1,7 +1,6 @@
 package com.jbrown.cache;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.map.LRUMap;
@@ -12,7 +11,6 @@ import com.jbrown.core.util.StrKey;
 import com.jbrown.ext.capsule.BrownCapsule;
 import com.jbrown.ext.capsule.BrownCapsuleI;
 import com.jbrown.ext.capsule.impl.BrownGeoCapsuleI;
- 
 import com.jbrown.web.servlet.RequestI;
 
 public class BrownDataCache implements Serializable {

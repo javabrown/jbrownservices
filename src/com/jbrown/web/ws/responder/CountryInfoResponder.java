@@ -72,7 +72,7 @@ public class CountryInfoResponder extends Responder {
 				  BrownDataCache.getInstance(brownRequest).getBrownGeoCapsule(countryName);
 			
 			List<Map<String, String>> stateCityList = geoCapsule
-					.getCapsuleData().getPostalLocationsForCityNameOrZipCode(
+					.getCapsuleData().getPostalLocationsForCityName(
 							stateName, cityName);
 			  
 			map.put(countryName, stateCityList);
