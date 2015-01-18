@@ -2,6 +2,7 @@
 <mobile-api>
 	<service>
 		<name>WsInterface</name>
+		<description>JavaBrown API</description>
 		<web-methods>
 			<web-method>
 				<name>register</name>

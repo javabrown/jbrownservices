@@ -47,3 +47,5 @@ http://localhost:8080/jbrownservices/api/ws/v1/countryinfo/US/NY/White Plains/
 http://localhost:8080/jbrownservices/api/ws/v1/countryinfo/in/jh/hazaribagh/
 
 http://localhost:8080/jbrownservices/api/ws/v1/countryinfo/in/jh/hazaribagh/?output=json&callback=?
+
+http://localhost:8080/jbrownservices/api/ws/v1/airport/JFK/

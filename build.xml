@@ -36,7 +36,7 @@
 
 
 	<target name="deploy"
-		depends="clean, mobile-api-gen, deployOnMac, deployOnWindows">
+		depends="clean, mobile-doc-gen, mobile-api-gen, deployOnMac, deployOnWindows">
 		<!--<mkdir dir="${dir.classes}" /> <javac srcdir="${dir.src}" destdir="${dir.classes}" 
 			fork="true" debug="true" classpathref="javac.classpath" /> <jar destfile="dist/jbrownservices.war"> 
 			<fileset dir="web" /> </jar> <copy todir="/mysoftwares/tomcat-6/webapps"> 
@@ -127,5 +127,16 @@
 		</copy>
 		<echo>Done!!</echo>
 	</target>
+
+	<target name="mobile-doc-gen">
+		<description>Generate documentation rest API</description>
+		<xslt processor="${saxon7}" in="scripts/api-endpoints.xml" style="scripts/api-docs.xsl"
+			out="${output-gen-dir}/api-docs.html" classpath="${saxon7.classpath}" />
+		<echo>Coping generated documentation to source dir.</echo>
+		<copy todir="${output-src-dir}">
+			<fileset dir="temp" includes="*.java" excludes="**/*.class,**/.jar" />
+		</copy>
+		<echo>Done!!</echo>
+	</target>	
 
 </project>
