@@ -1,27 +1,29 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<!-- The HTML 4.01 Transitional DOCTYPE declaration-->
-<!-- above set at the top of the file will set     -->
-<!-- the browser's rendering engine into           -->
-<!-- "Quirks Mode". Replacing this declaration     -->
-<!-- with a "Standards Mode" doctype is supported, -->
-<!-- but may lead to some differences in layout.   -->
-
-<html>
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <title>Hello App Engine</title>
-  </head>
-
-  <body>
-    <h1>Hello App Engine!</h1>
-	
-    <table>
-      <tr>
-        <td colspan="2" style="font-weight:bold;">Available Servlets:</td>        
-      </tr>
-      <tr>
-        <td><a href="jbrown">Jbrown</a></td>
-      </tr>
-    </table>
-  </body>
-</html>
+<html><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" type="text/css" media="screen"><link rel="stylesheet" href="https://cdn.datatables.net/plug-ins/3cfcc339e89/integration/jqueryui/dataTables.jqueryui.css" type="text/css" media="screen"><script src="https://code.jquery.com/jquery-1.11.1.min.js"></script><script src="https://cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script><script src="https://cdn.datatables.net/plug-ins/3cfcc339e89/integration/jqueryui/dataTables.jqueryui.js"></script><script>
+       		$(document).ready(function() {
+   				 $('#apiList').dataTable();
+			} );
+       </script><style>
+				 hr {
+				    height: 1px;
+				    color: #ed1d61;
+				    background: #ed1d61;
+				    font-size: 0;
+				    border: 0;
+				}
+       </style></head><body><center><h1 class="style-five">JavaBrown API</h1></center><hr><table id="apiList" class="display cell-border" width="100%" cellspacing="0"><thead><tr><th>SERVICE-NAME</th><th>REQUEST-TYPE</th><th>URI</th><th>VERSION</th><th>DESCRIPTION</th></tr></thead><tfoot><tr><th>SERVICE-NAME</th><th>REQUEST-TYPE</th><th>URI</th><th>VERSION</th><th>DESCRIPTION</th></tr></tfoot><tbody><tr><td>register</td><td>POST</td><td>
+								http://javabrown.com/jbrownservices/api/ws/v1/user/register</td><td>1</td><td>Register a new user's account.</td></tr><tr><td>getUserInfo</td><td>GET</td><td>
+								http://javabrown.com/jbrownservices/api/ws/v1/user/info/{userName}/{email}</td><td>1</td><td>Register new account.</td></tr><tr><td>auth</td><td>GET</td><td>
+								http://javabrown.com/jbrownservices/api/ws/v1/user/auth</td><td>1</td><td>Authorize an account.</td></tr><tr><td>getIsoCountries</td><td>GET</td><td>
+								http://javabrown.com/jbrownservices/api/ws/v1/countryinfo</td><td>1</td><td>Register new account.</td></tr><tr><td>getCountryInfo</td><td>GET</td><td>
+								http://javabrown.com/jbrownservices/api/ws/v1/countryinfo/{countryName}</td><td>1</td><td>Register new account.</td></tr><tr><td>getStateInfo</td><td>GET</td><td>
+								http://javabrown.com/jbrownservices/api/ws/v1/countryinfo/{countryName}/{stateName}</td><td>1</td><td>Register new account.</td></tr><tr><td>getCityInfo</td><td>GET</td><td>
+								http://javabrown.com/jbrownservices/api/ws/v1/countryinfo/{countryName}/{stateName}/{cityName}</td><td>1</td><td>Register new account.</td></tr><tr><td>getAirporByIata</td><td>GET</td><td>
+								http://javabrown.com/jbrownservices/api/ws/v1/airport/{iata}</td><td>1</td><td>Return Airport Info by IATA or airport code.</td></tr><tr><td>getDistance</td><td>GET</td><td>
+								http://javabrown.com/jbrownservices/api/ws/v1/distance/location-a/{countryName1}/location-b/{countryName1}</td><td>1</td><td>
+					Calculate the distance between the two locations
+				</td></tr><tr><td>getLineChart</td><td>GET</td><td>
+								http://javabrown.com/jbrownservices/api/ws/v2/ui/linechart</td><td>2</td><td>Generate Chart Line</td></tr><tr><td>encode</td><td>POST</td><td>
+								http://javabrown.com/jbrownservices/api/ws/v1/util/encode</td><td>1</td><td>Generate Chart Line</td></tr><tr><td>getPublicPhotos</td><td>GET</td><td>
+								http://javabrown.com/jbrownservices/api/ws/v1/media/search-images/{pattern}/{size}</td><td>1</td><td>Find image services</td></tr><tr><td>getAllPhotoSizeConstants</td><td>GET</td><td>
+								http://javabrown.com/jbrownservices/api/ws/v1/media/all-image-size</td><td>1</td><td>Return the list of available search constants
+				</td></tr></tbody></table><br></body></html>

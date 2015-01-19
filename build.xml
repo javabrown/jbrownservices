@@ -16,6 +16,7 @@
 	<property name="tomcat.dir" value="c:/tomcat-8" />
 	<property name="dir.src" value="src" />
 	<property name="dir.classes" value="war/WEB-INF/classes" />
+	<property name="dir.webroot" value="war/" />
 	<property name="dir.serviceclient.classes" value="serviceTestClasses" />
 
 	<path id="javac.classpath">
@@ -131,10 +132,10 @@
 	<target name="mobile-doc-gen">
 		<description>Generate documentation rest API</description>
 		<xslt processor="${saxon7}" in="scripts/api-endpoints.xml" style="scripts/api-docs.xsl"
-			out="${output-gen-dir}/api-docs.html" classpath="${saxon7.classpath}" />
+			out="${output-gen-dir}/index.html" classpath="${saxon7.classpath}" />
 		<echo>Coping generated documentation to source dir.</echo>
-		<copy todir="${output-src-dir}">
-			<fileset dir="temp" includes="*.java" excludes="**/*.class,**/.jar" />
+		<copy todir="${dir.webroot}">
+			<fileset dir="temp" includes="*.html" excludes="**/*.class,**/.jar,**/*.java" />
 		</copy>
 		<echo>Done!!</echo>
 	</target>	

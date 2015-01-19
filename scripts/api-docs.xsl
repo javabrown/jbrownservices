@@ -10,7 +10,9 @@
 	<xsl:param name="url_HTTP_HOST" />
 
 	<xsl:variable name="CurrentPageUrl" select="concat('http://',$url_HTTP_HOST,$url_PATH_INFO)" />
-
+	<xsl:param name="hostName"/>
+	<xsl:param name="domain"/>
+	
 	<xsl:template match="/">
 		<xsl:apply-templates/>
 	</xsl:template>
@@ -44,21 +46,21 @@
 			<table id="apiList" class="display cell-border" width="100%" cellspacing="0">
 			        <thead>
 			            <tr>
-			                <th>Service Name</th>
+			                <th>SERVICE-NAME</th>
 			                <th>REQUEST-TYPE</th>
 			                <th>URI</th>
-			                <th>Version</th>
-			                <th>Description</th>
+			                <th>VERSION</th>
+			                <th>DESCRIPTION</th>
 			            </tr>
 			        </thead>
 			 
 			        <tfoot>
 			            <tr>
-			                <th>Service Name</th>
+			                <th>SERVICE-NAME</th>
 			                <th>REQUEST-TYPE</th>
 			                <th>URI</th>
-			                <th>Version</th>
-			                <th>Description</th>
+			                <th>VERSION</th>
+			                <th>DESCRIPTION</th>
 			            </tr>
 			        </tfoot>
 			 
@@ -69,11 +71,14 @@
 							<xsl:variable name="service-version"><xsl:value-of select="version"/></xsl:variable>
 							<xsl:variable name="service-request-type"><xsl:value-of select="request-type"/></xsl:variable>
 							<xsl:variable name="service-mapping-uri"><xsl:value-of select="mapping-uri"/></xsl:variable>
+							<xsl:variable name="service-full-uri">
+								http://javabrown.com/jbrownservices/api/ws/v<xsl:value-of select="version"/><xsl:value-of select="$service-mapping-uri"/>
+							</xsl:variable>
 							<xsl:variable name="service-description"><xsl:value-of select="description"/></xsl:variable>
 					            <tr>
 					                <td><xsl:value-of select="$service-name"/></td>
 					                <td><xsl:value-of select="$service-request-type"/></td>
-					                <td><xsl:value-of select="$CurrentPageUrl" /> / <xsl:value-of select="$service-mapping-uri"/></td>
+					                <td><xsl:value-of select="$service-full-uri"/></td>
 					                <td><xsl:value-of select="$service-version"/></td>
 					                <td><xsl:value-of select="$service-description"/></td>
 					            </tr>
