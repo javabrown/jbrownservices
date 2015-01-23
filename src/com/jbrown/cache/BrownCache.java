@@ -44,3 +44,26 @@ class InMemoryCache implements CacheRouter, BrownCacheI {
 		_map.get(key);
 	}
 }
+
+class GoogleMemcachedCache implements CacheRouter, BrownCacheI {
+	Map<String, ? extends Object> _map;
+	
+	public GoogleMemcachedCache(){
+		_map = new HashMap<String,  Object>();
+	}
+	
+	@Override
+	public CacheRoute getRoute() {
+		return CacheRoute.GOOGLE_MEMCACHED;
+	}
+
+	@Override
+	public <T extends Object> void set(String key, T value) {
+		//_map.put(key, (Object) value);
+	}
+
+	@Override
+	public <T> void get(String key) {
+		_map.get(key);
+	}
+}
