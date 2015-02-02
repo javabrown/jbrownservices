@@ -43,4 +43,6 @@ public interface BrownKeysI {
 	
 	String IATA = "iata";
 	
+	String TEXT_TO_SPEECH = "textToSpeech";
+	
 }

@@ -217,4 +217,17 @@ public class RestServices extends BrownServices implements WsInterface,
 		
 		return EMPTY_VIEW;
 	}
+	
+    public ModelAndView textToAudio(
+  	      @PathVariable String textToSpeech,HttpServletRequest req, 
+  	      HttpServletResponse res, ModelMap model){
+    	BrownRequestI request = super.getBrownRequest(req);
+		ResponderI respoder = getResponderFactory().getResponder(
+				ResponderK.MEDIA_RESPONDER);
+		request.set(TEXT_TO_SPEECH, textToSpeech);
+		respoder.respond(request);
+    	//PENDING.....
+    	return EMPTY_VIEW;
+    }
+
 }

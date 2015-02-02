@@ -156,7 +156,20 @@
 				<request-type>GET</request-type>
 				<mapping-uri>/media/all-image-size</mapping-uri>
 			</web-method>
-
+			
+			<!-- 3. -->
+			<web-method>
+				<name>textToAudio</name>
+				<version>1</version>
+				<description>Convert Text to Audio
+				</description>
+				<request-type>GET</request-type>
+				<mapping-uri>/media/text-to-audio</mapping-uri>
+				<web-params>
+					<web-param>String textToSpeech</web-param>
+				</web-params>
+			</web-method>
+			
 
 		</web-methods>
 	</service>
