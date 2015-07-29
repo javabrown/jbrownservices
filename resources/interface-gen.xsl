@@ -34,15 +34,7 @@
 
 <xsl:template match="services">
 <xsl:result-document href="NewGenWebservicesI.java">
-/**
- * NewGenWebservicesI.java
- *
- * This file was auto-generated from api-doc.xml
- * Please do not edit directly.
- * 
- */
-
-package com.raileurope.web.ws.soap;
+  
 import java.util.*;
 
 public interface NewGenWebservicesI{
@@ -59,7 +51,7 @@ public interface NewGenWebservicesI{
  * 
  */
 
-package com.raileurope.web.ws.soap;
+package com.jbrown.web.ws.soap;
 import java.util.*;
 
 public class NewGenWebservices implements NewGenWebservicesI {
@@ -72,7 +64,7 @@ public class NewGenWebservices implements NewGenWebservicesI {
 <xsl:template match="service">
   <xsl:variable name="file" select="concat(@name, 'Result.java')"/>
   <xsl:result-document href="{$file}">
-package com.raileurope.web.ws.soap;
+package com.jbrown.web.ws.soap;
 import java.util.*;
 
 public class <xsl:value-of select="concat(@name, 'Result')"/> <xsl:text>{
@@ -92,7 +84,7 @@ public class <xsl:value-of select="concat(@name, 'Result')"/> <xsl:text>{
 
   <xsl:variable name="file2" select="concat(@name, '_helper', '.java')"/>
   <xsl:result-document href="{$file2}">
-package com.raileurope.web.ws.soap;
+package com.jbrown.web.ws.soap;
 import java.util.*;
 
 public class <xsl:value-of select="@name"/> <xsl:text>{
@@ -127,7 +119,7 @@ public class <xsl:value-of select="@name"/> <xsl:text>{
       debugInfo.put("type", "soap");
       debugInfo.put("url", System.getenv("WS_EXTERNAL_URL"));
       <xsl:apply-templates select="inputs" mode="debug-info"/> 
-      com.raileurope.web.ws.util.PanicMailer.sendPanic(e, debugInfo);
+      com.jbrown.web.ws.util.PanicMailer.sendPanic(e, debugInfo);
       return null;
     }
   }
@@ -142,7 +134,7 @@ public class <xsl:value-of select="@name"/> <xsl:text>{
 <xsl:template match="complexType">
   <xsl:variable name="file" select="concat(@name, '.java')"/>
   <xsl:result-document href="{$file}">
-package com.raileurope.web.ws.soap;
+package com.jbrown.web.ws.soap;
 import java.util.*;
 
 public class <xsl:value-of select="@name"/> <xsl:text>{

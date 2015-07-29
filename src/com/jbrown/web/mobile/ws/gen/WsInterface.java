@@ -68,8 +68,5 @@ public interface WsInterface{
 	      @PathVariable String size,HttpServletRequest req, HttpServletResponse res, ModelMap model);
      @RequestMapping(value = "/v1/media/all-image-size", method = RequestMethod.GET)
      public ModelAndView getAllPhotoSizeConstants(HttpServletRequest req, HttpServletResponse res, ModelMap model);
-     @RequestMapping(value = "/v1/media/text-to-audio", method = RequestMethod.GET)
-     public ModelAndView textToAudio(
-	      @PathVariable String textToSpeech,HttpServletRequest req, HttpServletResponse res, ModelMap model);
 }
 			
