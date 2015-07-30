@@ -30,7 +30,7 @@
 						<xsl:call-template name="html-header"/>
 					</head>
 					
-					<body class="transparent">
+					<body class="well transparent">
 						<div class="well transparent">
 							<center>
 							    <div class="jumbotron">
@@ -203,7 +203,7 @@
 			}
 			
 			.background-image {
-			  background-image: url('http://666a658c624a3c03a6b2-25cda059d975d2f318c03e90bcf17c40.r92.cf1.rackcdn.com/unsplash_527bf56961712_1.JPG');
+			  background-image: url('https://raw.githubusercontent.com/javabrown/jbrownservices/master/war/WEB-INF/icons/jb-api.jpg');
 			  background-size: cover;
 			  display: block;
 			  filter: blur(5px);
@@ -216,7 +216,7 @@
 			}
 			
 			html {
-            background: url('icons/jb-api.jpg') no-repeat center center fixed;
+            background: url('https://raw.githubusercontent.com/javabrown/jbrownservices/master/war/WEB-INF/icons/jb-api.jpg') no-repeat center center fixed;
             -webkit-background-size: cover;
             -moz-background-size: cover;
             -o-background-size: cover;
