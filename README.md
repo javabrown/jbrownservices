@@ -10,3 +10,4 @@ Service documentation (auto-generated)
   ![Alt text](https://github.com/javabrown/jbrownservices/blob/master/temp/api-docs.html "API Documentation")
   
   
+  ![](https://raw.githubusercontent.com/javabrown/jbrownservices/master/war/WEB-INF/icons/index-ss.png "JavaBrown API")
