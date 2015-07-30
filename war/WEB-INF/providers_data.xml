@@ -14,7 +14,7 @@
 							  <entry key="apiKey" value="801ba291f728d037ce22b7664975667a"/>
 							  <entry key="secret" value="191bb0fe52cd3017"/>
 							  <entry key="user_id" value="80622574@N07"/>
-							  <entry key="public_url" value="http://api.flickr.com/services/rest/?method=flickr.people.getPublicPhotos&amp;api_key=801ba291f728d037ce22b7664975667a&amp;user_id=80622574@N07"/>
+							  <entry key="public_url" value="https://api.flickr.com/services/rest/?method=flickr.people.getPublicPhotos&amp;api_key=801ba291f728d037ce22b7664975667a&amp;user_id=80622574@N07"/>
 						 </map>
 					 </property>
 				</bean>

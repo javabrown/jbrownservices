@@ -74,10 +74,14 @@ public class FBConnection {
 			jsonObject = JSONObject.fromObject(jsonResponse);
 
 			if (jsonObject != null) {
-				facebookUserInfo = new FacebookUserInfo(jsonObject.getString(FB_ID), jsonObject.getString(FB_EMAIL), 
-						jsonObject.getString(FB_FIRST_NAME), jsonObject.getString(FB_LAST_NAME), 
-						jsonObject.getString(FB_GENDER), jsonObject.getString(FB_NAME), 
-						jsonObject.getString(FB_USER_NAME), jsonObject.getString(FB_LOCALE));
+				facebookUserInfo = new FacebookUserInfo(
+						jsonObject.getString(FB_ID),
+						jsonObject.getString(FB_EMAIL),
+						jsonObject.getString(FB_FIRST_NAME),
+						jsonObject.getString(FB_LAST_NAME),
+						jsonObject.getString(FB_GENDER),
+						jsonObject.getString(FB_NAME), "",
+						jsonObject.getString(FB_LOCALE));
 			}
 		}
 		

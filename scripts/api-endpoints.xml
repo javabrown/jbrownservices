@@ -11,9 +11,11 @@
 				<request-type>POST</request-type>
 				<mapping-uri>/user/register</mapping-uri>
 				<sample-request>
-				    {
-				     "user" : "raja_khan",
-				     "password" : "123456",
+				    header=>{
+				     "access_token" : "facebook-token-from-jbrown-web-app"
+				    }
+				    body=>{
+				     empty
 				    }
 				</sample-request>
 			</web-method>
@@ -42,13 +44,14 @@
 				<request-type>GET</request-type>
 				<mapping-uri>/user/auth</mapping-uri>
 				<sample-request>
-				    {
-				     "user" : "raja_khan",
-				     "password" : "1234"
+				     header=>{
+				     "access_token" : "facebook-token-from-jbrown-web-app"
 				    }
-				</sample-request>						
+				    body=>{
+				     empty
+				    }
+				</sample-request>
 			</web-method>
-
 
 			<web-method>
 				<name>getIsoCountries</name>
@@ -60,7 +63,12 @@
 					<!-- none -->
 				</web-params>
 				<sample-request>
-				    {}
+				     header=>{
+				     "access_token" : "facebook-token-from-jbrown-web-app"
+				    }
+				    body=>{
+				     empty
+				    }
 				</sample-request>				
 			</web-method>
 
@@ -74,9 +82,11 @@
 					<web-param>String countryName</web-param>
 				</web-params>
 				<sample-request>
-				    {
-				     "user" : "raja_khan",
-				     "password" : "1234"
+				    header=>{
+				     "access_token" : "facebook-token-from-jbrown-web-app"
+				    }
+				    body=>{
+				     empty
 				    }
 				</sample-request>
 			</web-method>
@@ -177,7 +187,14 @@
 					<web-param>String pattern</web-param>
 					<web-param>String size</web-param>
 				</web-params>
-				<sample-request></sample-request>				
+				<sample-request>
+				   header=>{
+				     "access_token" : "facebook-token-from-jbrown-web-app"
+				    }
+				    GET Sample URL=>{
+				      http://localhost:8080/jbrownservices/api/ws/v1/media/search-images/raja/50px
+				    }
+				</sample-request>
 			</web-method>
 
 			<!-- 2. -->
