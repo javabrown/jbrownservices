@@ -86,7 +86,7 @@
 				     "access_token" : "facebook-token-from-jbrown-web-app"
 				    }
 				    body=>{
-				     empty
+				      http://localhost:8080/jbrownservices/api/ws/v1/countryinfo/in/
 				    }
 				</sample-request>
 			</web-method>
@@ -101,7 +101,14 @@
 					<web-param>String countryName</web-param>
 					<web-param>String stateName</web-param>
 				</web-params>
-				<sample-request></sample-request>
+				<sample-request>
+				 	header=>{
+				     "access_token" : "facebook-token-from-jbrown-web-app"
+				    }
+				    GET-SAMPLE=>{
+				      http://localhost:8080/jbrownservices/api/ws/v1/countryinfo/in/up/
+				    }
+				</sample-request>
 			</web-method>
 
 
@@ -116,9 +123,35 @@
 					<web-param>String stateName</web-param>
 					<web-param>String cityName</web-param>
 				</web-params>
-				<sample-request></sample-request>				
+				<sample-request>
+				 	header=>{
+				     "access_token" : "facebook-token-from-jbrown-web-app"
+				    }
+				    GET-SAMPLE=>{
+				      http://localhost:8080/jbrownservices/api/ws/v1/countryinfo/in/up/agra/
+				    }				
+				</sample-request>				
 			</web-method>
 
+
+			<web-method>
+				<name>getAllAirport</name>
+				<version>1</version>
+				<description>Return Airport Info by IATA or airport code.</description>
+				<request-type>GET</request-type>
+				<mapping-uri>/airport</mapping-uri>
+				<web-params></web-params>
+				
+				<sample-request>
+					header=>{
+				     "access_token" : "facebook-token-from-jbrown-web-app"
+				    }
+				    GET-SAMPLE=>{
+				      http://localhost:8080/jbrownservices/api/ws/v1/airport
+				    }
+				</sample-request>				
+			</web-method>
+			
 			<web-method>
 				<name>getAirporByIata</name>
 				<version>1</version>
@@ -128,7 +161,15 @@
 				<web-params>
 					<web-param>String iata</web-param>
 				</web-params>
-				<sample-request></sample-request>				
+				
+				<sample-request>
+					header=>{
+				     "access_token" : "facebook-token-from-jbrown-web-app"
+				    }
+				    GET-SAMPLE=>{
+				      http://localhost:8080/jbrownservices/api/ws/v1/airport/jfk
+				    }
+				</sample-request>				
 			</web-method>
 			
 			<web-method>

@@ -10,16 +10,15 @@ import com.jbrown.ext.capsule.BrownCapsule;
 import com.jbrown.web.ws.BrownRequestI;
 import com.jbrown.web.ws.Responder;
 
-public class AirportInfoResponder extends Responder {
+public class AirportResponder extends Responder {
 
 	@Override
 	protected Map<String, Object> perform(BrownRequestI request) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		String iata = request.get(IATA);
 		
 		try {
 			List<Map<String, String>> info =
-					new BrownCapsule().getAirportData().getAirportByIATACode(iata.toUpperCase());
+					new BrownCapsule().getAirportData().getAirportsList();
 			map.put(RESPONSE_K, info);
 			
 		} catch (Exception e) {
@@ -32,11 +31,11 @@ public class AirportInfoResponder extends Responder {
 	@Override
 	protected BrownErrorsI validate(BrownRequestI request) {
 		BrownErrorsI errors = request.getErrors();
-		String iata = request.get(IATA);
+		//String iata = request.get(IATA);
 		
-		if(StringUtil.isEmpty(iata)){
-			errors.add("airport/iata-code missing in request header");
-		}
+		//if(StringUtil.isEmpty(iata)){
+		//	errors.add("airport/iata-code missing in request header");
+		//}
 		
 		return errors;
 	}

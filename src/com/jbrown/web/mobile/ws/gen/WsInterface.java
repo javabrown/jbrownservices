@@ -49,6 +49,8 @@ public interface WsInterface{
 	      @PathVariable String countryName,
 	      @PathVariable String stateName,
 	      @PathVariable String cityName,HttpServletRequest req, HttpServletResponse res, ModelMap model);
+     @RequestMapping(value = "/v1/airport", method = RequestMethod.GET)
+     public ModelAndView getAllAirport(HttpServletRequest req, HttpServletResponse res, ModelMap model);
      @RequestMapping(value = "/v1/airport/{iata}", method = RequestMethod.GET)
      public ModelAndView getAirporByIata(
 	      @PathVariable String iata,HttpServletRequest req, HttpServletResponse res, ModelMap model);

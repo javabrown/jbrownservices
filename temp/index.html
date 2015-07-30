@@ -113,16 +113,44 @@
 				     "access_token" : "facebook-token-from-jbrown-web-app"
 				    }
 				    body=&gt;{
-				     empty
+				      http://localhost:8080/jbrownservices/api/ws/v1/countryinfo/in/
 				    }
-				</sample></div></td><td>1</td><td>Register new account.</td></tr><tr><td>getStateInfo</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span>1/countryinfo/{countryName}/{stateName}<button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request"></sample></div></td><td>1</td><td>Register new account.</td></tr><tr><td>getCityInfo</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span>1/countryinfo/{countryName}/{stateName}/{cityName}<button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request"></sample></div></td><td>1</td><td>Register new account.</td></tr><tr><td>getAirporByIata</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span>1/airport/{iata}<button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request"></sample></div></td><td>1</td><td>Return Airport Info by IATA or airport code.</td></tr><tr><td>getDistance</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span>1/distance/location-a/{countryName1}/location-b/{countryName1}<button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request"></sample></div></td><td>1</td><td>
+				</sample></div></td><td>1</td><td>Register new account.</td></tr><tr><td>getStateInfo</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span>1/countryinfo/{countryName}/{stateName}<button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request">
+				 	header=&gt;{
+				     "access_token" : "facebook-token-from-jbrown-web-app"
+				    }
+				    GET-SAMPLE=&gt;{
+				      http://localhost:8080/jbrownservices/api/ws/v1/countryinfo/in/up/
+				    }
+				</sample></div></td><td>1</td><td>Register new account.</td></tr><tr><td>getCityInfo</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span>1/countryinfo/{countryName}/{stateName}/{cityName}<button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request">
+				 	header=&gt;{
+				     "access_token" : "facebook-token-from-jbrown-web-app"
+				    }
+				    GET-SAMPLE=&gt;{
+				      http://localhost:8080/jbrownservices/api/ws/v1/countryinfo/in/up/agra/
+				    }				
+				</sample></div></td><td>1</td><td>Register new account.</td></tr><tr><td>getAllAirport</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span>1/airport<button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request">
+					header=&gt;{
+				     "access_token" : "facebook-token-from-jbrown-web-app"
+				    }
+				    GET-SAMPLE=&gt;{
+				      http://localhost:8080/jbrownservices/api/ws/v1/airport
+				    }
+				</sample></div></td><td>1</td><td>Return Airport Info by IATA or airport code.</td></tr><tr><td>getAirporByIata</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span>1/airport/{iata}<button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request">
+					header=&gt;{
+				     "access_token" : "facebook-token-from-jbrown-web-app"
+				    }
+				    GET-SAMPLE=&gt;{
+				      http://localhost:8080/jbrownservices/api/ws/v1/airport/jfk
+				    }
+				</sample></div></td><td>1</td><td>Return Airport Info by IATA or airport code.</td></tr><tr><td>getDistance</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span>1/distance/location-a/{countryName1}/location-b/{countryName1}<button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request"></sample></div></td><td>1</td><td>
 					Calculate the distance between the two locations
 				</td></tr><tr><td>getLineChart</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span>2/ui/linechart<button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request"></sample></div></td><td>2</td><td>Generate Chart Line</td></tr><tr><td>encode</td><td>POST</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span>1/util/encode<button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request"></sample></div></td><td>1</td><td>Generate Chart Line</td></tr><tr><td>getPublicPhotos</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span>1/media/search-images/{pattern}/{size}<button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request">
 				   header=&gt;{
 				     "access_token" : "facebook-token-from-jbrown-web-app"
 				    }
-				    body=&gt;{
-				     empty
+				    GET Sample URL=&gt;{
+				      http://localhost:8080/jbrownservices/api/ws/v1/media/search-images/raja/50px
 				    }
 				</sample></div></td><td>1</td><td>Find image services</td></tr><tr><td>getAllPhotoSizeConstants</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span>1/media/all-image-size<button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request"></sample></div></td><td>1</td><td>Return the list of available search constants
 				</td></tr><tr><td>textToAudio</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span>1/media/text-to-audio<button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request"></sample></div></td><td>1</td><td>Convert Text to Audio

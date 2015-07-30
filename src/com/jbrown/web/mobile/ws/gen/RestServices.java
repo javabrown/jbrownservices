@@ -205,13 +205,25 @@ public class RestServices extends BrownServices implements WsInterface,
 		respoder.respond(request);
 		return EMPTY_VIEW;
 	}
-
+	
+	@Override
+	public ModelAndView getAllAirport(HttpServletRequest req,
+			HttpServletResponse res, ModelMap model) {
+		BrownRequestI request = super.getBrownRequest(req);
+		ResponderI respoder = getResponderFactory().getResponder(
+				ResponderK.AIRPORT_RESPONDER);
+ 
+		respoder.respond(request);
+		
+		return EMPTY_VIEW;
+	}
+	 
 	@Override
 	public ModelAndView getAirporByIata(@PathVariable String iata,
 			HttpServletRequest req, HttpServletResponse res, ModelMap model) {
 		BrownRequestI request = super.getBrownRequest(req);
 		ResponderI respoder = getResponderFactory().getResponder(
-				ResponderK.AIRPORT_RESPONDER);
+				ResponderK.AIRPORT_IATA_RESPONDER);
 		request.set(IATA, iata);
 		respoder.respond(request);
 		

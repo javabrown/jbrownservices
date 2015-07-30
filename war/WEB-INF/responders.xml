@@ -10,7 +10,9 @@
 
 	<bean id="mediaResponderBean" class="com.jbrown.web.ws.responder.MediaResponder" />
 
-	<bean id="airportResponderBean" class="com.jbrown.web.ws.responder.AirportInfoResponder" />
+	<bean id="airportIATAResponderBean" class="com.jbrown.web.ws.responder.AirportInfoResponder" />
+	
+	<bean id="airportResponderBean" class="com.jbrown.web.ws.responder.AirportResponder" />
 
 	<bean id="responderFactory" class="com.jbrown.web.ws.responder.ResponderFactory">
 		<property name="responders">
@@ -18,6 +20,7 @@
 				<entry key="authResponder" value-ref="authResponderBean" />
 				<entry key="geoResponder" value-ref="geoResponderBean" />
 				<entry key="airportResponder" value-ref="airportResponderBean" />
+				<entry key="airportIATAResponderBean" value-ref="airportIATAResponderBean" />
 				<entry key="mediaResponder" value-ref="mediaResponderBean" />
 			</map>
 		</property>

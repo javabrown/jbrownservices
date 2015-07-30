@@ -6,4 +6,5 @@ public interface ResponderK {
 	String UTIL_RESPONDER = "utilityResponder";
 	String MEDIA_RESPONDER = "mediaResponder";
 	String AIRPORT_RESPONDER = "airportResponder";
+	String AIRPORT_IATA_RESPONDER = "airportIATAResponder";
 }
