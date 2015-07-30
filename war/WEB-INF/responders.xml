@@ -20,7 +20,7 @@
 				<entry key="authResponder" value-ref="authResponderBean" />
 				<entry key="geoResponder" value-ref="geoResponderBean" />
 				<entry key="airportResponder" value-ref="airportResponderBean" />
-				<entry key="airportIATAResponderBean" value-ref="airportIATAResponderBean" />
+				<entry key="airportIATAResponder" value-ref="airportIATAResponderBean" />
 				<entry key="mediaResponder" value-ref="mediaResponderBean" />
 			</map>
 		</property>
