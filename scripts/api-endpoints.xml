@@ -10,6 +10,12 @@
 				<description>Register a new user's account.</description>
 				<request-type>POST</request-type>
 				<mapping-uri>/user/register</mapping-uri>
+				<sample-request>
+				    {
+				     "user" : "raja_khan",
+				     "password" : "123456",
+				    }
+				</sample-request>
 			</web-method>
 
 			<web-method>
@@ -22,6 +28,11 @@
 					<web-param>String userName</web-param>
 					<web-param>String email</web-param>
 				</web-params>
+				<sample-request>
+				    {
+				     "user" : "raja_khan"
+				    }
+				</sample-request>				
 			</web-method>
 
 			<web-method>
@@ -30,6 +41,12 @@
 				<description>Authorize an account.</description>
 				<request-type>GET</request-type>
 				<mapping-uri>/user/auth</mapping-uri>
+				<sample-request>
+				    {
+				     "user" : "raja_khan",
+				     "password" : "1234"
+				    }
+				</sample-request>						
 			</web-method>
 
 
@@ -42,6 +59,9 @@
 				<web-params>
 					<!-- none -->
 				</web-params>
+				<sample-request>
+				    {}
+				</sample-request>				
 			</web-method>
 
 			<web-method>
@@ -53,6 +73,12 @@
 				<web-params>
 					<web-param>String countryName</web-param>
 				</web-params>
+				<sample-request>
+				    {
+				     "user" : "raja_khan",
+				     "password" : "1234"
+				    }
+				</sample-request>
 			</web-method>
 
 			<web-method>
@@ -65,6 +91,7 @@
 					<web-param>String countryName</web-param>
 					<web-param>String stateName</web-param>
 				</web-params>
+				<sample-request></sample-request>
 			</web-method>
 
 
@@ -79,6 +106,7 @@
 					<web-param>String stateName</web-param>
 					<web-param>String cityName</web-param>
 				</web-params>
+				<sample-request></sample-request>				
 			</web-method>
 
 			<web-method>
@@ -90,6 +118,7 @@
 				<web-params>
 					<web-param>String iata</web-param>
 				</web-params>
+				<sample-request></sample-request>				
 			</web-method>
 			
 			<web-method>
@@ -104,6 +133,7 @@
 					<web-param>String countryName1</web-param>
 					<web-param>String countryName2</web-param>
 				</web-params>
+				<sample-request></sample-request>				
 			</web-method>
 
 			<!-- Utility Text2Image -->
@@ -119,6 +149,7 @@
 				<description>Generate Chart Line</description>
 				<request-type>GET</request-type>
 				<mapping-uri>/ui/linechart</mapping-uri>
+				<sample-request></sample-request>				
 			</web-method>
 
 			<web-method>
@@ -130,6 +161,7 @@
 				<web-params>
 					<web-param>String textToEncode</web-param>
 				</web-params>
+				<sample-request></sample-request>				
 			</web-method>
 
 
@@ -145,6 +177,7 @@
 					<web-param>String pattern</web-param>
 					<web-param>String size</web-param>
 				</web-params>
+				<sample-request></sample-request>				
 			</web-method>
 
 			<!-- 2. -->
@@ -155,6 +188,7 @@
 				</description>
 				<request-type>GET</request-type>
 				<mapping-uri>/media/all-image-size</mapping-uri>
+				<sample-request></sample-request>				
 			</web-method>
 			
 			<!-- 3. -->
@@ -168,6 +202,7 @@
 				<web-params>
 					<web-param>String textToSpeech</web-param>
 				</web-params>
+				<sample-request></sample-request>				
 			</web-method>
 			
 

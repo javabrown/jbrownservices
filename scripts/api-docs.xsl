@@ -30,8 +30,8 @@
 						<xsl:call-template name="html-header"/>
 					</head>
 					
-					<body>
-						<div class="well">
+					<body class="transparent">
+						<div class="well transparent">
 							<center>
 							    <div class="jumbotron">
 									<h1><xsl:value-of select="$var"/></h1>      
@@ -51,8 +51,8 @@
 	<!-- **** -->
 	
 	<xsl:template name="make-service-body">
-       <div class="page-container1">
-            <div class="container1">
+       <div class="page-container">
+            
 						    
 					<table id="apiList" class="display cell-border" width="100%" cellspacing="0">
 					        <thead>
@@ -82,6 +82,7 @@
 									<xsl:variable name="service-version"><xsl:value-of select="version"/></xsl:variable>
 									<xsl:variable name="service-request-type"><xsl:value-of select="request-type"/></xsl:variable>
 									<xsl:variable name="service-mapping-uri"><xsl:value-of select="mapping-uri"/></xsl:variable>
+									<xsl:variable name="sample-request"><xsl:value-of select="sample-request"/></xsl:variable>
 									<xsl:variable name="service-full-uri">http://javabrown.com/jbrownservices/api/ws/v<xsl:value-of select="version"/><xsl:value-of select="$service-mapping-uri"/></xsl:variable>
 									<xsl:variable name="js-backed-service-uri-block"><xsl:value-of select="version"/><xsl:value-of select="$service-mapping-uri"/></xsl:variable>
 									
@@ -91,13 +92,14 @@
 							                <td><xsl:value-of select="$service-request-type"/></td>
 							                <!-- td><xsl:value-of select="$service-full-uri"/></td -->
 							                <td>
-							                
-							                	<div class="launchSample">
+							                    
+							                	<div class="launchSample">						                	    
 								                	<span class='uri'>{{Filled by JS}}</span><xsl:value-of select="$js-backed-service-uri-block"/>
 								                	
 								                	<button class="btn launchSample">
 	  							                	  <i class="icon-search icon-green"></i>
 								                	</button>
+								                	<sample  class="hide sample-request"><xsl:value-of select='$sample-request'/></sample>
 								                </div>
 								             
 							                </td>
@@ -114,14 +116,15 @@
 					<br/> 	
 					
 					 <div id="confirm" class="modal hide fade">
-						<div class="modal-body">Do you want to continue?</div>
+						<div class="modal-body">
+							<p class="dialog-msg">-</p>
+						</div>
 						<div class="modal-footer">
-							<button type="button" data-dismiss="modal" class="btn btn-primary" data-value="1">Continue</button>
 							<button type="button" data-dismiss="modal" class="btn" data-value="0">Cancel</button>
 						</div>
 					</div>
 						
-			 </div>
+			 
 		</div>					
 	</xsl:template>
 	
@@ -145,13 +148,17 @@
        			 var host = window.location.host ? window.location.host : "localhost:8080";
    				 var wsHost = window.location.protocol + "//" + host + "/jbrownservices/api/ws/v";
    				 $('.uri').html(wsHost);
-   				 $('#apiList').dataTable();
-   				 
    			     prepareDialog();
+   			     
+   			     //alert('done');
+   			     $('#apiList').dataTable();
 			} );
 			
 			function prepareDialog() {
 				$('.launchSample').on('click', function (e) {
+				    var sampleRequest = $(this).find('.sample-request').html();
+				    $('.dialog-msg').html(sampleRequest);
+				    
 				    $('#confirm')
 				        .modal({ backdrop: 'static', keyboard: false })
 				        .one('click', '[data-value]', function (e) {
@@ -174,6 +181,10 @@
 				border: 0;
 			}
 			
+			.hide{
+			  display:none;
+			}
+			
 			body,
 			.modal-open .page-container,
 			.modal-open .page-container .navbar-fixed-top,
@@ -187,6 +198,38 @@
 				}
 			}
 			
+			* {
+			  box-sizing: border-box;
+			}
+			
+			.background-image {
+			  background-image: url('http://666a658c624a3c03a6b2-25cda059d975d2f318c03e90bcf17c40.r92.cf1.rackcdn.com/unsplash_527bf56961712_1.JPG');
+			  background-size: cover;
+			  display: block;
+			  filter: blur(5px);
+			  -webkit-filter: blur(5px);
+			  height: 800px;
+			  left: 0;
+			  position: fixed;
+			  right: 0;
+			  z-index: 1;
+			}
+			
+			html {
+            background: url('icons/jb-api.jpg') no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+           }
+			
+			.content {
+			  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+			}			
+			
+		    .transparent {
+               opacity: 0.9;
+            }
       </style>
       
 	</xsl:template>
