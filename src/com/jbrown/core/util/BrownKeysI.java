@@ -45,4 +45,10 @@ public interface BrownKeysI {
 	
 	String TEXT_TO_SPEECH = "textToSpeech";
 	
+	String CAPSULE_K = "Brown_Capsule_K";
+	String AIRPORT_CAPSULE_K = "AirportCapsule_K";
+	
+	String AIRPORT_DATA_K = "AirportDataK";
+ 
+	
 }

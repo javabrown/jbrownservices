@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.jbrown.cache.GoogleCache;
+import com.jbrown.core.util.BrownKeysI;
 import com.jbrown.core.util.StringUtil;
 import com.jbrown.errors.BrownErrorsI;
 import com.jbrown.ext.capsule.BrownCapsule;
@@ -17,9 +19,24 @@ public class AirportResponder extends Responder {
 		Map<String, Object> map = new HashMap<String, Object>();
 		
 		try {
-			List<Map<String, String>> info =
-					new BrownCapsule().getAirportData().getAirportsList();
-			map.put(RESPONSE_K, info);
+			List<Map<String, String>> airportData = 
+					(List<Map<String, String>>) GoogleCache.get(BrownKeysI.AIRPORT_DATA_K);
+			
+			if(airportData == null){
+				BrownCapsule casule = (BrownCapsule) GoogleCache.get(BrownKeysI.CAPSULE_K);
+				
+				if(casule == null){
+					casule = new BrownCapsule();
+					GoogleCache.put(BrownKeysI.CAPSULE_K, casule);
+				}
+				
+				airportData = casule.getAirportData().getAirportsList();
+				
+				GoogleCache.put(BrownKeysI.AIRPORT_DATA_K, airportData);
+				System.out.println("Reloaded into Memcached");
+			}
+		 
+			map.put(RESPONSE_K, airportData);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
