@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.jbrown.cache.BrownCache;
 import com.jbrown.cache.GoogleCache;
 import com.jbrown.core.util.BrownKeysI;
 import com.jbrown.core.util.StringUtil;
@@ -43,7 +44,7 @@ public class AirportInfoResponder extends Responder {
 	}
 
 	public AirportCapsuleI getAirportCapsule() {
-		AirportCapsuleI airportCapsuleI = (AirportCapsuleI) GoogleCache
+		AirportCapsuleI airportCapsuleI = (AirportCapsuleI) BrownCache.getInstance()
 				.get(BrownKeysI.AIRPORT_CAPSULE_K);
 
 		if (airportCapsuleI == null) {
@@ -63,7 +64,7 @@ public class AirportInfoResponder extends Responder {
 	}
 	
 	public BrownCapsule getCapsule(){
-		BrownCapsule capsule = (BrownCapsule) GoogleCache.get(BrownKeysI.CAPSULE_K);
+		BrownCapsule capsule = (BrownCapsule) BrownCache.getInstance().get(BrownKeysI.CAPSULE_K);
 		
 		if(capsule == null){
 			capsule = new BrownCapsule();

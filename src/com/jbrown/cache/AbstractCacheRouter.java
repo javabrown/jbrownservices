@@ -11,5 +11,8 @@ public abstract class AbstractCacheRouter {
 	
 	public interface CacheRouter {
 		CacheRoute getRoute();
+		boolean isAvailable();
 	}
 }
+
+ 
