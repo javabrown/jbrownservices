@@ -17,6 +17,7 @@ public class BrownCache extends AbstractCacheRouter {
 	
 	private CacheRouter[] _cacheRouters;
 	
+	@SuppressWarnings("rawtypes")
 	public static BrownCacheI getInstance() {
 		if (_instance == null) {
 			_instance = new BrownCache();
@@ -87,7 +88,9 @@ class GoogleMemcachedCache<K, V> implements CacheRouter, BrownCacheI<K, V> {
 
 	private MemcacheService getMemcacheService() {
 		try {
-			return MemcacheServiceFactory.getMemcacheService("jbrownservices_");
+			MemcacheService c = MemcacheServiceFactory.getMemcacheService("jbrownservices_");
+			c.put("__ping", "__ping");
+			return c;
 		} catch (Exception ex) {
 			System.out.println("Error during Google->getMemcacheService()!!");
 		}

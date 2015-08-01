@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.jbrown.cache.BrownCache;
-import com.jbrown.cache.GoogleCache;
 import com.jbrown.core.util.BrownKeysI;
 import com.jbrown.core.util.StringUtil;
 import com.jbrown.errors.BrownErrorsI;
@@ -50,10 +49,11 @@ public class AirportInfoResponder extends Responder {
 		if (airportCapsuleI == null) {
 			BrownCapsule capsule = getCapsule();
 
-			if (capsule == null) {
+			if (capsule != null) {
 				try {
 					airportCapsuleI = (AirportCapsuleI) capsule
 							.getAirportData();
+					BrownCache.getInstance().set(BrownKeysI.AIRPORT_CAPSULE_K, airportCapsuleI);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -68,7 +68,7 @@ public class AirportInfoResponder extends Responder {
 		
 		if(capsule == null){
 			capsule = new BrownCapsule();
-			GoogleCache.put(BrownKeysI.CAPSULE_K, capsule);
+			BrownCache.getInstance().set(BrownKeysI.CAPSULE_K, capsule);
 		}
 		
 		return capsule;
