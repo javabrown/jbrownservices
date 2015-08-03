@@ -146,7 +146,7 @@
        <script>
        		$(document).ready(function() {
        			 var host = window.location.host ? window.location.host : "localhost:8080";
-   				 var wsHost = window.location.protocol + "//" + host + "/jbrownservices/api/ws/v";
+   				 var wsHost = window.location.protocol + "//" + host + "/api/ws/v";
    				 $('.uri').html(wsHost);
    			     prepareDialog();
    			     

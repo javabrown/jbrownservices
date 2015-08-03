@@ -11,7 +11,7 @@
 	</servlet>	-->
 	
 	<welcome-file-list>
-		<welcome-file>/index.html</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
 	
 	<servlet>
@@ -28,13 +28,13 @@
 	   <load-on-startup>3</load-on-startup>
 	</servlet>
 
-   <servlet>
+   <!--  servlet>
 	   <servlet-name>jpg0</servlet-name>
 	   <servlet-class>
 	     com.jbrown.web.servlet.ImageServlet
 	   </servlet-class>
 	   <load-on-startup>3</load-on-startup>
-    </servlet>
+    </servlet -->
    
 	<!-- servlet-mapping>
 		<servlet-name>mvc-dispatcher</servlet-name>
@@ -46,10 +46,10 @@
 	   <url-pattern>/api/*</url-pattern>
 	</servlet-mapping>
 
-	<servlet-mapping>
+	<!--  servlet-mapping>
 	   <servlet-name>jpg0</servlet-name>
 	   <url-pattern>/image/jpg</url-pattern>
-	</servlet-mapping>
+	</servlet-mapping -->
 			
 	<listener>
 		  <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

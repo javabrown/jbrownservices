@@ -16,9 +16,17 @@
 	<property name="tomcat.dir" value="c:/tomcat7" />
 	<property name="dir.src" value="src" />
 	<property name="dir.classes" value="war/WEB-INF/classes" />
+	<property name="dir.lib" value="war/WEB-INF/lib" />
 	<property name="dir.webroot" value="war/" />
 	<property name="dir.serviceclient.classes" value="serviceTestClasses" />
-
+	
+	<property name="app-libs" value="libs/app-libs/" />
+	<property name="gae-libs" value="libs/appengine-libs/1.9.24/" />
+	
+	<!-- Configure Later -->
+    <!-- <property name="appengine.sdk.dir" location="c:/tools/appengine-java-sdk-1.9.24" / -->
+    <!-- import file="${appengine.sdk.dir}/config/user/ant-macros.xml" / -->
+    
 	<path id="javac.classpath">
 		<fileset dir="war/WEB-INF/lib" includes="**/*.jar" />
 
@@ -28,16 +36,23 @@
 	</path>
 
 	<target name="clean">
-		<delete dir="${dir.classes}" failonerror="true"
-			includeemptydirs="true" />
-		<delete file="dist\*.jar, *.war" failonerror="true"
-			includeemptydirs="true" />
+	    <delete dir="${dir.lib}" failonerror="true" includeemptydirs="true" />
+		<delete dir="${dir.classes}" failonerror="true" includeemptydirs="true" />
+		<delete file="dist\*.jar, *.war" failonerror="true" includeemptydirs="true" /> 
 	</target>
+	
+    <target name="copy-jars" description="Copies the App Engine JARs to the WAR.">
+	    <copy todir="war/WEB-INF/lib" flatten="true">
+		      <fileset dir="${app-libs}">
+		        <include name="**/*.jar" />
+		      </fileset>
+		      <fileset dir="${gae-libs}">
+		        <include name="**/*.jar" />
+		      </fileset>
+	    </copy>
+    </target>
 
-
-
-	<target name="deploy"
-		depends="clean, mobile-doc-gen, mobile-api-gen, deployOnMac, deployOnWindows">
+	<target name="deploy" depends="clean, copy-jars, mobile-doc-gen, mobile-api-gen, deployOnMac, deployOnWindows">
 		<!--<mkdir dir="${dir.classes}" /> <javac srcdir="${dir.src}" destdir="${dir.classes}" 
 			fork="true" debug="true" classpathref="javac.classpath" /> <jar destfile="dist/jbrownservices.war"> 
 			<fileset dir="web" /> </jar> <copy todir="/mysoftwares/tomcat-6/webapps"> 
@@ -132,12 +147,12 @@
 	<target name="mobile-doc-gen">
 		<description>Generate documentation rest API</description>
 		<xslt processor="${saxon7}" in="scripts/api-endpoints.xml" style="scripts/api-docs.xsl"
-			out="${output-gen-dir}/index.html" classpath="${saxon7.classpath}" />
+			out="${output-gen-dir}/index.jsp" classpath="${saxon7.classpath}" />
 		<echo>Coping generated documentation to source dir.</echo>
 		<copy todir="${dir.webroot}">
-			<fileset dir="temp" includes="*.html" excludes="**/*.class,**/.jar,**/*.java" />
+			<fileset dir="temp" includes="*.jsp" excludes="**/*.class,**/.jar,**/*.java" />
 		</copy>
 		<echo>Done!!</echo>
-	</target>	
+	</target>
 
 </project>
