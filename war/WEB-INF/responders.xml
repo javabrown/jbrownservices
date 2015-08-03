@@ -13,6 +13,10 @@
 	<bean id="airportIATAResponderBean" class="com.jbrown.web.ws.responder.AirportInfoResponder" />
 	
 	<bean id="airportResponderBean" class="com.jbrown.web.ws.responder.AirportResponder" />
+	
+	<bean id="cachePushResponderBean" class="com.jbrown.web.ws.responder.CachePushResponder" />
+	
+	<bean id="cacheGetResponderBean" class="com.jbrown.web.ws.responder.CacheGetResponder" />
 
 	<bean id="responderFactory" class="com.jbrown.web.ws.responder.ResponderFactory">
 		<property name="responders">
@@ -22,7 +26,9 @@
 				<entry key="airportResponder" value-ref="airportResponderBean" />
 				<entry key="airportIATAResponder" value-ref="airportIATAResponderBean" />
 				<entry key="mediaResponder" value-ref="mediaResponderBean" />
+				<entry key="cachePushResponder" value-ref="cachePushResponderBean" />
+				<entry key="cacheGetResponder" value-ref="cacheGetResponderBean" />
 			</map>
 		</property>
 	</bean>
-</beans>
+</beans>  
