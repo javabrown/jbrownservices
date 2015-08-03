@@ -6,10 +6,8 @@ JBrownServices is an open source web-service project designed &amp; developed by
 
 Service documentation (auto-generated)
 
-
-  ![Alt text](https://github.com/javabrown/jbrownservices/blob/master/temp/api-docs.html "API Documentation")
-
-  !(http://javabrownservices.appspot.com/ "Live API")
+ 
+  Live API ➤ http://javabrownservices.appspot.com/
   
   ![](https://raw.githubusercontent.com/javabrown/jbrownservices/master/war/WEB-INF/icons/index-ss.png "JavaBrown API")
 
