@@ -9,7 +9,7 @@ Service documentation (auto-generated)
 
   ![Alt text](https://github.com/javabrown/jbrownservices/blob/master/temp/api-docs.html "API Documentation")
 
-  ![Alt text](http://javabrownservices.appspot.com/ "Live API")
+  !(http://javabrownservices.appspot.com/ "Live API")
   
   ![](https://raw.githubusercontent.com/javabrown/jbrownservices/master/war/WEB-INF/icons/index-ss.png "JavaBrown API")
 
