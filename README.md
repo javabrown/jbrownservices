@@ -4,8 +4,6 @@ JBrownServices is an open source web-service project designed &amp; developed by
 ##JavaBrown API
 ================
 
-Service documentation (auto-generated)
-
  
   Live API ➤ http://javabrownservices.appspot.com/
   
