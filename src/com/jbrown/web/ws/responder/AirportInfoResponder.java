@@ -43,24 +43,23 @@ public class AirportInfoResponder extends Responder {
 	}
 
 	public AirportCapsuleI getAirportCapsule() {
-		AirportCapsuleI airportCapsuleI = (AirportCapsuleI) BrownCache.getInstance()
+		AirportCapsuleI airportCapsule = (AirportCapsuleI) BrownCache.getInstance()
 				.get(BrownKeysI.AIRPORT_CAPSULE_K);
 
-		if (airportCapsuleI == null) {
+		if (airportCapsule == null) {
 			BrownCapsule capsule = getCapsule();
 
 			if (capsule != null) {
 				try {
-					airportCapsuleI = (AirportCapsuleI) capsule
-							.getAirportData();
-					BrownCache.getInstance().set(BrownKeysI.AIRPORT_CAPSULE_K, airportCapsuleI);
+					airportCapsule = (AirportCapsuleI) capsule.getAirportData();
+					BrownCache.getInstance().set(BrownKeysI.AIRPORT_CAPSULE_K, airportCapsule);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		}
 
-		return airportCapsuleI;
+		return airportCapsule;
 	}
 	
 	public BrownCapsule getCapsule(){

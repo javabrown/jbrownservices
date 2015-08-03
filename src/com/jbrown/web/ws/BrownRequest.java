@@ -294,4 +294,9 @@ public class BrownRequest implements BrownRequestI {
 
 		return map;
 	}
+
+	@Override
+	public JSONObject getJson() {
+		return this.json;
+	}
 }

@@ -7,4 +7,7 @@ public interface ResponderK {
 	String MEDIA_RESPONDER = "mediaResponder";
 	String AIRPORT_RESPONDER = "airportResponder";
 	String AIRPORT_IATA_RESPONDER = "airportIATAResponder";
+	String CACHE_PUSH_RESPONDER = "cachePushResponder";
+	String CACHE_GET_RESPONDER = "cacheGetResponder";
+	
 }

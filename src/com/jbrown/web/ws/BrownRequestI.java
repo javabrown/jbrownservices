@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jbrown.errors.BrownErrorsI;
 import com.jbrown.web.servlet.RequestI;
+import com.google.appengine.labs.repackaged.org.json.JSONArray;
+import com.google.appengine.labs.repackaged.org.json.JSONException;
+import com.google.appengine.labs.repackaged.org.json.JSONObject;
 
 public interface BrownRequestI extends RequestI {
 	HttpServletRequest getHttpServletRequest();
@@ -24,4 +27,6 @@ public interface BrownRequestI extends RequestI {
 	BrownErrorsI getErrors();
 	
 	Map<String, String> getHeadersMap();
+	
+	JSONObject getJson();
 }
