@@ -262,8 +262,45 @@
 				</web-params>
 				<sample-request></sample-request>				
 			</web-method>
-			
 
+			<!-- ******* DATA API ************ -->
+			<!-- 1. -->
+			<web-method>
+				<name>setCache</name>
+				<version>1</version>
+				<description>Cache Store Service</description>
+				<request-type>POST</request-type>
+				<mapping-uri>/data/cache/set</mapping-uri>
+				<web-params></web-params>
+				<sample-request>
+				   header=>{
+				     "access_token" : "facebook-token-from-jbrown-web-app"
+				    }
+				    POST BODY=>
+				    {
+				     "cache_key" : "Enter-Cache-Key",
+				     "cache_value" : "Enter Cache Value"
+				    }
+				</sample-request>
+			</web-method>			
+			<!-- 2. -->
+			<web-method>
+				<name>getCache</name>
+				<version>1</version>
+				<description>Cache Fetch Service</description>
+				<request-type>POST</request-type>
+				<mapping-uri>/data/cache/get</mapping-uri>
+				<web-params></web-params>
+				<sample-request>
+				   header=>{
+				     "access_token" : "facebook-token-from-jbrown-web-app"
+				    }
+				    POST BODY=>
+				    {
+				     "cache_key" : "Enter-Cache-Key"
+				    }
+				</sample-request>
+			</web-method>	
 		</web-methods>
 	</service>
 

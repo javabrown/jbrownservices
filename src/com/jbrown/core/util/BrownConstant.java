@@ -21,4 +21,7 @@ public interface BrownConstant {
   String FB_USER_NAME = "username";
   String FB_LOCALE = "locale";
   String FB_ACCESS_TOKEN = "access_token";
+  String CACHE_KEY = "cache_key";
+  String CACHE_VALUE = "cache_value";
+  
 }

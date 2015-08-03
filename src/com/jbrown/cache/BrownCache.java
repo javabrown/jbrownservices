@@ -64,8 +64,13 @@ class InMemoryCache<K, V> implements CacheRouter, BrownCacheI<K, V> {
 	}
 
 	@Override
-	public void set(K key, V value) {
-		_map.put(key, value);
+	public boolean set(K key, V value) {
+		if(key != null && value != null){
+			_map.put(key, value);
+			return true;
+		}
+		
+		return false;
 	}
 
 	@Override
@@ -104,9 +109,13 @@ class GoogleMemcachedCache<K, V> implements CacheRouter, BrownCacheI<K, V> {
 	}
 
 	@Override
-	public void set(K key, V value) {
-		_c.put(key, value);
-		System.out.printf("memcached put done for key %s!!", key);
+	public boolean set(K key, V value) {
+		if(key != null && value != null){
+			_c.put(key, value);
+			return true;
+		}
+		
+		return false;
 	}
 
 	@SuppressWarnings("unchecked")

@@ -241,5 +241,26 @@ public class RestServices extends BrownServices implements WsInterface,
     	//PENDING.....
     	return EMPTY_VIEW;
     }
+    
+	public ModelAndView setCache(String body, HttpServletRequest req,
+			HttpServletResponse res) {
+		BrownRequestI request = super.getBrownRequest(req);
+		ResponderI respoder = getResponderFactory().getResponder(
+				ResponderK.CACHE_PUSH_RESPONDER);
+		respoder.respond(request);
+
+		return EMPTY_VIEW;
+	}
+	
+ 
+	public ModelAndView getCache(String body, HttpServletRequest req,
+			HttpServletResponse res) {
+		BrownRequestI request = super.getBrownRequest(req);
+		ResponderI respoder = getResponderFactory().getResponder(
+				ResponderK.CACHE_GET_RESPONDER);
+		respoder.respond(request);
+
+		return EMPTY_VIEW;
+	}
 
 }
