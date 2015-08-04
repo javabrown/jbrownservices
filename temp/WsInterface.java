@@ -73,5 +73,13 @@ public interface WsInterface{
      @RequestMapping(value = "/v1/media/text-to-audio", method = RequestMethod.GET)
      public ModelAndView textToAudio(
 	      @PathVariable String textToSpeech,HttpServletRequest req, HttpServletResponse res, ModelMap model);
+     @RequestMapping(value = "/v1/data/cache/set", method = RequestMethod.POST)    
+     public ModelAndView setCache
+      (@RequestBody String body, HttpServletRequest req, HttpServletResponse res);
+      
+     @RequestMapping(value = "/v1/data/cache/get", method = RequestMethod.POST)    
+     public ModelAndView getCache
+      (@RequestBody String body, HttpServletRequest req, HttpServletResponse res);
+      
 }
 			

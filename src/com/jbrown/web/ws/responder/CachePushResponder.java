@@ -6,6 +6,8 @@ import java.util.Map;
 import com.jbrown.cache.BrownCache;
 import com.jbrown.core.util.BrownConstant;
 import com.jbrown.core.util.BrownKeysI;
+import com.jbrown.core.util.CacheData;
+import com.jbrown.core.util.CacheDataI;
 import com.jbrown.core.util.StringUtil;
 import com.jbrown.errors.BrownErrorsI;
 import com.jbrown.web.ws.BrownRequestI;
@@ -16,9 +18,13 @@ public class CachePushResponder extends Responder {
 	protected Map<String, Object> perform(BrownRequestI request) {
 		String cacheKey = request.get(BrownConstant.CACHE_KEY);
 		String cacheValue = request.get(BrownConstant.CACHE_VALUE);
+		 
+		CacheDataI savableData = new CacheData(cacheKey, cacheValue, request);
+		 
+		boolean flag = BrownCache.getInstance().set(savableData.getPrivateKey(), 
+				savableData);
+		
 		Map<String, Object> map = new HashMap<String, Object>();
-
-		boolean flag = BrownCache.getInstance().set(cacheKey, cacheValue);
 		map.put(BrownKeysI.RESPONSE_K, flag);
 		return map;
 	}
@@ -30,13 +36,19 @@ public class CachePushResponder extends Responder {
 		if(request.getHeadersMap()!= null) {
 			String cacheKey = request.get(BrownConstant.CACHE_KEY);
 			String cacheValue = request.get(BrownConstant.CACHE_VALUE);
-			 
+			CacheDataI cacheDataSaver = 
+					new CacheData(cacheKey, cacheValue, request);
+			
 			if(StringUtil.isEmpty(cacheKey)) {
 				errors.add(String.format("%s missing", BrownConstant.CACHE_KEY));
 			}
 			
 			if(StringUtil.isEmpty(cacheValue)) {
 				errors.add(String.format("%s missing", BrownConstant.CACHE_VALUE));
+			}
+			
+			if(!cacheDataSaver.isStorable()){
+				System.out.println(cacheDataSaver.toString());
 			}
 		}
 		

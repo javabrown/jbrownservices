@@ -154,4 +154,21 @@
 				    }
 				</sample></div></td><td>1</td><td>Find image services</td></tr><tr><td>getAllPhotoSizeConstants</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span>1/media/all-image-size<button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request"></sample></div></td><td>1</td><td>Return the list of available search constants
 				</td></tr><tr><td>textToAudio</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span>1/media/text-to-audio<button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request"></sample></div></td><td>1</td><td>Convert Text to Audio
-				</td></tr></tbody></table><br><div id="confirm" class="modal hide fade"><div class="modal-body"><p class="dialog-msg">-</p></div><div class="modal-footer"><button type="button" data-dismiss="modal" class="btn" data-value="0">Cancel</button></div></div></div></div></body></html>
+				</td></tr><tr><td>setCache</td><td>POST</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span>1/data/cache/set<button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request">
+				   header=&gt;{
+				     "access_token" : "facebook-token-from-jbrown-web-app"
+				    }
+				    POST BODY=&gt;
+				    {
+				     "cache_key" : "Enter-Cache-Key",
+				     "cache_value" : "Enter Cache Value"
+				    }
+				</sample></div></td><td>1</td><td>Cache Store Service</td></tr><tr><td>getCache</td><td>POST</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span>1/data/cache/get<button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request">
+				   header=&gt;{
+				     "access_token" : "facebook-token-from-jbrown-web-app"
+				    }
+				    POST BODY=&gt;
+				    {
+				     "cache_key" : "Enter-Cache-Key"
+				    }
+				</sample></div></td><td>1</td><td>Cache Fetch Service</td></tr></tbody></table><br><div id="confirm" class="modal hide fade"><div class="modal-body"><p class="dialog-msg">-</p></div><div class="modal-footer"><button type="button" data-dismiss="modal" class="btn" data-value="0">Cancel</button></div></div></div></div></body></html>
