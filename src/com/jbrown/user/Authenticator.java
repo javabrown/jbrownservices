@@ -65,6 +65,19 @@ public class Authenticator {
 		return false;
 	}
 
+	public String getBrownUserId(String accessToken){
+		FBConnection conn = new FBConnection(accessToken);
+		
+		if(conn.getFbUserInfo() != null){
+			String brownUserId = conn.getFbUserInfo().getBrownUserId();
+			System.out.println("BrownUserId: "+ brownUserId);
+			
+			return brownUserId;
+		}
+		
+		return null;
+	}
+	
 //	@Deprecated
 //	public String autheticate(String email, String password) {
 //		boolean isValidUser = false;

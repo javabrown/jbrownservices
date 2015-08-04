@@ -1,9 +1,10 @@
 package com.jbrown.user;
 
 public interface BrownUserI {
-	public String getFirstName();
-	public String getLastName();
-	public String getEmail();
-	public String getPassword();
-	public String getEncodeString();
+	String getBrownUserId();
+	String getFirstName();
+	String getLastName();
+	String getEmail();
+	String getPassword();
+	String getEncodeString();
 }

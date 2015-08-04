@@ -96,4 +96,9 @@ public class BrownUser implements BrownUserI {
 		return "BrownUser [firstName=" + firstName + ", lastName=" + lastName
 				+ ", email=" + email + ", password=" + password + "]";
 	}
+
+	@Override
+	public String getBrownUserId() {
+		return null;
+	}
 }
