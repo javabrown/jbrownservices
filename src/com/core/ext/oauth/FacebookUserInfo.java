@@ -2,8 +2,12 @@ package com.core.ext.oauth;
 
 import java.io.Serializable;
 
-public class FacebookUserInfo implements Serializable {
+import com.jbrown.user.BrownUserI;
+
+public class FacebookUserInfo implements BrownUserI, Serializable {
 	private static final long serialVersionUID = 1L;
+	private static final String NAMESPACE = "JB-Facebook"
+			;
 	private String id;
 	private String email;
 	private String firstName;
@@ -56,5 +60,20 @@ public class FacebookUserInfo implements Serializable {
 
 	public String getLocale() {
 		return locale;
+	}
+
+	@Override
+	public String getBrownUserId() {
+		return String.format("%s|%s", NAMESPACE, email);
+	}
+
+	@Override
+	public String getPassword() {
+		return null;
+	}
+
+	@Override
+	public String getEncodeString() {
+		return null;
 	}
 }
