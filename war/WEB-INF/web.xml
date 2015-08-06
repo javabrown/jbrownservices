@@ -14,6 +14,18 @@
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
 	
+	<!-- DB START -->
+	   <servlet>
+        <servlet-name>sign</servlet-name>
+        <servlet-class>com.jbrown.db.core.GuestbookServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>sign</servlet-name>
+        <url-pattern>/sign</url-pattern>
+    </servlet-mapping>
+	
+	<!-- DB END -->
+	
 	<servlet>
 		<servlet-name>mvc-dispatcher</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
