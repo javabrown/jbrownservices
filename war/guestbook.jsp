@@ -12,14 +12,14 @@ if (SystemProperty.environment.value() ==
     SystemProperty.Environment.Value.Production) {
   // Load the class that provides the new "jdbc:google:mysql://" prefix.
   Class.forName("com.mysql.jdbc.GoogleDriver");
-  url = "jdbc:google:mysql://javabrownservices:jb-cloud/guestbook?user=rkhan";
+  url = "jdbc:google:mysql://javabrownservices:jb-cloud/guestbook?user=xxx";
 } else {
   // Local MySQL instance to use during development.
   Class.forName("com.mysql.jdbc.Driver");
-  url = "jdbc:mysql://173.194.226.233:3306/guestbook?user=rkhan";
+  url = "jdbc:mysql://173.194.226.233:3306/guestbook";
 }
 
-Connection conn = DriverManager.getConnection(url);
+Connection conn = DriverManager.getConnection(url, "xxx", "xx");
 ResultSet rs = conn.createStatement().executeQuery(
     "SELECT guestName, content, entryID FROM entries");
 %>
