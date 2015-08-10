@@ -14,8 +14,12 @@
 				    header=>{
 				     "access_token" : "facebook-token-from-jbrown-web-app"
 				    }
-				    body=>{
-				     empty
+				    body=>
+				    {
+				        "name" : "User Name",
+				        "email" : "email@domain.com",
+				        "phone" : "123456",
+				        "password" : "xxxxx"
 				    }
 				</sample-request>
 			</web-method>

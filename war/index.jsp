@@ -87,8 +87,12 @@
 				    header=&gt;{
 				     "access_token" : "facebook-token-from-jbrown-web-app"
 				    }
-				    body=&gt;{
-				     empty
+				    body=&gt;
+				    {
+				        "name" : "User Name",
+				        "email" : "email@domain.com",
+				        "phone" : "123456",
+				        "password" : "xxxxx"
 				    }
 				</sample></div></td><td>1</td><td>Register a new user's account.</td></tr><tr><td>getUserInfo</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span>1/user/info/{userName}/{email}<button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request">
 				    {

@@ -59,6 +59,17 @@
 				 
 		</ul>
 	</div>
+	
+	<div class="box orange">
+		<span class="title">System Environment</span> 
+		<ul> 
+				<li>
+					<h3><b><%=com.google.appengine.api.utils.SystemProperty.environment.value()%></b></h3>
+				</li> 
+				 
+		</ul>
+	</div>
+		
 		
 		<!-- div class="box orange">
 			<span class="title">Windows</span> 
