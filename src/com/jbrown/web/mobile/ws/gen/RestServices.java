@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jbrown.core.util.BrownKeysI;
+import com.jbrown.db.core.DBTester;
 import com.jbrown.web.ws.BrownRequestI;
 import com.jbrown.web.ws.BrownServices;
 import com.jbrown.web.ws.ResponderI;
@@ -27,240 +28,237 @@ import com.jbrown.web.ws.responder.ResponderK;
 
 @Controller
 public class RestServices extends BrownServices implements WsInterface,
-		BrownKeysI {
-	@Override
-	public ModelAndView register(String body,
-			HttpServletRequest req, HttpServletResponse res) {
-		ResponderI respoder = getResponderFactory().getResponder(
-				ResponderK.AUTH_RESPONDER);
-		BrownRequestI request = super.getBrownRequest(req);
-		
-		//clear all the errors if any. (for auth & register only)
-		request.getErrors().clear(); 
-		
-		request.set(ACTION_K, ACTION_REGISTER_K);
-		
-		respoder.respond(request);
-		return EMPTY_VIEW;
-	}
+    BrownKeysI {
+  @Override
+  public ModelAndView register(String body, HttpServletRequest req,
+      HttpServletResponse res) {
+    ResponderI respoder = getResponderFactory().getResponder(
+        ResponderK.REGISTER_RESPONDER);
+    BrownRequestI request = super.getBrownRequest(req);
 
-	@Override
-	public ModelAndView getUserInfo(String userName,
-			@PathVariable String email, HttpServletRequest req,
-			HttpServletResponse res, ModelMap model) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	@Override
-	public ModelAndView auth(HttpServletRequest req,
-			HttpServletResponse res, ModelMap model) {
-		ResponderI respoder = getResponderFactory().getResponder(
-				ResponderK.AUTH_RESPONDER);
-		BrownRequestI request = super.getBrownRequest(req);
-		
-		//clear all the errors if any. (for auth & register only)
-		request.getErrors().clear(); 
-		
-		request.set(ACTION_K, ACTION_AUTH_K);
-		
-		request.getErrors().clear();
-		respoder.respond(request);
-		return EMPTY_VIEW;
-	}
+    // clear all the errors if any. (for auth & register only)
+    request.getErrors().clear();
 
+    request.set(ACTION_K, ACTION_REGISTER_K);
 
-	@RequestMapping(value = "/v1/countryinfo", method = RequestMethod.GET)
-	public ModelAndView getIsoCountries(HttpServletRequest req,
-			HttpServletResponse res, ModelMap model) {
-		ResponderI respoder = getResponderFactory().getResponder(
-				ResponderK.GEO_RESPONDER);
-		
-		BrownRequestI request = super.getBrownRequest(req);
-		request.set(ACTION_K, "getIsoCountries");
-		
-		respoder.respond(request);
-		
-		return EMPTY_VIEW;
-	}
-	
-	@Override
-	public ModelAndView getCountryInfo(@PathVariable String countryName, 
-			HttpServletRequest req, HttpServletResponse res, ModelMap model) {
-		//initialize(req, res);
-		ResponderI respoder = getResponderFactory().getResponder(
-				ResponderK.GEO_RESPONDER);
+    respoder.respond(request);
+    return EMPTY_VIEW;
+  }
 
-		BrownRequestI request = super.getBrownRequest(req);
-		request.set(ACTION_K, "getCountryInfo");
-		request.set(COUNTRY_NAME_K, countryName);
-		
-		
-		respoder.respond(request);
-		
-		return EMPTY_VIEW;
-	}
-	
+  @Override
+  public ModelAndView getUserInfo(String userName, @PathVariable String email,
+      HttpServletRequest req, HttpServletResponse res, ModelMap model) {
+    // TODO Auto-generated method stub
+    return null;
+  }
 
-	@Override
-	public ModelAndView getStateInfo(@PathVariable String countryName,
-			@PathVariable String stateName, HttpServletRequest req,
-			HttpServletResponse res, ModelMap model) {
-		ResponderI respoder = getResponderFactory().getResponder(
-				ResponderK.GEO_RESPONDER);
-	
-		BrownRequestI request = super.getBrownRequest(req);
-		request.set("action", "getStateInfo");
-		request.set("countryName", countryName);
-		request.set("stateName", stateName);
-		
-		respoder.respond(request);
-		return EMPTY_VIEW;
-	}
+  @Override
+  public ModelAndView auth(HttpServletRequest req, HttpServletResponse res,
+      ModelMap model) {
+    ResponderI respoder = getResponderFactory().getResponder(
+        ResponderK.AUTH_RESPONDER);
+    BrownRequestI request = super.getBrownRequest(req);
 
-	@Override
-	public ModelAndView getCityInfo(@PathVariable String countryName,
-			@PathVariable String stateName, @PathVariable String cityName,
-			HttpServletRequest req, HttpServletResponse res, ModelMap model) {
-		ResponderI respoder = getResponderFactory().getResponder(
-				ResponderK.GEO_RESPONDER);
+    // clear all the errors if any. (for auth & register only)
+    request.getErrors().clear();
 
-		BrownRequestI request = super.getBrownRequest(req);//new BrownRequest(req, res);
-		request.set("action", "getCityInfo");
-		request.set("countryName", countryName);
-		request.set("stateName", stateName);
-		request.set("cityName", cityName);
-		
-		respoder.respond(request);
-		
-		return EMPTY_VIEW;
-	}
-//
-//
-//	@Override
-//	public ModelAndView getImageForText(@PathVariable String text,
-//			@PathVariable int width, @PathVariable int height,
-//			HttpServletRequest req, HttpServletResponse res, ModelMap model) {
-//		SwingUtil.texttoImage(text, width, height, res);
-//		return null;
-//	}
- 
-	@Override
-	public ModelAndView getLineChart(HttpServletRequest req,
-			HttpServletResponse res, ModelMap model) {
-		// TODO Auto-generated method stub
-		return new ModelAndView("google-chart");
-	}
+    request.set(ACTION_K, ACTION_AUTH_K);
 
-	@Override
-	public ModelAndView getDistance(@PathVariable String countryName1,
-			@PathVariable String countryName2, HttpServletRequest req,
-			HttpServletResponse res, ModelMap model) {
-		ResponderI respoder = getResponderFactory().getResponder(
-				ResponderK.GEO_RESPONDER);
-	
-		BrownRequestI request = super.getBrownRequest(req);
-		request.set(ACTION_K, GEO_GET_DISTANCE_K);
-		request.set("location1", countryName1);
-		request.set("location2", countryName2);
-		
-		respoder.respond(request);
-		return EMPTY_VIEW;
-	}
+    request.getErrors().clear();
+    respoder.respond(request);
+    return EMPTY_VIEW;
+  }
 
-	@Override
-	public ModelAndView encode(@RequestBody String body,
-			HttpServletRequest req, HttpServletResponse res) {
-		ResponderI respoder = getResponderFactory().getResponder(
-				ResponderK.UTIL_RESPONDER);
-		BrownRequestI request = super.getBrownRequest(req);  
-		request.set(ACTION_K, ACTION_ENCODE_K);
+  @RequestMapping(value = "/v1/countryinfo", method = RequestMethod.GET)
+  public ModelAndView getIsoCountries(HttpServletRequest req,
+      HttpServletResponse res, ModelMap model) {
+    ResponderI respoder = getResponderFactory().getResponder(
+        ResponderK.GEO_RESPONDER);
 
-		respoder.respond(request);
-		return EMPTY_VIEW;
-	}
+    BrownRequestI request = super.getBrownRequest(req);
+    request.set(ACTION_K, "getIsoCountries");
 
-	@Override
-	public ModelAndView getPublicPhotos(@PathVariable String pattern,
-			@PathVariable String size, HttpServletRequest req,
-			HttpServletResponse res, ModelMap model) {
+    respoder.respond(request);
 
-		ResponderI respoder = getResponderFactory().getResponder(
-				ResponderK.MEDIA_RESPONDER);
-		BrownRequestI request = super.getBrownRequest(req);
-		request.set(ACTION_K, WsActionType.PUBLIC_IMAGES.getActionName());
+    return EMPTY_VIEW;
+  }
 
-		respoder.respond(request);
-		return EMPTY_VIEW;
-	}
+  @Override
+  public ModelAndView getCountryInfo(@PathVariable String countryName,
+      HttpServletRequest req, HttpServletResponse res, ModelMap model) {
+    // initialize(req, res);
+    ResponderI respoder = getResponderFactory().getResponder(
+        ResponderK.GEO_RESPONDER);
 
-	@Override
-	public ModelAndView getAllPhotoSizeConstants(HttpServletRequest req,
-			HttpServletResponse res, ModelMap model) {
-		ResponderI respoder = getResponderFactory().getResponder(
-				ResponderK.MEDIA_RESPONDER);
-		BrownRequestI request = super.getBrownRequest(req);
-		request.set(ACTION_K, WsActionType.PUBLIC_IMAGES.getActionName());
+    BrownRequestI request = super.getBrownRequest(req);
+    request.set(ACTION_K, "getCountryInfo");
+    request.set(COUNTRY_NAME_K, countryName);
 
-		respoder.respond(request);
-		return EMPTY_VIEW;
-	}
-	
-	@Override
-	public ModelAndView getAllAirport(HttpServletRequest req,
-			HttpServletResponse res, ModelMap model) {
-		BrownRequestI request = super.getBrownRequest(req);
-		ResponderI respoder = getResponderFactory().getResponder(
-				ResponderK.AIRPORT_RESPONDER);
- 
-		respoder.respond(request);
-		
-		return EMPTY_VIEW;
-	}
-	 
-	@Override
-	public ModelAndView getAirporByIata(@PathVariable String iata,
-			HttpServletRequest req, HttpServletResponse res, ModelMap model) {
-		BrownRequestI request = super.getBrownRequest(req);
-		ResponderI respoder = getResponderFactory().getResponder(
-				ResponderK.AIRPORT_IATA_RESPONDER);
-		request.set(IATA, iata);
-		respoder.respond(request);
-		
-		return EMPTY_VIEW;
-	}
-	
-    public ModelAndView textToAudio(
-  	      @PathVariable String textToSpeech,HttpServletRequest req, 
-  	      HttpServletResponse res, ModelMap model){
-    	BrownRequestI request = super.getBrownRequest(req);
-		ResponderI respoder = getResponderFactory().getResponder(
-				ResponderK.MEDIA_RESPONDER);
-		request.set(TEXT_TO_SPEECH, textToSpeech);
-		respoder.respond(request);
-    	//PENDING.....
-    	return EMPTY_VIEW;
-    }
-    
-	public ModelAndView setCache(String body, HttpServletRequest req,
-			HttpServletResponse res) {
-		BrownRequestI request = super.getBrownRequest(req);
-		ResponderI respoder = getResponderFactory().getResponder(
-				ResponderK.CACHE_PUSH_RESPONDER);
-		respoder.respond(request);
+    respoder.respond(request);
 
-		return EMPTY_VIEW;
-	}
-	
- 
-	public ModelAndView getCache(String body, HttpServletRequest req,
-			HttpServletResponse res) {
-		BrownRequestI request = super.getBrownRequest(req);
-		ResponderI respoder = getResponderFactory().getResponder(
-				ResponderK.CACHE_GET_RESPONDER);
-		respoder.respond(request);
+    return EMPTY_VIEW;
+  }
 
-		return EMPTY_VIEW;
-	}
+  @Override
+  public ModelAndView getStateInfo(@PathVariable String countryName,
+      @PathVariable String stateName, HttpServletRequest req,
+      HttpServletResponse res, ModelMap model) {
+    ResponderI respoder = getResponderFactory().getResponder(
+        ResponderK.GEO_RESPONDER);
+
+    BrownRequestI request = super.getBrownRequest(req);
+    request.set("action", "getStateInfo");
+    request.set("countryName", countryName);
+    request.set("stateName", stateName);
+
+    respoder.respond(request);
+    return EMPTY_VIEW;
+  }
+
+  @Override
+  public ModelAndView getCityInfo(@PathVariable String countryName,
+      @PathVariable String stateName, @PathVariable String cityName,
+      HttpServletRequest req, HttpServletResponse res, ModelMap model) {
+    ResponderI respoder = getResponderFactory().getResponder(
+        ResponderK.GEO_RESPONDER);
+
+    BrownRequestI request = super.getBrownRequest(req);// new BrownRequest(req,
+                                                       // res);
+    request.set("action", "getCityInfo");
+    request.set("countryName", countryName);
+    request.set("stateName", stateName);
+    request.set("cityName", cityName);
+
+    respoder.respond(request);
+
+    return EMPTY_VIEW;
+  }
+
+  //
+  //
+  // @Override
+  // public ModelAndView getImageForText(@PathVariable String text,
+  // @PathVariable int width, @PathVariable int height,
+  // HttpServletRequest req, HttpServletResponse res, ModelMap model) {
+  // SwingUtil.texttoImage(text, width, height, res);
+  // return null;
+  // }
+
+  @Override
+  public ModelAndView getLineChart(HttpServletRequest req,
+      HttpServletResponse res, ModelMap model) {
+    // TODO Auto-generated method stub
+    return new ModelAndView("google-chart");
+  }
+
+  @Override
+  public ModelAndView getDistance(@PathVariable String countryName1,
+      @PathVariable String countryName2, HttpServletRequest req,
+      HttpServletResponse res, ModelMap model) {
+    ResponderI respoder = getResponderFactory().getResponder(
+        ResponderK.GEO_RESPONDER);
+
+    BrownRequestI request = super.getBrownRequest(req);
+    request.set(ACTION_K, GEO_GET_DISTANCE_K);
+    request.set("location1", countryName1);
+    request.set("location2", countryName2);
+
+    respoder.respond(request);
+    return EMPTY_VIEW;
+  }
+
+  @Override
+  public ModelAndView encode(@RequestBody String body, HttpServletRequest req,
+      HttpServletResponse res) {
+    ResponderI respoder = getResponderFactory().getResponder(
+        ResponderK.UTIL_RESPONDER);
+    BrownRequestI request = super.getBrownRequest(req);
+    request.set(ACTION_K, ACTION_ENCODE_K);
+
+    respoder.respond(request);
+    return EMPTY_VIEW;
+  }
+
+  @Override
+  public ModelAndView getPublicPhotos(@PathVariable String pattern,
+      @PathVariable String size, HttpServletRequest req,
+      HttpServletResponse res, ModelMap model) {
+
+    ResponderI respoder = getResponderFactory().getResponder(
+        ResponderK.MEDIA_RESPONDER);
+    BrownRequestI request = super.getBrownRequest(req);
+    request.set(ACTION_K, WsActionType.PUBLIC_IMAGES.getActionName());
+
+    respoder.respond(request);
+    return EMPTY_VIEW;
+  }
+
+  @Override
+  public ModelAndView getAllPhotoSizeConstants(HttpServletRequest req,
+      HttpServletResponse res, ModelMap model) {
+    ResponderI respoder = getResponderFactory().getResponder(
+        ResponderK.MEDIA_RESPONDER);
+    BrownRequestI request = super.getBrownRequest(req);
+    request.set(ACTION_K, WsActionType.PUBLIC_IMAGES.getActionName());
+
+    respoder.respond(request);
+    return EMPTY_VIEW;
+  }
+
+  @Override
+  public ModelAndView getAllAirport(HttpServletRequest req,
+      HttpServletResponse res, ModelMap model) {
+    BrownRequestI request = super.getBrownRequest(req);
+    ResponderI respoder = getResponderFactory().getResponder(
+        ResponderK.AIRPORT_RESPONDER);
+
+    respoder.respond(request);
+
+    return EMPTY_VIEW;
+  }
+
+  @Override
+  public ModelAndView getAirporByIata(@PathVariable String iata,
+      HttpServletRequest req, HttpServletResponse res, ModelMap model) {
+    BrownRequestI request = super.getBrownRequest(req);
+    ResponderI respoder = getResponderFactory().getResponder(
+        ResponderK.AIRPORT_IATA_RESPONDER);
+    request.set(IATA, iata);
+    respoder.respond(request);
+
+    return EMPTY_VIEW;
+  }
+
+  public ModelAndView textToAudio(@PathVariable String textToSpeech,
+      HttpServletRequest req, HttpServletResponse res, ModelMap model) {
+    BrownRequestI request = super.getBrownRequest(req);
+    ResponderI respoder = getResponderFactory().getResponder(
+        ResponderK.MEDIA_RESPONDER);
+    request.set(TEXT_TO_SPEECH, textToSpeech);
+    respoder.respond(request);
+    // PENDING.....
+    return EMPTY_VIEW;
+  }
+
+  public ModelAndView setCache(String body, HttpServletRequest req,
+      HttpServletResponse res) {
+    BrownRequestI request = super.getBrownRequest(req);
+    ResponderI respoder = getResponderFactory().getResponder(
+        ResponderK.CACHE_PUSH_RESPONDER);
+    respoder.respond(request);
+
+    return EMPTY_VIEW;
+  }
+
+  public ModelAndView getCache(String body, HttpServletRequest req,
+      HttpServletResponse res) {
+    BrownRequestI request = super.getBrownRequest(req);
+    new DBTester().read();
+    ResponderI respoder = getResponderFactory().getResponder(
+        ResponderK.CACHE_GET_RESPONDER);
+    respoder.respond(request);
+
+    return EMPTY_VIEW;
+  }
 
 }
