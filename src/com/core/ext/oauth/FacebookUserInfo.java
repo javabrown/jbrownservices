@@ -6,8 +6,7 @@ import com.jbrown.user.BrownUserI;
 
 public class FacebookUserInfo implements BrownUserI, Serializable {
 	private static final long serialVersionUID = 1L;
-	private static final String NAMESPACE = "JB-Facebook"
-			;
+	private static final String NAMESPACE = "JB-Facebook";
 	private String id;
 	private String email;
 	private String firstName;
@@ -46,6 +45,17 @@ public class FacebookUserInfo implements BrownUserI, Serializable {
 		return lastName;
 	}
 
+
+  @Override
+  public String getName() {
+    return String.format("%s %s", firstName , lastName);
+  }
+
+  @Override
+  public String getPhone() {
+    return "";
+  }
+  
 	public String getGender() {
 		return gender;
 	}
@@ -76,4 +86,5 @@ public class FacebookUserInfo implements BrownUserI, Serializable {
 	public String getEncodeString() {
 		return null;
 	}
+
 }
