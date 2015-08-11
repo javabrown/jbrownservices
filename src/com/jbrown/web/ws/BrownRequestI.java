@@ -21,7 +21,7 @@ public interface BrownRequestI extends RequestI {
 
 	void putCache(String key, Object value);
 
-    Object getSessionCache(String key);
+  Object getSessionCache(String key);
 
 	void putSessionCache(String key, Object value);
 	 
@@ -36,4 +36,6 @@ public interface BrownRequestI extends RequestI {
 	JSONObject getJson();
 	
 	String getDomain();
+	
+	void clearSession();
 }

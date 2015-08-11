@@ -2,10 +2,8 @@ package com.jbrown.user;
 
 import com.jbrown.core.exception.BorwnException;
 import com.jbrown.core.util.BrownCrypter;
-import com.jbrown.core.util.BrownEncoder;
 import com.jbrown.core.util.BrownKeysI;
 import com.jbrown.core.util.StringUtil;
-import com.jbrown.ext.crypter.Crypter;
 
 /**
  * 
@@ -129,7 +127,7 @@ public class BrownUser implements BrownUserI {
 	}
 
 	class AuthCrypter {
-		private String SAPERATOR = "#r#KhAn@_$_#_!_JBK#";
+		private String SAPERATOR = "#KhAn#";
 		 
 		public String getEncryptedCode() {
 			try {
@@ -144,7 +142,7 @@ public class BrownUser implements BrownUserI {
 		}
 		
 		private String getValue() {
-			return  String.format("%sname=%s%sdomain=%s%s", SAPERATOR, name, SAPERATOR, domain, SAPERATOR);
+			return  String.format("%sname=%s%s", SAPERATOR, name, SAPERATOR);
 		}
 		
 		private String getParsedName(String encodedStr) {

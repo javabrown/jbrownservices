@@ -2,7 +2,8 @@ package com.jbrown.web.ws.responder;
 
 import java.util.HashMap;
 import java.util.Map;
-
+ 
+import com.jbrown.core.util.BrownAuthUtil;
 import com.jbrown.core.util.BrownKeysI;
 import com.jbrown.core.util.StringUtil;
 import com.jbrown.db.dao.UserDaoImpl;
@@ -10,6 +11,9 @@ import com.jbrown.errors.BrownErrorsI;
 import com.jbrown.user.BrownUserI;
 import com.jbrown.web.ws.BrownRequestI;
 import com.jbrown.web.ws.Responder;
+
+import static com.jbrown.core.util.StringUtil.isEmpty;
+import static com.jbrown.core.util.StringUtil.isUnsafeString;
 
 public class LoginResponder extends Responder {
 	@Override
@@ -34,28 +38,29 @@ public class LoginResponder extends Responder {
 		String password = (String) request.get(PASSWORD_K);
 		String authCode = (String) request.get(AUTH_CODE_K);
 
-		if (StringUtil.isEmpty(email, password) &&  StringUtil.isEmpty(authCode)) {
+		if (isEmpty(email, password) &&  isEmpty(authCode)) {
 			errors.add(String.format(
 					"Mandatory Fields Missing :[%s | %s ] OR [ %s ]", EMAIL_K, 
 					PASSWORD_K, AUTH_CODE_K));
-		} else if (StringUtil.isUnsafeString(email, password, authCode)) {
+		} else if (isUnsafeString(email, password, authCode)) {
 			errors.add(String.format("Special chars not allowed:",
 					StringUtil.UNSAFE_STRING));
 		} else if (!StringUtil.isEmpty(email) && !StringUtil.isValidEmail(email)) {
 			errors.add(String.format("Invalid Email Format %s", email));
 		}
 		else if(isUserAlreadyLogin(request)){
-			errors.add(String.format("Already authenticated. %s=%s", AUTH_CODE_K, 
-			   (String) request.getSessionCache(BrownKeysI.JAVABROWN_AUTH_K)));
+		  String code = BrownAuthUtil.getBrownUser(request).getEncryptedKey();
+			errors.add(String.format("Already authenticated. %s=%s", AUTH_CODE_K, code));
 		}
 
 		return errors;
 	}
 
 	private boolean isUserAlreadyLogin(BrownRequestI req) {
-		String authCode =  (String) req.getSessionCache(BrownKeysI.JAVABROWN_AUTH_K);
-
-		if (!StringUtil.isEmpty(authCode)) {
+	  BrownUserI user = BrownAuthUtil.getBrownUser(req);
+	 
+		    
+		if (user != null) {
 			return true;
 		}
 
@@ -66,8 +71,7 @@ public class LoginResponder extends Responder {
 		BrownUserI user = new UserDaoImpl().findUser(email, password);
 		
 		if (user != null) {
-			req.putSessionCache(BrownKeysI.JAVABROWN_AUTH_K,
-					user.getEncryptedKey());
+			req.putSessionCache(BrownKeysI.JAVABROWN_AUTH_K, user);
 			
 			return user.getEncryptedKey();
 		}

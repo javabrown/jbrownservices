@@ -68,6 +68,17 @@ public class RestServices extends BrownServices implements WsInterface,
     return EMPTY_VIEW;
   }
 
+  @Override
+  public ModelAndView logout(HttpServletRequest req, HttpServletResponse res,
+      ModelMap model) {
+    ResponderI respoder = getResponderFactory().getResponder(
+        ResponderK.LOGOUT_RESPONDER);
+    BrownRequestI request = super.getBrownRequest(req);
+    request.getErrors().clear();
+    respoder.respond(request);
+    return EMPTY_VIEW;
+  }
+  
   @RequestMapping(value = "/v1/countryinfo", method = RequestMethod.GET)
   public ModelAndView getIsoCountries(HttpServletRequest req,
       HttpServletResponse res, ModelMap model) {
@@ -252,12 +263,11 @@ public class RestServices extends BrownServices implements WsInterface,
   public ModelAndView getCache(String body, HttpServletRequest req,
       HttpServletResponse res) {
     BrownRequestI request = super.getBrownRequest(req);
-    new DBTester().read();
+    
     ResponderI respoder = getResponderFactory().getResponder(
         ResponderK.CACHE_GET_RESPONDER);
     respoder.respond(request);
 
     return EMPTY_VIEW;
   }
-
 }

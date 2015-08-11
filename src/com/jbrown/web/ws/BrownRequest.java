@@ -109,6 +109,11 @@ public class BrownRequest implements BrownRequestI {
 		HttpSession session = this.request.getSession(true);
 		return (session == null) ? null : session.getAttribute(key);
 	}
+	
+	 @Override
+  public void clearSession() {
+	    this.request.getSession(true).invalidate();
+	}
 
 	@Override
 	public void putSessionCache(String key, Object value) {
