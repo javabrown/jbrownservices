@@ -18,15 +18,18 @@ public class UserDaoImpl implements UserDao {
   private Statement statement;
   private ResultSet rs;
 
-  static String INSERT_SQL = "insert into users (name, email, phone, password) "
+  static String INSERT_SQL = "insert into users (name, email, phone, password, domain) "
       + "values ('%s', '%s', '%s', '%s')";
 
-  static String SELECT_ALL_SQL = "select id, name, email, phone, password from users";
+  static String SELECT_ALL_SQL = "select id, name, email, phone, password, domain from users";
 
-  static String SELECT_BY_EMAIL_SQL = "select id, name, email, phone, password from users"
+  static String SELECT_BY_EMAIL_SQL = "select id, name, email, phone, password, domain from users"
       + " where email='%s'";
+  
+  static String SELECT_BY_EMAIL_PASSWORD_SQL = "select id, name, email, phone, password, domain from users"
+	      + " where email='%s' AND password='?'";
 
-  static String UPDATE_SQL = "update users set name='?', phone='?', password='?'"
+  static String UPDATE_SQL = "update users set name='?', phone='?', password='?', domain='?'"
       + " where email='%s'";
 
   static String DELETE_SQL = "delete from users where email='%s'";
@@ -74,8 +77,9 @@ public class UserDaoImpl implements UserDao {
         String email = rs.getString(3);
         String phone = rs.getString(4);
         String password = rs.getString(5);
-
-        userList.add(new BrownUser(id + "", name, email, phone, password));
+        String domain = rs.getString(6);
+        
+        userList.add(new BrownUser(id + "", name, email, phone, password, domain));
       }
     } catch (SQLException ex) {
       System.out.printf("Error in getAllUsers => %s", ex);
@@ -104,8 +108,9 @@ public class UserDaoImpl implements UserDao {
         String mail = rs.getString(3);
         String phone = rs.getString(4);
         String password = rs.getString(5);
-
-        user = new BrownUser(id + "", name, mail, phone, password);
+        String domain = rs.getString(6);
+        
+        user = new BrownUser(id + "", name, mail, phone, password, domain);
       }
     } catch (SQLException ex) {
       System.out.printf("Error in getUser => %s", ex);
@@ -163,5 +168,36 @@ public class UserDaoImpl implements UserDao {
     }
 
     return false;
+  }
+  
+  @Override
+  public BrownUserI findUser(String email, String password) {
+    String selectSql = String.format(SELECT_BY_EMAIL_PASSWORD_SQL, email, password);
+    BrownUserI user = null;
+    
+    try {
+        connection = DbConnectionManager.getInstance().get();
+        statement = connection.createStatement();
+        rs = statement.executeQuery(selectSql);
+
+        while (rs.next()) {
+          int id = rs.getInt(1);
+          String name = rs.getString(2);
+          String mail = rs.getString(3);
+          String phone = rs.getString(4);
+          String passwrd = rs.getString(5);
+          String domain = rs.getString(6);
+ 
+          user = new BrownUser(id + "", name, mail, phone, passwrd, domain);
+        }
+      } catch (SQLException ex) {
+        System.out.printf("Error in getUser => %s", ex);
+      } finally {
+        DbUtil.close(rs);
+        DbUtil.close(statement);
+        DbConnectionManager.getInstance().put(connection);
+      }
+
+    return user;
   }
 }

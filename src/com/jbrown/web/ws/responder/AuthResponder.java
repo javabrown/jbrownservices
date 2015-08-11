@@ -60,7 +60,7 @@ public class AuthResponder extends Responder {
     String password = (String) request.get(PASSWORD_K);
 
     String result = new Authenticator().registerNewUser(name, email, phone,
-        password);
+        password, request.getDomain());
     map.put(RESPONSE_K, result);
 
     return map;
@@ -72,16 +72,16 @@ public class AuthResponder extends Responder {
 
     if (request.getHeadersMap() != null) {
       String token = request.getHeadersMap().get(BrownKeysI.AUTH_CODE_K);
-      String fbAccessToken = request.getHeadersMap().get(FB_ACCESS_TOKEN);
-      StringBuilder error = new StringBuilder();
+      //String fbAccessToken = request.getHeadersMap().get(FB_ACCESS_TOKEN);
+      //StringBuilder error = new StringBuilder();
 
       // if(StringUtil.isEmpty(token)){
       // errors.add(AUTH_CODE_K +"");
       // errors.add("Error.JSONData");
       // }
 
-      if (StringUtil.isEmpty(fbAccessToken)) {
-        errors.add(FB_ACCESS_TOKEN + " is missing in request header");
+      if (StringUtil.isEmpty(token)) {
+        errors.add(AUTH_CODE_K + " is missing in request header");
       }
     }
 

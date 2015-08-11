@@ -10,6 +10,10 @@ public interface BrownUserI {
   String getPhone();
 
   String getPassword();
-
+  
+  String getDomain();
+  
   String getEncodeString();
+  
+  String getEncryptedKey();
 }

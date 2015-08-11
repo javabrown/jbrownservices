@@ -14,4 +14,6 @@ public interface UserDao {
   boolean updateUser(BrownUserI user);
 
   boolean deleteUser(BrownUserI user);
+  
+  BrownUserI findUser(String login, String password);
 }

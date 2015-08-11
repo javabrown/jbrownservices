@@ -104,11 +104,13 @@ public class BrownRequest implements BrownRequestI {
 		return this.request.getRemoteAddr();
 	}
 
+	@Override
 	public Object getSessionCache(String key) {
 		HttpSession session = this.request.getSession(true);
 		return (session == null) ? null : session.getAttribute(key);
 	}
 
+	@Override
 	public void putSessionCache(String key, Object value) {
 		HttpSession session = this.request.getSession(true);
 		if (session != null) {
@@ -298,5 +300,10 @@ public class BrownRequest implements BrownRequestI {
 	@Override
 	public JSONObject getJson() {
 		return this.json;
+	}
+
+	@Override
+	public String getDomain() {
+		return this.request.getServerName().replaceAll(".*\\.(?=.*\\.)", "");
 	}
 }

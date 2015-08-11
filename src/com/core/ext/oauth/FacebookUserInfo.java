@@ -87,4 +87,14 @@ public class FacebookUserInfo implements BrownUserI, Serializable {
 		return null;
 	}
 
+	@Override
+	public String getDomain() {
+		return null;
+	}
+
+	@Override
+	public String getEncryptedKey() {
+		return null;
+	}
+
 }

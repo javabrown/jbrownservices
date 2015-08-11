@@ -1,17 +1,22 @@
 package com.jbrown.user;
 
 import com.core.ext.oauth.FBConnection;
+import com.jbrown.core.util.BrownKeysI;
 import com.jbrown.core.util.StringUtil;
+import com.jbrown.db.dao.UserDaoImpl;
 import com.jbrown.ext.crypter.Crypter;
+import com.jbrown.web.ws.BrownRequest;
+import com.jbrown.web.ws.BrownRequestI;
 
 public class Authenticator {
 
   public String registerNewUser(String name, String email, String phone,
-      String password) {
+      String password, String domain) {
     boolean isUserAlredayExists = false; // Impl. pending
 
     if (!isUserAlredayExists) {
-      BrownUserI user = new BrownUser("", name, email, phone, password);
+      BrownUserI user = new BrownUser("", name, email, phone, password, domain);
+      
       String encryptedString;
       try {
         encryptedString = new Crypter().encrypt(user.getEncodeString());
@@ -25,6 +30,13 @@ public class Authenticator {
     return null;
   }
 
+  public void doAuth(BrownRequestI req, String email, String password){
+	  BrownUserI user = new UserDaoImpl().findUser(email, password);
+	  if(user != null){
+		 req.putSessionCache(BrownKeysI.JAVABROWN_AUTH_K, user.getEncryptedKey());
+	  }
+  }
+  
   public boolean autheticate(String token) {
     String encryptedString = null;
     String email = null;

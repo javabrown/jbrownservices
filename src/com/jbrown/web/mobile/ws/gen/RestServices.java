@@ -53,10 +53,9 @@ public class RestServices extends BrownServices implements WsInterface,
   }
 
   @Override
-  public ModelAndView auth(HttpServletRequest req, HttpServletResponse res,
-      ModelMap model) {
+  public ModelAndView auth(String body, HttpServletRequest req, HttpServletResponse res) {
     ResponderI respoder = getResponderFactory().getResponder(
-        ResponderK.AUTH_RESPONDER);
+        ResponderK.LOGIN_RESPONDER);
     BrownRequestI request = super.getBrownRequest(req);
 
     // clear all the errors if any. (for auth & register only)

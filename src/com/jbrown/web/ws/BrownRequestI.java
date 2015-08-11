@@ -4,6 +4,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.jbrown.errors.BrownErrorsI;
 import com.jbrown.web.servlet.RequestI;
@@ -20,6 +21,10 @@ public interface BrownRequestI extends RequestI {
 
 	void putCache(String key, Object value);
 
+    Object getSessionCache(String key);
+
+	void putSessionCache(String key, Object value);
+	 
 	String get(String key);
 
 	void set(String key, String value);
@@ -29,4 +34,6 @@ public interface BrownRequestI extends RequestI {
 	Map<String, String> getHeadersMap();
 	
 	JSONObject getJson();
+	
+	String getDomain();
 }

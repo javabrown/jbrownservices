@@ -85,25 +85,29 @@
             }
       </style></head><body class="well transparent"><div class="well transparent"><center><div class="jumbotron"><h1>JavaBrown API</h1><p>Open Source API by JavaBrown Foundation</p></div></center><hr><div class="page-container"><table id="apiList" class="display cell-border" width="100%" cellspacing="0"><thead><tr><th>SERVICE-NAME</th><th>REQUEST-TYPE</th><th>URI</th><th>VERSION</th><th>DESCRIPTION</th></tr></thead><tfoot><tr><th>SERVICE-NAME</th><th>REQUEST-TYPE</th><th>URI</th><th>VERSION</th><th>DESCRIPTION</th></tr></tfoot><tbody><tr><td>register</td><td>POST</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span>1/user/register<button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request">
 				    header=&gt;{
-				     "access_token" : "facebook-token-from-jbrown-web-app"
+				     
 				    }
 				    body=&gt;
 				    {
 				        "name" : "User Name",
 				        "email" : "email@domain.com",
 				        "phone" : "123456",
-				        "password" : "xxxxx"
+				        "password" : "xxxxx",
+				        "domain" : "www.yourdomain.com"
 				    }
 				</sample></div></td><td>1</td><td>Register a new user's account.</td></tr><tr><td>getUserInfo</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span>1/user/info/{userName}/{email}<button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request">
 				    {
 				     "user" : "raja_khan"
 				    }
-				</sample></div></td><td>1</td><td>Register new account.</td></tr><tr><td>auth</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span>1/user/auth<button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request">
+				</sample></div></td><td>1</td><td>Register new account.</td></tr><tr><td>auth</td><td>POST</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span>1/user/auth<button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request">
 				     header=&gt;{
-				     "access_token" : "facebook-token-from-jbrown-web-app"
+				     
 				    }
-				    body=&gt;{
-				     empty
+				    body=&gt; 
+				    {
+				        "email" : "email@domain.com",
+				        "password" : "xxxxx",
+				        "auth-code" : "xxxxx"
 				    }
 				</sample></div></td><td>1</td><td>Authorize an account.</td></tr><tr><td>getIsoCountries</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span>1/countryinfo<button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request">
 				     header=&gt;{

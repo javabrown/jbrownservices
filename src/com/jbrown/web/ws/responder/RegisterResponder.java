@@ -19,12 +19,14 @@ public class RegisterResponder extends Responder {
     String email = (String) request.get(EMAIL_K);
     String phone = (String) request.get(PHONE_K);
     String password = (String) request.get(PASSWORD_K);
+    String domain = (String) request.get(DOMAIN_K);
     
-    BrownUserI newUser = new BrownUser("", name, email, phone, password);
+    BrownUserI newUser = new BrownUser("", name, email, phone, password, domain);
     boolean success = new UserDaoImpl().createUser(newUser);
     
     Map<String, Object> result = new HashMap<String, Object>();
     result.put(RESPONSE_K, success);
+    result.put(AUTH_CODE_K, newUser.getEncryptedKey());
     
     return result;
   }
@@ -37,11 +39,12 @@ public class RegisterResponder extends Responder {
     String email = (String) request.get(EMAIL_K);
     String phone = (String) request.get(PHONE_K);
     String password = (String) request.get(PASSWORD_K);
-
-    if (StringUtil.isEmpty(name, email, phone, password)) {
+    String domain = (String) request.get(DOMAIN_K);
+    
+    if (StringUtil.isEmpty(name, email, phone, password, domain)) {
       errors.add(String.format(
-          "Mandatory Fields Missing :%s | %s | %s | %s", NAME_K, EMAIL_K,
-          PHONE_K, PASSWORD_K));
+          "Mandatory Fields Missing :%s | %s | %s | %s | %s", NAME_K, EMAIL_K,
+          PHONE_K, PASSWORD_K, DOMAIN_K));
     } else if (StringUtil.isUnsafeString(name, email, phone, password)) {
       errors.add(String.format("Special chars not allowed:", StringUtil.UNSAFE_STRING));
     } else if (!StringUtil.isValidEmail(email)) {

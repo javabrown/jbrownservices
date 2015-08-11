@@ -13,6 +13,7 @@ public class BrownAuthUtil {
 			String fbAccessToken = request.getHeadersMap().get(FB_ACCESS_TOKEN);
 
 			if (!StringUtil.isEmpty(token)) {
+				 
 				return new Authenticator().autheticate(token);
 			} else if (!StringUtil.isEmpty(fbAccessToken)) {
 				return new Authenticator().autheticateFb(fbAccessToken);

@@ -25,7 +25,7 @@ public class DBTester {
     // /retrieve();
     boolean isUserCreated =
         new UserDaoImpl().createUser(new BrownUser("1", "Raja Khan", "getrk@yahoo.com",
-        "9143106271", "test123"));
+        "9143106271", "test123", "javabrown.com"));
 
     try {
       c = h.get();

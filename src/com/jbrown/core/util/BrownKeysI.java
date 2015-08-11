@@ -35,7 +35,8 @@ public interface BrownKeysI {
   String TOKEN_K = "token";
   String DATA_K = "data";
   String AUTH_CODE_K = "auth-code";
-
+  String DOMAIN_K = "domain";
+  
   String EMPTY_K = "";
 
   String PROVIDER_FLICKR_K = "flickr";

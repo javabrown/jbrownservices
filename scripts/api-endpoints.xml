@@ -12,14 +12,15 @@
 				<mapping-uri>/user/register</mapping-uri>
 				<sample-request>
 				    header=>{
-				     "access_token" : "facebook-token-from-jbrown-web-app"
+				     
 				    }
 				    body=>
 				    {
 				        "name" : "User Name",
 				        "email" : "email@domain.com",
 				        "phone" : "123456",
-				        "password" : "xxxxx"
+				        "password" : "xxxxx",
+				        "domain" : "www.yourdomain.com"
 				    }
 				</sample-request>
 			</web-method>
@@ -45,14 +46,17 @@
 				<name>auth</name>
 				<version>1</version>
 				<description>Authorize an account.</description>
-				<request-type>GET</request-type>
+				<request-type>POST</request-type>
 				<mapping-uri>/user/auth</mapping-uri>
 				<sample-request>
 				     header=>{
-				     "access_token" : "facebook-token-from-jbrown-web-app"
+				     
 				    }
-				    body=>{
-				     empty
+				    body=> 
+				    {
+				        "email" : "email@domain.com",
+				        "password" : "xxxxx",
+				        "auth-code" : "xxxxx"
 				    }
 				</sample-request>
 			</web-method>
