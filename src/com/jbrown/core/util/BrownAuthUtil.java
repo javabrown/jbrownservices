@@ -1,7 +1,9 @@
 package com.jbrown.core.util;
 
 import com.jbrown.user.Authenticator;
+import com.jbrown.user.BrownUserI;
 import com.jbrown.web.ws.BrownRequestI;
+
 import static com.jbrown.core.util.BrownConstant.*;
 
 
@@ -12,9 +14,8 @@ public class BrownAuthUtil {
 			String token = request.getHeadersMap().get(BrownKeysI.AUTH_CODE_K);
 			String fbAccessToken = request.getHeadersMap().get(FB_ACCESS_TOKEN);
 
-			if (!StringUtil.isEmpty(token)) {
-				 
-				return new Authenticator().autheticate(token);
+			if (request.getSessionCache(BrownKeysI.JAVABROWN_AUTH_K) != null) {
+				return true;
 			} else if (!StringUtil.isEmpty(fbAccessToken)) {
 				return new Authenticator().autheticateFb(fbAccessToken);
 			} else {
@@ -27,14 +28,19 @@ public class BrownAuthUtil {
 		return false;
 	}
 
+	public static BrownUserI getBrownUser(BrownRequestI request) {
+	  return (BrownUserI) request.getSessionCache(BrownKeysI.JAVABROWN_AUTH_K);
+	}
 	
 	public static String getBrownUserId(BrownRequestI request) {
 		try {
 			String token = request.getHeadersMap().get(BrownKeysI.AUTH_CODE_K);
 			String fbAccessToken = request.getHeadersMap().get(FB_ACCESS_TOKEN);
 
-			if (!StringUtil.isEmpty(token)) {
-				return new Authenticator().getBrownUserId(token);
+			BrownUserI user = getBrownUser(request);
+			
+			if (user != null) {
+				return user.getEmail();
 			} else if (!StringUtil.isEmpty(fbAccessToken)) {
 				return new Authenticator().getBrownUserId(fbAccessToken);
 			} else {

@@ -62,6 +62,17 @@
 			</web-method>
 
 			<web-method>
+				<name>logout</name>
+				<version>1</version>
+				<description>Invalidate the active user session</description>
+				<request-type>GET</request-type>
+				<mapping-uri>/user/logout</mapping-uri>
+				<sample-request>
+				    header=>{}
+				</sample-request>
+			</web-method>
+			
+			<web-method>
 				<name>getIsoCountries</name>
 				<version>1</version>
 				<description>Register new account.</description>

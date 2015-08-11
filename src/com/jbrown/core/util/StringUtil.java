@@ -22,7 +22,7 @@ public class StringUtil {
   }
 
   public static boolean isUnsafeString(String s) {
-    return s.matches(UNSAFE_STRING);
+     return s != null && s.matches(UNSAFE_STRING);
   }
 
   public static boolean isUnsafeString(String... stringArray) {

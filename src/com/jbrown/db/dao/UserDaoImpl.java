@@ -19,7 +19,7 @@ public class UserDaoImpl implements UserDao {
   private ResultSet rs;
 
   static String INSERT_SQL = "insert into users (name, email, phone, password, domain) "
-      + "values ('%s', '%s', '%s', '%s')";
+      + "values ('%s', '%s', '%s', '%s', '%s')";
 
   static String SELECT_ALL_SQL = "select id, name, email, phone, password, domain from users";
 
@@ -27,9 +27,9 @@ public class UserDaoImpl implements UserDao {
       + " where email='%s'";
   
   static String SELECT_BY_EMAIL_PASSWORD_SQL = "select id, name, email, phone, password, domain from users"
-	      + " where email='%s' AND password='?'";
+	      + " where email='%s' AND password='%s'";
 
-  static String UPDATE_SQL = "update users set name='?', phone='?', password='?', domain='?'"
+  static String UPDATE_SQL = "update users set name='%s', phone='%s', password='%s', domain='%s'"
       + " where email='%s'";
 
   static String DELETE_SQL = "delete from users where email='%s'";
@@ -40,7 +40,7 @@ public class UserDaoImpl implements UserDao {
   @Override
   public boolean createUser(BrownUserI user) {
     String insertSql = String.format(INSERT_SQL, user.getName(),
-        user.getEmail(), user.getPhone(), user.getPassword());
+        user.getEmail(), user.getPhone(), user.getPassword(), user.getDomain());
 
     try {
       connection = DbConnectionManager.getInstance().get();
