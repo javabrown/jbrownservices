@@ -109,7 +109,9 @@
 				        "password" : "xxxxx",
 				        "auth-code" : "xxxxx"
 				    }
-				</sample></div></td><td>1</td><td>Authorize an account.</td></tr><tr><td>getIsoCountries</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span>1/countryinfo<button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request">
+				</sample></div></td><td>1</td><td>Authorize an account.</td></tr><tr><td>logout</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span>1/user/logout<button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request">
+				    header=&gt;{}
+				</sample></div></td><td>1</td><td>Invalidate the active user session</td></tr><tr><td>getIsoCountries</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span>1/countryinfo<button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request">
 				     header=&gt;{
 				     "access_token" : "facebook-token-from-jbrown-web-app"
 				    }

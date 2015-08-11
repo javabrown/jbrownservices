@@ -37,6 +37,8 @@ public interface WsInterface{
      public ModelAndView auth
       (@RequestBody String body, HttpServletRequest req, HttpServletResponse res);
       
+     @RequestMapping(value = "/v1/user/logout", method = RequestMethod.GET)
+     public ModelAndView logout(HttpServletRequest req, HttpServletResponse res, ModelMap model);
      @RequestMapping(value = "/v1/countryinfo", method = RequestMethod.GET)
      public ModelAndView getIsoCountries(HttpServletRequest req, HttpServletResponse res, ModelMap model);
      @RequestMapping(value = "/v1/countryinfo/{countryName}", method = RequestMethod.GET)

@@ -6,6 +6,8 @@
 	
 	<bean id="loginResponderBean" class="com.jbrown.web.ws.responder.LoginResponder" />
 	
+	<bean id="logoutResponderBean" class="com.jbrown.web.ws.responder.LogoutResponder" />
+	
 	<bean id="registerResponderBean" class="com.jbrown.web.ws.responder.RegisterResponder" />
 	
 	<bean id="geoResponderBean" class="com.jbrown.web.ws.responder.CountryInfoResponder"/>
@@ -26,6 +28,7 @@
 				<entry key="authResponder" value-ref="authResponderBean" />
 				<entry key="registerResponder" value-ref="registerResponderBean" />
 				<entry key="loginResponder" value-ref="loginResponderBean" />
+				<entry key="logoutResponder" value-ref="logoutResponderBean" />
 				<entry key="geoResponder" value-ref="geoResponderBean" />
 				<entry key="airportResponder" value-ref="airportResponderBean" />
 				<entry key="airportIATAResponder" value-ref="airportIATAResponderBean" />
