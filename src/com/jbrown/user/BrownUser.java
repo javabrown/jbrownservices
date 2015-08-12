@@ -1,16 +1,13 @@
 package com.jbrown.user;
 
+import java.io.Serializable;
+
 import com.jbrown.core.exception.BorwnException;
 import com.jbrown.core.util.BrownCrypter;
 import com.jbrown.core.util.BrownKeysI;
 import com.jbrown.core.util.StringUtil;
-
-/**
- * 
- * @author rkhan
- * 
- */
-public class BrownUser implements BrownUserI {
+ 
+public class BrownUser implements BrownUserI, Serializable{
 	private String id;
 	private String name;
 	private String email;
