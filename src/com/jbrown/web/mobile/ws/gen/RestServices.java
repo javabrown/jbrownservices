@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jbrown.core.util.BrownKeysI;
+import com.jbrown.core.util.MailUtil;
 import com.jbrown.db.core.DBTester;
 import com.jbrown.web.ws.BrownRequestI;
 import com.jbrown.web.ws.BrownServices;
@@ -256,7 +257,7 @@ public class RestServices extends BrownServices implements WsInterface,
     ResponderI respoder = getResponderFactory().getResponder(
         ResponderK.CACHE_PUSH_RESPONDER);
     respoder.respond(request);
-
+    //MailUtil.sendEmail();
     return EMPTY_VIEW;
   }
 
