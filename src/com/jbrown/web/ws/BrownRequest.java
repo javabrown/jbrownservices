@@ -16,6 +16,7 @@ import com.google.appengine.labs.repackaged.org.json.JSONException;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
 import com.jbrown.core.exception.BorwnException;
 import com.jbrown.core.util.BrownConstant;
+import com.jbrown.core.util.BrownKeysI;
 import com.jbrown.core.util.StringUtil;
 import com.jbrown.errors.BrownErrorsI;
 import com.jbrown.web.BrownContextI;
@@ -112,12 +113,13 @@ public class BrownRequest implements BrownRequestI {
 	
 	 @Override
   public void clearSession() {
-	    this.request.getSession(true).invalidate();
+	    this.putSessionCache(BrownKeysI.JAVABROWN_AUTH_K, null);
+	    this.request.getSession().invalidate();
 	}
 
 	@Override
 	public void putSessionCache(String key, Object value) {
-		HttpSession session = this.request.getSession(true);
+		HttpSession session = this.request.getSession();
 		if (session != null) {
 			session.setAttribute(key, value);
 		}

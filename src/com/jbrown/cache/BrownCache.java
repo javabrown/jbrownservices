@@ -1,11 +1,15 @@
 package com.jbrown.cache;
 
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.google.appengine.api.memcache.Expiration;
 import com.google.appengine.api.memcache.MemcacheService;
 import com.google.appengine.api.memcache.MemcacheServiceFactory;
 import com.google.appengine.api.memcache.Stats;
@@ -14,6 +18,7 @@ import com.jbrown.core.exception.BorwnException;
 
 public class BrownCache extends AbstractCacheRouter {
 	private static BrownCache _instance;
+	private static int MAX_EXPIRATION_DAY = 30;
 	
 	private CacheRouter[] _cacheRouters;
 	
@@ -44,7 +49,7 @@ public class BrownCache extends AbstractCacheRouter {
 
 		throw new BorwnException("Attension required!! No Cache Router");
 	}
-
+	
 	public CacheRoute getRoute() {
 		return null;
 	}
@@ -85,6 +90,8 @@ class InMemoryCache<K, V> implements CacheRouter, BrownCacheI<K, V> {
 }
 
 class GoogleMemcachedCache<K, V> implements CacheRouter, BrownCacheI<K, V> {
+  private static int MAX_EXPIRATION_DAY = 30;
+  
 	private static MemcacheService _c;
 
 	public GoogleMemcachedCache(){
@@ -111,7 +118,7 @@ class GoogleMemcachedCache<K, V> implements CacheRouter, BrownCacheI<K, V> {
 	@Override
 	public boolean set(K key, V value) {
 		if(key != null && value != null){
-			_c.put(key, value);
+			_c.put(key, value, getMaxExpiration());
 			return true;
 		}
 		
@@ -157,6 +164,14 @@ class GoogleMemcachedCache<K, V> implements CacheRouter, BrownCacheI<K, V> {
 		}
 		
 		return _c != null;
+	}
+	
+	private Expiration getMaxExpiration() {
+    Calendar cal = new GregorianCalendar();
+    cal.setTime(new Date());
+    cal.add(Calendar.DATE, MAX_EXPIRATION_DAY);
+    
+    return Expiration.onDate(cal.getTime());
 	}
 }
 
