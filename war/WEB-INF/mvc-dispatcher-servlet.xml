@@ -33,4 +33,28 @@
 			<value>.jsp</value>
 		</property>
 	</bean>
+
+	<bean id="urlMapping"
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+						<prop key="/**/test">testHandler</prop>
+						<prop key="/**/upload">blobUploadHandler</prop>
+						<prop key="/**/serve">blobServeHandler</prop>
+			</props>
+		</property>
+	</bean>
+  
+	 <bean id="testHandler" class="com.jbrown.web.handlers.TestHandler">
+			<property name="viewName" value="test" />
+	</bean>
+	
+ <bean id="blobUploadHandler" class="com.jbrown.web.handlers.BlobUploadHandler">
+			<property name="viewName" value="blobview" />
+	</bean>
+
+ <bean id="blobServeHandler" class="com.jbrown.web.handlers.BlobServeHandler">
+			<property name="viewName" value="blobview" />
+	</bean>
+	
 </beans>
