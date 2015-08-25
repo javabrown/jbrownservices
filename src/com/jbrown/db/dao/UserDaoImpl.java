@@ -12,7 +12,7 @@ import com.jbrown.db.core.DbUtil;
 import com.jbrown.user.BrownUser;
 import com.jbrown.user.BrownUserI;
 
-public class UserDaoImpl implements UserDao {
+public class UserDaoImpl extends AbstractDao implements UserDao {
   List<BrownUserI> users;
   private Connection connection;
   private Statement statement;
