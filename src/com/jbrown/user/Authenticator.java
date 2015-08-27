@@ -3,7 +3,7 @@ package com.jbrown.user;
 import com.core.ext.oauth.FBConnection;
 import com.jbrown.core.util.BrownKeysI;
 import com.jbrown.core.util.StringUtil;
-import com.jbrown.db.dao.UserDaoImpl;
+import com.jbrown.db.dao.UserDao;
 import com.jbrown.ext.crypter.Crypter;
 import com.jbrown.web.ws.BrownRequestI;
 
@@ -30,7 +30,7 @@ public class Authenticator {
   }
 
   public void doAuth(BrownRequestI req, String email, String password){
-	  BrownUserI user = new UserDaoImpl().findUser(email, password);
+	  BrownUserI user = new UserDao(req).findUser(email, password);
 	  if(user != null){
 		 req.putSessionCache(BrownKeysI.JAVABROWN_AUTH_K, user.getEncryptedKey());
 	  }
