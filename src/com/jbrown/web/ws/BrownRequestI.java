@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.jbrown.db.dao.DataStore;
 import com.jbrown.errors.BrownErrorsI;
 import com.jbrown.web.servlet.RequestI;
 import com.google.appengine.labs.repackaged.org.json.JSONArray;
@@ -38,4 +39,6 @@ public interface BrownRequestI extends RequestI {
 	String getDomain();
 	
 	void clearSession();
+	
+	DataStore getDataStore();
 }

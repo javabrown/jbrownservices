@@ -2,7 +2,6 @@ package com.jbrown.web;
 
 import java.io.IOException;
 
-import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
@@ -13,23 +12,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.jbrown.core.util.BrownAuthUtil;
 import com.jbrown.core.util.BrownKeysI;
-import com.jbrown.core.util.BrownUtil;
+import com.jbrown.db.dao.DataStore;
 import com.jbrown.errors.BrownErrors;
 import com.jbrown.errors.BrownErrorsI;
-import com.jbrown.web.servlet.Request;
-import com.jbrown.web.servlet.RequestI;
 import com.jbrown.web.ws.BrownRequest;
 import com.jbrown.web.ws.BrownRequestI;
-import com.jbrown.web.ws.ResponderI;
-import com.jbrown.web.ws.responder.AuthResponder;
-import com.jbrown.web.ws.responder.ErrorResponder;
 
 /**
  * 
  * @author rkhan
  *
  */
-public class BrownWsFilter implements Filter{
+public class BrownWsFilter implements BrownFilterI {
 	private BrownContext brownContext;
 	
 	public void setBrownContext(BrownContext brownContext){
@@ -38,33 +32,23 @@ public class BrownWsFilter implements Filter{
 	
 	@Override
 	public void destroy() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse res,
 			FilterChain chain) throws IOException, ServletException {
-		System.out.println("Filtered request");
 		HttpServletRequest request  = (HttpServletRequest)req;
 		HttpServletResponse response  = (HttpServletResponse)res;
 		
-		//Initialize error object
-		BrownErrorsI errors = new BrownErrors();
-		BrownRequestI brownRequest = new BrownRequest(request, response,
-				errors, this.brownContext);
-		
-		request.setAttribute(BrownKeysI.BROWN_REQUEST_OBJ_K, brownRequest);
-		
-		if(!BrownAuthUtil.isValidUser(brownRequest)){
-			errors.add("INVALID_USER", "Invalid Service User");
-		}
+		this.preAction(request, response);
 		
 		try {
 			chain.doFilter(req, res);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		this.postAction(request, response);
 	}
 
 	@Override
@@ -73,4 +57,39 @@ public class BrownWsFilter implements Filter{
 		
 	}
 
+	@Override
+	public void preAction(HttpServletRequest request,
+			HttpServletResponse response) {
+		System.out.println("Filtered request");
+		
+		//Initialize error object
+		BrownErrorsI errors = new BrownErrors();
+		BrownRequestI brownRequest = new BrownRequest(request, response,
+				errors, this.brownContext);
+		
+		
+				
+		request.setAttribute(BrownKeysI.BROWN_REQUEST_OBJ_K, brownRequest);
+		
+		if(!BrownAuthUtil.isValidUser(brownRequest)){
+			errors.add("INVALID_USER", "Invalid Service User");
+		}
+	}
+
+	@Override
+	public void postAction(HttpServletRequest request,
+			HttpServletResponse response) {
+        BrownRequestI brownRequest = (BrownRequestI) 
+            request.getAttribute(BrownKeysI.BROWN_REQUEST_OBJ_K);
+        
+       
+        if(brownRequest != null){
+        	DataStore dataStore = brownRequest.getDataStore();
+        	
+        	//Close Database connection if opened
+        	if(dataStore.hasValidDbConnection()){
+        		dataStore.closeDbConnection();
+        	}
+        }
+	}
 }

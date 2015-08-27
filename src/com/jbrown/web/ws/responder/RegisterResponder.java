@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.jbrown.core.util.StringUtil;
+import com.jbrown.db.dao.UserDaoI;
 import com.jbrown.db.dao.UserDao;
-import com.jbrown.db.dao.UserDaoImpl;
 import com.jbrown.errors.BrownErrorsI;
 import com.jbrown.user.BrownUser;
 import com.jbrown.user.BrownUserI;
@@ -22,7 +22,7 @@ public class RegisterResponder extends Responder {
     String domain = (String) request.get(DOMAIN_K);
     
     BrownUserI newUser = new BrownUser("", name, email, phone, password, domain);
-    boolean success = new UserDaoImpl().createUser(newUser);
+    boolean success = new UserDao(request).createUser(newUser);
     
     Map<String, Object> result = new HashMap<String, Object>();
     result.put(RESPONSE_K, success);
@@ -49,15 +49,15 @@ public class RegisterResponder extends Responder {
       errors.add(String.format("Special chars not allowed:", StringUtil.UNSAFE_STRING));
     } else if (!StringUtil.isValidEmail(email)) {
       errors.add(String.format("Invalid Email Format %s", email));
-    } else if (isUserAlreadyExists(email)) {
+    } else if (isUserAlreadyExists(request, email)) {
       errors.add(String.format("Email address '%s' already taken.", email));
     }
 
     return errors;
   }
 
-  private boolean isUserAlreadyExists(String email){
-    BrownUserI user = new UserDaoImpl().getUserByEmail(email);
+  private boolean isUserAlreadyExists(BrownRequestI request, String email){
+    BrownUserI user = new UserDao(request).getUserByEmail(email);
     
     if(user != null){
       return true;

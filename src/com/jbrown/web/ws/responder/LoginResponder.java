@@ -6,7 +6,7 @@ import java.util.Map;
 import com.jbrown.core.util.BrownAuthUtil;
 import com.jbrown.core.util.BrownKeysI;
 import com.jbrown.core.util.StringUtil;
-import com.jbrown.db.dao.UserDaoImpl;
+import com.jbrown.db.dao.UserDao;
 import com.jbrown.errors.BrownErrorsI;
 import com.jbrown.user.BrownUserI;
 import com.jbrown.web.ws.BrownRequestI;
@@ -68,7 +68,7 @@ public class LoginResponder extends Responder {
 	}
 	
 	private String doAuth(BrownRequestI req, String email, String password) {
-		BrownUserI user = new UserDaoImpl().findUser(email, password);
+		BrownUserI user = new UserDao(req).findUser(email, password);
 		
 		if (user != null) {
 			req.putSessionCache(BrownKeysI.JAVABROWN_AUTH_K, user);

@@ -18,6 +18,7 @@ import com.jbrown.core.exception.BorwnException;
 import com.jbrown.core.util.BrownConstant;
 import com.jbrown.core.util.BrownKeysI;
 import com.jbrown.core.util.StringUtil;
+import com.jbrown.db.dao.DataStore;
 import com.jbrown.errors.BrownErrorsI;
 import com.jbrown.web.BrownContextI;
 
@@ -26,6 +27,7 @@ public class BrownRequest implements BrownRequestI {
 	private HttpServletResponse response;
     private BrownErrorsI errors;
 	private BrownContextI brownContext;
+	private DataStore dataStore; 
 	
 	private JSONObject json;
 	private Map<String, String[]> requestMap;
@@ -40,6 +42,7 @@ public class BrownRequest implements BrownRequestI {
 		this.requestMap = new HashMap<String, String[]>();
 		this.errors = errors;
 		this.brownContext = brownContext;
+		this.dataStore = new DataStore(); 
 		
 		this.json = getJson(request, isPost());
 		this.extractJsonAttributes();
@@ -312,5 +315,10 @@ public class BrownRequest implements BrownRequestI {
 	@Override
 	public String getDomain() {
 		return this.request.getServerName().replaceAll(".*\\.(?=.*\\.)", "");
+	}
+
+	@Override
+	public DataStore getDataStore() {
+		return this.dataStore;
 	}
 }
