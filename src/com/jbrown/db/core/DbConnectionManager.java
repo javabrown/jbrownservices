@@ -17,7 +17,7 @@ public class DbConnectionManager {
   private static DbConnectionManager _instance = null;
   private static Map<String, String> _configMap = init();
 
-  private DataSource _ds = null;
+  private BasicDataSource _ds = null;
 
   private DbConnectionManager() {
     BasicDataSource ds = new BasicDataSource();
@@ -57,7 +57,8 @@ public class DbConnectionManager {
     Connection c = null;
 
     try {
-      c = this.getConnection();// _ds.getConnection();
+      //c = _ds.getConnection();
+      c = this.getConnection();
     } catch (Exception se) {
       throw new BorwnException(se);
     }
