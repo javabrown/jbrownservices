@@ -8,13 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.jbrown.core.exception.BorwnException;
-import com.jbrown.db.dao.UserDaoImpl;
+import com.jbrown.db.dao.UserDao;
 import com.jbrown.db.dao.model.User;
 import com.jbrown.user.BrownUser;
 
 public class DBTester {
   public static final String EntityKind = "TestComments";
-  static String SELECT_SQL = "select * from entries";
+  static String SELECT_SQL = "select * from users";
 
   public static String[] read() {
     DbConnectionManager h = DbConnectionManager.getInstance();
@@ -23,10 +23,7 @@ public class DBTester {
 
     // store();
     // /retrieve();
-    boolean isUserCreated =
-        new UserDaoImpl().createUser(new BrownUser("1", "Raja Khan", "getrk@yahoo.com",
-        "9143106271", "test123", "javabrown.com"));
-
+ 
     try {
       c = h.get();
       PreparedStatement s = c.prepareStatement(SELECT_SQL,
@@ -45,12 +42,9 @@ public class DBTester {
       if (c != null)
         h.put(c);
     }
-
-    resultList.add(new UserDaoImpl().getUserByEmail("getrk@yahoo.com")
-        .toString());
+ 
     
-    resultList.add("UserCreated = "+isUserCreated);
-
+   
     return resultList.toArray(new String[0]);
   }
 
