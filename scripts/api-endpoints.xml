@@ -319,7 +319,27 @@
 				     "cache_key" : "Enter-Cache-Key"
 				    }
 				</sample-request>
-			</web-method>	
+			</web-method>
+			
+			
+			<!-- ******* QUESTION API ************ -->
+			<!-- 1. -->
+			<web-method>
+				<name>getAllQuestions</name>
+				<version>1</version>
+				<description>Cache Store Service</description>
+				<request-type>GET</request-type>
+				<mapping-uri>/data/quiz/question/all</mapping-uri>
+				<web-params></web-params>
+				<sample-request>
+				   header=>{
+				     "access_token" : "facebook-token-from-jbrown-web-app"
+				    }
+				    GET BODY=>
+				    {
+				    }
+				</sample-request>
+			</web-method>		
 		</web-methods>
 	</service>
 
