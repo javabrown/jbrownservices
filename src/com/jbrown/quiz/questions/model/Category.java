@@ -1,5 +1,6 @@
 package com.jbrown.quiz.questions.model;
 
+import com.jbrown.core.exception.BorwnException;
 import com.jbrown.core.util.StringUtil;
 
 public enum Category {
@@ -28,4 +29,14 @@ public enum Category {
 		
 		return false;
 	}
+	
+  public static Category find(String name) {
+    for (Category c : Category.values()) {
+      if (c.getName().equalsIgnoreCase(name)) {
+        return c;
+      }
+    }
+
+    throw new BorwnException(String.format("Unknown category %s found", name));
+  }
 }

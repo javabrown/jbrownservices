@@ -51,4 +51,6 @@ public interface BrownKeysI {
 
   String AIRPORT_DATA_K = "AirportDataK";
 
+  String QUESTIONS_K = "questions";
+  String ALL_QUIZ_QUESTIONS_K = "ALL_QUIZ_QUESTIONS_K";
 }
