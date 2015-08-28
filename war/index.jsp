@@ -181,4 +181,11 @@
 				    {
 				     "cache_key" : "Enter-Cache-Key"
 				    }
-				</sample></div></td><td>1</td><td>Cache Fetch Service</td></tr></tbody></table><br><div id="confirm" class="modal hide fade"><div class="modal-body"><p class="dialog-msg">-</p></div><div class="modal-footer"><button type="button" data-dismiss="modal" class="btn" data-value="0">Cancel</button></div></div></div></div></body></html>
+				</sample></div></td><td>1</td><td>Cache Fetch Service</td></tr><tr><td>getAllQuestions</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span>1/data/quiz/question/all<button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request">
+				   header=&gt;{
+				     "access_token" : "facebook-token-from-jbrown-web-app"
+				    }
+				    GET BODY=&gt;
+				    {
+				    }
+				</sample></div></td><td>1</td><td>Cache Store Service</td></tr></tbody></table><br><div id="confirm" class="modal hide fade"><div class="modal-body"><p class="dialog-msg">-</p></div><div class="modal-footer"><button type="button" data-dismiss="modal" class="btn" data-value="0">Cancel</button></div></div></div></div></body></html>

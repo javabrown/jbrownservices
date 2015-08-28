@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.jbrown.core.util.BrownKeysI;
-import com.jbrown.core.util.MailUtil;
-import com.jbrown.db.core.DBTester;
 import com.jbrown.web.ws.BrownRequestI;
 import com.jbrown.web.ws.BrownServices;
 import com.jbrown.web.ws.ResponderI;
@@ -267,6 +265,18 @@ public class RestServices extends BrownServices implements WsInterface,
     
     ResponderI respoder = getResponderFactory().getResponder(
         ResponderK.CACHE_GET_RESPONDER);
+    respoder.respond(request);
+
+    return EMPTY_VIEW;
+  }
+
+  @Override
+  public ModelAndView getAllQuestions(HttpServletRequest req,
+      HttpServletResponse res, ModelMap model) {
+    BrownRequestI request = super.getBrownRequest(req);
+    
+    ResponderI respoder = getResponderFactory().getResponder(
+        ResponderK.QUIZ_ALL_QUESTIONS_RESPONDER);
     respoder.respond(request);
 
     return EMPTY_VIEW;

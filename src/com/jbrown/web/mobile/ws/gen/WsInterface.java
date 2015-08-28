@@ -85,5 +85,7 @@ public interface WsInterface{
      public ModelAndView getCache
       (@RequestBody String body, HttpServletRequest req, HttpServletResponse res);
       
+     @RequestMapping(value = "/v1/data/quiz/question/all", method = RequestMethod.GET)
+     public ModelAndView getAllQuestions(HttpServletRequest req, HttpServletResponse res, ModelMap model);
 }
 			

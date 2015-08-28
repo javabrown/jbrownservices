@@ -22,6 +22,10 @@
 	
 	<bean id="cacheGetResponderBean" class="com.jbrown.web.ws.responder.CacheGetResponder" />
 
+	<bean id="quizAllQuestionsResponderBean" class="com.jbrown.web.ws.responder.QuizAllQuestionsResponder" />
+	
+	
+	
 	<bean id="responderFactory" class="com.jbrown.web.ws.responder.ResponderFactory">
 		<property name="responders">
 			<map>
@@ -35,6 +39,7 @@
 				<entry key="mediaResponder" value-ref="mediaResponderBean" />
 				<entry key="cachePushResponder" value-ref="cachePushResponderBean" />
 				<entry key="cacheGetResponder" value-ref="cacheGetResponderBean" />
+				<entry key="quizAllQuestionsResponder" value-ref="quizAllQuestionsResponderBean" />
 			</map>
 		</property>
 	</bean>
