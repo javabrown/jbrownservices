@@ -83,6 +83,8 @@
 									<xsl:variable name="service-request-type"><xsl:value-of select="request-type"/></xsl:variable>
 									<xsl:variable name="service-mapping-uri"><xsl:value-of select="mapping-uri"/></xsl:variable>
 									<xsl:variable name="sample-request"><xsl:value-of select="sample-request"/></xsl:variable>
+									<xsl:variable name="sample-request-header"><xsl:value-of select="sample-request/header"/></xsl:variable>
+									<xsl:variable name="sample-request-body"><xsl:value-of select="sample-request/body"/></xsl:variable>
 									<xsl:variable name="service-full-uri">http://javabrown.com/jbrownservices/api/ws/v<xsl:value-of select="version"/><xsl:value-of select="$service-mapping-uri"/></xsl:variable>
 									<xsl:variable name="js-backed-service-uri-block"><xsl:value-of select="version"/><xsl:value-of select="$service-mapping-uri"/></xsl:variable>
 									
@@ -94,12 +96,14 @@
 							                <td>
 							                    
 							                	<div class="launchSample">						                	    
-								                	<span class='uri'>{{Filled by JS}}</span><xsl:value-of select="$js-backed-service-uri-block"/>
+								                	<span class='uri'>{{Filled by JS}}</span><span class='uri1'><xsl:value-of select="$js-backed-service-uri-block"/></span>
 								                	
 								                	<button class="btn launchSample">
 	  							                	  <i class="icon-search icon-green"></i>
 								                	</button>
 								                	<sample  class="hide sample-request"><xsl:value-of select='$sample-request'/></sample>
+								                	<sample-request-header  class="hide sample-request-header"><xsl:value-of select='$sample-request-header'/></sample-request-header>
+								                	<sample-request-body  class="hide sample-request-body"><xsl:value-of select='$sample-request-body'/></sample-request-body>
 								                </div>
 								             
 							                </td>
@@ -115,15 +119,58 @@
 					
 					<br/> 	
 					
-					 <div id="confirm" class="modal hide fade">
+				<!--  dialog to show on service description -begin -->
+				<div id="confirm" class="modal hide fade">
 						<div class="modal-body">
-							<p class="dialog-msg">-</p>
+							  <p class="dialog-msg">-</p>
+ 
+							    <!-- form class="form-horizontal">
+													  <div class="form-group form-group-lg">
+													    <label class="col-sm-2 control-label" for="service-description-header">Header</label>
+													    <div class="col-sm-10">
+													      <samp id='service-description-header' class="form-control" rows="2"/>
+													    </div>
+													  </div>
+													  <div class="form-group form-group-sm">
+													    <label class="col-sm-2 control-label" for="service-description-body">Body</label>
+													    <div class="col-sm-10">
+													      <samp id='service-description-body' class="form-control" rows="3"/>
+													    </div>
+													  </div>
+											</form -->
+											  
+										 <table class="table table-condensed">
+														<tr>
+																	<td class="info">
+		                  <samp><b>URL:</b></samp>
+		               </td>
+															  <td class="active">
+		                  <samp id='service-uri' class="form-control" rows="1"/>
+		               </td>
+	             </tr>
+														<tr>
+																	<td class="info">
+		                  <samp><b>Header:</b></samp>
+		               </td>
+															  <td class="active">
+		                  <samp id='service-description-header' class="form-control" rows="2"/>
+		               </td>
+	             </tr>
+	             <tr>
+																	<td class="info">
+		                  <samp><b>Body:</b></samp>
+		               </td>	             	
+															  <td class="success">
+															       <samp id='service-description-body' class="form-control" rows="3"/>
+															  </td>
+														</tr>
+										</table>
 						</div>
 						<div class="modal-footer">
 							<button type="button" data-dismiss="modal" class="btn" data-value="0">Cancel</button>
 						</div>
 					</div>
-						
+				 <!--  dialog to show on service description -end -->
 			 
 		</div>					
 	</xsl:template>
@@ -155,20 +202,44 @@
 			} );
 			
 			function prepareDialog() {
-				$('.launchSample').on('click', function (e) {
-				    var sampleRequest = $(this).find('.sample-request').html();
-				    $('.dialog-msg').html(sampleRequest);
-				    
-				    $('#confirm')
-				        .modal({ backdrop: 'static', keyboard: false })
-				        .one('click', '[data-value]', function (e) {
-				            if($(this).data('value')) {
-				                //alert('confirmed');
-				            } else {
-				                //alert('canceled');
-				            }
-				        });
-				});				
+					$('.launchSample').on('click', function (e) {
+					    //var sampleRequest = $(this).find('.sample-request').html();
+					    var sampleRequestHeader = $(this).find('.sample-request-header').html();
+					    var sampleRequestBody = $(this).find('.sample-request-body').html();
+					    
+					    //read uri by peices
+					    var sampleRequestUri1 =  $(this).find('.uri').html();
+					    var sampleRequestUri2 =  $(this).find('.uri1').html();
+					    
+					    if(sampleRequestHeader){
+					      sampleRequestHeader = sampleRequestHeader.replace(/\s/g, '');
+					      sampleRequestHeader = JSON.parse(sampleRequestHeader);
+					      sampleRequestHeader = JSON.stringify(sampleRequestHeader, null, 4)
+					    }
+					    
+					    if(sampleRequestBody){
+					      sampleRequestBody = sampleRequestBody.replace(/\s/g, '');
+					      sampleRequestBody = JSON.parse(sampleRequestBody);
+					      sampleRequestBody = JSON.stringify( sampleRequestBody, null, 4);
+					    }
+					     
+					    $('#service-description-header').html(sampleRequestHeader);
+					    $('#service-description-body').html(sampleRequestBody);
+					    
+						   $('#service-uri').html( sampleRequestUri1+sampleRequestUri2);
+						   //alert(sampleRequestUri1+sampleRequestUri2);
+	
+	
+					    $('#confirm')
+					        .modal({ backdrop: 'static', keyboard: false })
+					        .one('click', '[data-value]', function (e) {
+					            if($(this).data('value')) {
+					                //alert('confirmed');
+					            } else {
+					                //alert('canceled');
+					            }
+					        });
+					});				
 			}
        </script>
        

@@ -11,17 +11,16 @@
 				<request-type>POST</request-type>
 				<mapping-uri>/user/register</mapping-uri>
 				<sample-request>
-				    header=>{
-				     
-				    }
-				    body=>
-				    {
+				    <header></header>
+				    <body> 
+				      {
 				        "name" : "User Name",
 				        "email" : "email@domain.com",
 				        "phone" : "123456",
 				        "password" : "xxxxx",
 				        "domain" : "www.yourdomain.com"
-				    }
+				      }
+				    </body>
 				</sample-request>
 			</web-method>
 
@@ -36,9 +35,12 @@
 					<web-param>String email</web-param>
 				</web-params>
 				<sample-request>
+				    <header></header>
+				    <body>
 				    {
 				     "user" : "raja_khan"
 				    }
+				    </body>
 				</sample-request>				
 			</web-method>
 
@@ -49,15 +51,14 @@
 				<request-type>POST</request-type>
 				<mapping-uri>/user/auth</mapping-uri>
 				<sample-request>
-				     header=>{
-				     
-				    }
-				    body=> 
-				    {
+				    <header></header>
+				    <body>
+				     {
 				        "email" : "email@domain.com",
 				        "password" : "xxxxx",
 				        "auth-code" : "xxxxx"
-				    }
+				     }
+				    </body>
 				</sample-request>
 			</web-method>
 
@@ -68,7 +69,8 @@
 				<request-type>GET</request-type>
 				<mapping-uri>/user/logout</mapping-uri>
 				<sample-request>
-				    header=>{}
+				    <header></header>
+				    <body></body>
 				</sample-request>
 			</web-method>
 			
@@ -82,12 +84,8 @@
 					<!-- none -->
 				</web-params>
 				<sample-request>
-				     header=>{
-				     "access_token" : "facebook-token-from-jbrown-web-app"
-				    }
-				    body=>{
-				     empty
-				    }
+					<header>{ "access_token" : "facebook-token-from-jbrown-web-app" }</header>
+				    <body></body>
 				</sample-request>				
 			</web-method>
 
@@ -101,12 +99,8 @@
 					<web-param>String countryName</web-param>
 				</web-params>
 				<sample-request>
-				    header=>{
-				     "access_token" : "facebook-token-from-jbrown-web-app"
-				    }
-				    body=>{
-				      http://localhost:8080/jbrownservices/api/ws/v1/countryinfo/in/
-				    }
+				    <header>{ "access_token" : "facebook-token-from-jbrown-web-app" }</header>
+				    <body>http://localhost:8080/jbrownservices/api/ws/v1/countryinfo/in/</body>
 				</sample-request>
 			</web-method>
 
@@ -121,12 +115,8 @@
 					<web-param>String stateName</web-param>
 				</web-params>
 				<sample-request>
-				 	header=>{
-				     "access_token" : "facebook-token-from-jbrown-web-app"
-				    }
-				    GET-SAMPLE=>{
-				      http://localhost:8080/jbrownservices/api/ws/v1/countryinfo/in/up/
-				    }
+				    <header>{ "access_token" : "facebook-token-from-jbrown-web-app" }</header>
+				    <body>http://localhost:8080/jbrownservices/api/ws/v1/countryinfo/in/up/</body>
 				</sample-request>
 			</web-method>
 
@@ -143,12 +133,8 @@
 					<web-param>String cityName</web-param>
 				</web-params>
 				<sample-request>
-				 	header=>{
-				     "access_token" : "facebook-token-from-jbrown-web-app"
-				    }
-				    GET-SAMPLE=>{
-				      http://localhost:8080/jbrownservices/api/ws/v1/countryinfo/in/up/agra/
-				    }				
+				    <header>{ "access_token" : "facebook-token-from-jbrown-web-app" }</header>
+				    <body>http://localhost:8080/jbrownservices/api/ws/v1/countryinfo/in/up/agra/</body>				    
 				</sample-request>				
 			</web-method>
 
@@ -162,12 +148,8 @@
 				<web-params></web-params>
 				
 				<sample-request>
-					header=>{
-				     "access_token" : "facebook-token-from-jbrown-web-app"
-				    }
-				    GET-SAMPLE=>{
-				      http://localhost:8080/jbrownservices/api/ws/v1/airport
-				    }
+				    <header>{ "access_token" : "facebook-token-from-jbrown-web-app" }</header>
+				    <body>http://localhost:8080/jbrownservices/api/ws/v1/airport</body>	
 				</sample-request>				
 			</web-method>
 			
@@ -182,12 +164,8 @@
 				</web-params>
 				
 				<sample-request>
-					header=>{
-				     "access_token" : "facebook-token-from-jbrown-web-app"
-				    }
-				    GET-SAMPLE=>{
-				      http://localhost:8080/jbrownservices/api/ws/v1/airport/jfk
-				    }
+				    <header>{ "access_token" : "facebook-token-from-jbrown-web-app" }</header>
+				    <body>http://localhost:8080/jbrownservices/api/ws/v1/airport/jfk</body>					    
 				</sample-request>				
 			</web-method>
 			
@@ -203,7 +181,10 @@
 					<web-param>String countryName1</web-param>
 					<web-param>String countryName2</web-param>
 				</web-params>
-				<sample-request></sample-request>				
+				<sample-request>
+				    <header></header>
+				    <body></body>				
+				</sample-request>				
 			</web-method>
 
 			<!-- Utility Text2Image -->
@@ -219,7 +200,9 @@
 				<description>Generate Chart Line</description>
 				<request-type>GET</request-type>
 				<mapping-uri>/ui/linechart</mapping-uri>
-				<sample-request></sample-request>				
+				<sample-request>
+							 <header></header><body></body>				
+				</sample-request>				
 			</web-method>
 
 			<web-method>
@@ -231,7 +214,7 @@
 				<web-params>
 					<web-param>String textToEncode</web-param>
 				</web-params>
-				<sample-request></sample-request>				
+				<sample-request><header></header><body></body></sample-request>				
 			</web-method>
 
 
@@ -248,12 +231,8 @@
 					<web-param>String size</web-param>
 				</web-params>
 				<sample-request>
-				   header=>{
-				     "access_token" : "facebook-token-from-jbrown-web-app"
-				    }
-				    GET Sample URL=>{
-				      http://localhost:8080/jbrownservices/api/ws/v1/media/search-images/raja/50px
-				    }
+				    <header>{ "access_token" : "facebook-token-from-jbrown-web-app" }</header>
+				    <body>http://localhost:8080/jbrownservices/api/ws/v1/media/search-images/raja/50px</body>
 				</sample-request>
 			</web-method>
 
@@ -265,7 +244,9 @@
 				</description>
 				<request-type>GET</request-type>
 				<mapping-uri>/media/all-image-size</mapping-uri>
-				<sample-request></sample-request>				
+				<sample-request>
+				    <header></header><body></body>
+				</sample-request>				
 			</web-method>
 			
 			<!-- 3. -->
@@ -279,7 +260,9 @@
 				<web-params>
 					<web-param>String textToSpeech</web-param>
 				</web-params>
-				<sample-request></sample-request>				
+				<sample-request>
+				  <header></header><body></body>
+				</sample-request>				
 			</web-method>
 
 			<!-- ******* DATA API ************ -->
@@ -292,14 +275,13 @@
 				<mapping-uri>/data/cache/set</mapping-uri>
 				<web-params></web-params>
 				<sample-request>
-				   header=>{
-				     "access_token" : "facebook-token-from-jbrown-web-app"
-				    }
-				    POST BODY=>
-				    {
-				     "cache_key" : "Enter-Cache-Key",
-				     "cache_value" : "Enter Cache Value"
-				    }
+				    <header>{ "access_token" : "facebook-token-from-jbrown-web-app" }</header>
+				    <body>
+				       {
+				         "cache_key" : "Enter-Cache-Key",
+				         "cache_value" : "Enter Cache Value"
+				      }
+				    </body>
 				</sample-request>
 			</web-method>			
 			<!-- 2. -->
@@ -311,13 +293,14 @@
 				<mapping-uri>/data/cache/get</mapping-uri>
 				<web-params></web-params>
 				<sample-request>
-				   header=>{
-				     "access_token" : "facebook-token-from-jbrown-web-app"
-				    }
-				    POST BODY=>
-				    {
-				     "cache_key" : "Enter-Cache-Key"
-				    }
+				    <header>
+				      {  "access_token" : "facebook-token-from-jbrown-web-app" }
+				    </header>
+				    <body>
+				      {
+				        "cache_key" : "Enter-Cache-Key"
+				      }		    
+				    </body>
 				</sample-request>
 			</web-method>
 			
@@ -332,12 +315,8 @@
 				<mapping-uri>/data/quiz/question/all</mapping-uri>
 				<web-params></web-params>
 				<sample-request>
-				   header=>{
-				     "access_token" : "facebook-token-from-jbrown-web-app"
-				    }
-				    GET BODY=>
-				    {
-				    }
+				    <header>{  "access_token" : "facebook-token-from-jbrown-web-app" }</header>
+				    <body></body>
 				</sample-request>
 			</web-method>		
 		</web-methods>
