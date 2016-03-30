@@ -24,6 +24,7 @@
 
 	<bean id="quizAllQuestionsResponderBean" class="com.jbrown.web.ws.responder.QuizAllQuestionsResponder" />
 	
+	<bean id="invalidRequestResponderBean" class="com.jbrown.web.ws.responder.InvalidRequestResponder" />
 	
 	
 	<bean id="responderFactory" class="com.jbrown.web.ws.responder.ResponderFactory">
@@ -40,6 +41,7 @@
 				<entry key="cachePushResponder" value-ref="cachePushResponderBean" />
 				<entry key="cacheGetResponder" value-ref="cacheGetResponderBean" />
 				<entry key="quizAllQuestionsResponder" value-ref="quizAllQuestionsResponderBean" />
+				<entry key="invalidRequestResponder" value-ref="invalidRequestResponderBean" />
 			</map>
 		</property>
 	</bean>

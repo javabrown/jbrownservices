@@ -13,4 +13,5 @@ public interface ResponderK {
 	String CACHE_PUSH_RESPONDER = "cachePushResponder";
 	String CACHE_GET_RESPONDER = "cacheGetResponder";
 	String QUIZ_ALL_QUESTIONS_RESPONDER = "quizAllQuestionsResponder";
+	String INAVLID_REQUEST_RESPONDER = "invalidRequestResponder";
 }

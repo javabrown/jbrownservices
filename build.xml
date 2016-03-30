@@ -22,6 +22,7 @@
 	
 	<property name="app-libs" value="libs/app-libs/" />
 	<property name="gae-libs" value="libs/appengine-libs/1.9.24/" />
+	<property name="gae-cloud-store-libs" value="libs/appengine-libs/cloud-storage-lib" />
 	
 	<!-- Configure Later -->
     <!-- <property name="appengine.sdk.dir" location="c:/tools/appengine-java-sdk-1.9.24" / -->
@@ -41,7 +42,7 @@
 		<delete file="dist\*.jar, *.war" failonerror="true" includeemptydirs="true" /> 
 	</target>
 	
-    <target name="copy-jars" description="Copies the App Engine JARs to the WAR.">
+ <target name="copy-jars" description="Copies the App Engine JARs to the WAR.">
 	    <copy todir="war/WEB-INF/lib" flatten="true">
 		      <fileset dir="${app-libs}">
 		        <include name="**/*.jar" />
@@ -49,8 +50,11 @@
 		      <fileset dir="${gae-libs}">
 		        <include name="**/*.jar" />
 		      </fileset>
+		      <fileset dir="${gae-cloud-store-libs}">
+		        <include name="**/*.jar" />
+		      </fileset>
 	    </copy>
-    </target>
+ </target>
 
 	<target name="deploy" depends="clean, copy-jars, mobile-doc-gen, mobile-api-gen, deployOnMac, deployOnWindows">
 		<!--<mkdir dir="${dir.classes}" /> <javac srcdir="${dir.src}" destdir="${dir.classes}" 

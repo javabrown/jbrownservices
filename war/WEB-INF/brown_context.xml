@@ -18,4 +18,4 @@
   <bean id="brownFilter" class="com.jbrown.web.BrownWsFilter">
      <property name="brownContext"><ref bean="brownContext"/></property>
   </bean>
-</beans>  
+</beans>

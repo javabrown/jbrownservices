@@ -14,39 +14,39 @@ import com.jbrown.web.MimeTypesI;
 
 /***
  * 
- * @author rkhan Responder for Mobile REST API.
+ * @author rkhan Responder for REST API.
  */
 public abstract class Responder implements ResponderI, BrownKeysI {
 
 	@Override
 	public void respond(BrownRequestI request) {
-		BrownResponseI jsonResponse = new JsonResponse();
+		BrownResponseI brownResponse = new BrownResponse();
 
 		BrownErrorsI errors = validate(request);
 
 		if (errors == null || errors.nErrors() == 0) {
 			Map<String, Object> response = perform(request);
 			if (response != null && response.size() > 0) {
-				jsonResponse.addAll(response);
+			  brownResponse.addAll(response);
 			}
 		}
 
 		if(errors != null && errors.nErrors() > 0){
-		  jsonResponse.add("Errors", errors.getErrorMessages());
+		  brownResponse.add("Errors", errors.getErrorMessages());
 		}
 		
-		buildResponse(request, jsonResponse);
+		buildResponse(request, brownResponse);
 	}
 
-	void buildResponse(BrownRequestI jsonRequest, BrownResponseI request){
-		HttpServletResponse httpResponse = jsonRequest.getHttpServletResponse();
+	void buildResponse(BrownRequestI request, BrownResponseI response){
+		HttpServletResponse httpResponse = request.getHttpServletResponse();
 		this.addCrosHeader(httpResponse);
 		
 		try {
-			OutputFormat outputFormat = OutputFormat.getInstance(jsonRequest
+			OutputFormat outputFormat = OutputFormat.getInstance(request
 					.getHttpServletRequest().getParameter("output"));
 			String callBack = 
-					jsonRequest.getHttpServletRequest().getParameter("callback");
+			    request.getHttpServletRequest().getParameter("callback");
 
 			//httpResponse.setContentType(MimeTypesI.PLAIN_TEXT);
 			httpResponse.setContentType(outputFormat.getMimeType());
@@ -55,7 +55,7 @@ public abstract class Responder implements ResponderI, BrownKeysI {
 			PrintWriter writer = httpResponse.getWriter();
 
 
-			writer.print(request.transform(outputFormat, callBack));
+			writer.print(response.transform(outputFormat, callBack));
 			
 			writer.flush();
 			writer.close();

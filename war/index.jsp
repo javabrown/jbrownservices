@@ -10,20 +10,44 @@
 			} );
 			
 			function prepareDialog() {
-				$('.launchSample').on('click', function (e) {
-				    var sampleRequest = $(this).find('.sample-request').html();
-				    $('.dialog-msg').html(sampleRequest);
-				    
-				    $('#confirm')
-				        .modal({ backdrop: 'static', keyboard: false })
-				        .one('click', '[data-value]', function (e) {
-				            if($(this).data('value')) {
-				                //alert('confirmed');
-				            } else {
-				                //alert('canceled');
-				            }
-				        });
-				});				
+					$('.launchSample').on('click', function (e) {
+					    //var sampleRequest = $(this).find('.sample-request').html();
+					    var sampleRequestHeader = $(this).find('.sample-request-header').html();
+					    var sampleRequestBody = $(this).find('.sample-request-body').html();
+					    
+					    //read uri by peices
+					    var sampleRequestUri1 =  $(this).find('.uri').html();
+					    var sampleRequestUri2 =  $(this).find('.uri1').html();
+					    
+					    if(sampleRequestHeader){
+					      sampleRequestHeader = sampleRequestHeader.replace(/\s/g, '');
+					      sampleRequestHeader = JSON.parse(sampleRequestHeader);
+					      sampleRequestHeader = JSON.stringify(sampleRequestHeader, null, 4)
+					    }
+					    
+					    if(sampleRequestBody){
+					      sampleRequestBody = sampleRequestBody.replace(/\s/g, '');
+					      sampleRequestBody = JSON.parse(sampleRequestBody);
+					      sampleRequestBody = JSON.stringify( sampleRequestBody, null, 4);
+					    }
+					     
+					    $('#service-description-header').html(sampleRequestHeader);
+					    $('#service-description-body').html(sampleRequestBody);
+					    
+						   $('#service-uri').html( sampleRequestUri1+sampleRequestUri2);
+						   //alert(sampleRequestUri1+sampleRequestUri2);
+	
+	
+					    $('#confirm')
+					        .modal({ backdrop: 'static', keyboard: false })
+					        .one('click', '[data-value]', function (e) {
+					            if($(this).data('value')) {
+					                //alert('confirmed');
+					            } else {
+					                //alert('canceled');
+					            }
+					        });
+					});				
 			}
        </script><style>
 			hr {
@@ -83,109 +107,66 @@
 		    .transparent {
                opacity: 0.9;
             }
-      </style></head><body class="well transparent"><div class="well transparent"><center><div class="jumbotron"><h1>JavaBrown API</h1><p>Open Source API by JavaBrown Foundation</p></div></center><hr><div class="page-container"><table id="apiList" class="display cell-border" width="100%" cellspacing="0"><thead><tr><th>SERVICE-NAME</th><th>REQUEST-TYPE</th><th>URI</th><th>VERSION</th><th>DESCRIPTION</th></tr></thead><tfoot><tr><th>SERVICE-NAME</th><th>REQUEST-TYPE</th><th>URI</th><th>VERSION</th><th>DESCRIPTION</th></tr></tfoot><tbody><tr><td>register</td><td>POST</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span>1/user/register<button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request">
-				    header=&gt;{
-				     
-				    }
-				    body=&gt;
-				    {
+      </style></head><body class="well transparent"><div class="well transparent"><center><div class="jumbotron"><h1>JavaBrown API</h1><p>Open Source API by JavaBrown Foundation</p></div></center><hr><div class="page-container"><table id="apiList" class="display cell-border" width="100%" cellspacing="0"><thead><tr><th>SERVICE-NAME</th><th>REQUEST-TYPE</th><th>URI</th><th>VERSION</th><th>DESCRIPTION</th></tr></thead><tfoot><tr><th>SERVICE-NAME</th><th>REQUEST-TYPE</th><th>URI</th><th>VERSION</th><th>DESCRIPTION</th></tr></tfoot><tbody><tr><td>register</td><td>POST</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span><span class="uri1">1/user/register</span><button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request"> 
+				      {
 				        "name" : "User Name",
 				        "email" : "email@domain.com",
 				        "phone" : "123456",
 				        "password" : "xxxxx",
 				        "domain" : "www.yourdomain.com"
-				    }
-				</sample></div></td><td>1</td><td>Register a new user's account.</td></tr><tr><td>getUserInfo</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span>1/user/info/{userName}/{email}<button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request">
+				      }
+				    </sample><sample-request-header class="hide sample-request-header"></sample-request-header><sample-request-body class="hide sample-request-body"> 
+				      {
+				        "name" : "User Name",
+				        "email" : "email@domain.com",
+				        "phone" : "123456",
+				        "password" : "xxxxx",
+				        "domain" : "www.yourdomain.com"
+				      }
+				    </sample-request-body></div></td><td>1</td><td>Register a new user's account.</td></tr><tr><td>getUserInfo</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span><span class="uri1">1/user/info/{userName}/{email}</span><button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request">
 				    {
 				     "user" : "raja_khan"
 				    }
-				</sample></div></td><td>1</td><td>Register new account.</td></tr><tr><td>auth</td><td>POST</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span>1/user/auth<button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request">
-				     header=&gt;{
-				     
-				    }
-				    body=&gt; 
+				    </sample><sample-request-header class="hide sample-request-header"></sample-request-header><sample-request-body class="hide sample-request-body">
 				    {
+				     "user" : "raja_khan"
+				    }
+				    </sample-request-body></div></td><td>1</td><td>Register new account.</td></tr><tr><td>auth</td><td>POST</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span><span class="uri1">1/user/auth</span><button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request">
+				     {
 				        "email" : "email@domain.com",
 				        "password" : "xxxxx",
 				        "auth-code" : "xxxxx"
-				    }
-				</sample></div></td><td>1</td><td>Authorize an account.</td></tr><tr><td>logout</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span>1/user/logout<button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request">
-				    header=&gt;{}
-				</sample></div></td><td>1</td><td>Invalidate the active user session</td></tr><tr><td>getIsoCountries</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span>1/countryinfo<button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request">
-				     header=&gt;{
-				     "access_token" : "facebook-token-from-jbrown-web-app"
-				    }
-				    body=&gt;{
-				     empty
-				    }
-				</sample></div></td><td>1</td><td>Register new account.</td></tr><tr><td>getCountryInfo</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span>1/countryinfo/{countryName}<button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request">
-				    header=&gt;{
-				     "access_token" : "facebook-token-from-jbrown-web-app"
-				    }
-				    body=&gt;{
-				      http://localhost:8080/jbrownservices/api/ws/v1/countryinfo/in/
-				    }
-				</sample></div></td><td>1</td><td>Register new account.</td></tr><tr><td>getStateInfo</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span>1/countryinfo/{countryName}/{stateName}<button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request">
-				 	header=&gt;{
-				     "access_token" : "facebook-token-from-jbrown-web-app"
-				    }
-				    GET-SAMPLE=&gt;{
-				      http://localhost:8080/jbrownservices/api/ws/v1/countryinfo/in/up/
-				    }
-				</sample></div></td><td>1</td><td>Register new account.</td></tr><tr><td>getCityInfo</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span>1/countryinfo/{countryName}/{stateName}/{cityName}<button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request">
-				 	header=&gt;{
-				     "access_token" : "facebook-token-from-jbrown-web-app"
-				    }
-				    GET-SAMPLE=&gt;{
-				      http://localhost:8080/jbrownservices/api/ws/v1/countryinfo/in/up/agra/
-				    }				
-				</sample></div></td><td>1</td><td>Register new account.</td></tr><tr><td>getAllAirport</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span>1/airport<button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request">
-					header=&gt;{
-				     "access_token" : "facebook-token-from-jbrown-web-app"
-				    }
-				    GET-SAMPLE=&gt;{
-				      http://localhost:8080/jbrownservices/api/ws/v1/airport
-				    }
-				</sample></div></td><td>1</td><td>Return Airport Info by IATA or airport code.</td></tr><tr><td>getAirporByIata</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span>1/airport/{iata}<button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request">
-					header=&gt;{
-				     "access_token" : "facebook-token-from-jbrown-web-app"
-				    }
-				    GET-SAMPLE=&gt;{
-				      http://localhost:8080/jbrownservices/api/ws/v1/airport/jfk
-				    }
-				</sample></div></td><td>1</td><td>Return Airport Info by IATA or airport code.</td></tr><tr><td>getDistance</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span>1/distance/location-a/{countryName1}/location-b/{countryName1}<button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request"></sample></div></td><td>1</td><td>
+				     }
+				    </sample><sample-request-header class="hide sample-request-header"></sample-request-header><sample-request-body class="hide sample-request-body">
+				     {
+				        "email" : "email@domain.com",
+				        "password" : "xxxxx",
+				        "auth-code" : "xxxxx"
+				     }
+				    </sample-request-body></div></td><td>1</td><td>Authorize an account.</td></tr><tr><td>logout</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span><span class="uri1">1/user/logout</span><button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request"></sample><sample-request-header class="hide sample-request-header"></sample-request-header><sample-request-body class="hide sample-request-body"></sample-request-body></div></td><td>1</td><td>Invalidate the active user session</td></tr><tr><td>getIsoCountries</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span><span class="uri1">1/countryinfo</span><button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request">{ "access_token" : "facebook-token-from-jbrown-web-app" }</sample><sample-request-header class="hide sample-request-header">{ "access_token" : "facebook-token-from-jbrown-web-app" }</sample-request-header><sample-request-body class="hide sample-request-body"></sample-request-body></div></td><td>1</td><td>Register new account.</td></tr><tr><td>getCountryInfo</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span><span class="uri1">1/countryinfo/{countryName}</span><button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request">{ "access_token" : "facebook-token-from-jbrown-web-app" }http://localhost:8080/jbrownservices/api/ws/v1/countryinfo/in/</sample><sample-request-header class="hide sample-request-header">{ "access_token" : "facebook-token-from-jbrown-web-app" }</sample-request-header><sample-request-body class="hide sample-request-body">http://localhost:8080/jbrownservices/api/ws/v1/countryinfo/in/</sample-request-body></div></td><td>1</td><td>Register new account.</td></tr><tr><td>getStateInfo</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span><span class="uri1">1/countryinfo/{countryName}/{stateName}</span><button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request">{ "access_token" : "facebook-token-from-jbrown-web-app" }http://localhost:8080/jbrownservices/api/ws/v1/countryinfo/in/up/</sample><sample-request-header class="hide sample-request-header">{ "access_token" : "facebook-token-from-jbrown-web-app" }</sample-request-header><sample-request-body class="hide sample-request-body">http://localhost:8080/jbrownservices/api/ws/v1/countryinfo/in/up/</sample-request-body></div></td><td>1</td><td>Register new account.</td></tr><tr><td>getCityInfo</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span><span class="uri1">1/countryinfo/{countryName}/{stateName}/{cityName}</span><button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request">{ "access_token" : "facebook-token-from-jbrown-web-app" }http://localhost:8080/jbrownservices/api/ws/v1/countryinfo/in/up/agra/</sample><sample-request-header class="hide sample-request-header">{ "access_token" : "facebook-token-from-jbrown-web-app" }</sample-request-header><sample-request-body class="hide sample-request-body">http://localhost:8080/jbrownservices/api/ws/v1/countryinfo/in/up/agra/</sample-request-body></div></td><td>1</td><td>Register new account.</td></tr><tr><td>getAllAirport</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span><span class="uri1">1/airport</span><button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request">{ "access_token" : "facebook-token-from-jbrown-web-app" }http://localhost:8080/jbrownservices/api/ws/v1/airport</sample><sample-request-header class="hide sample-request-header">{ "access_token" : "facebook-token-from-jbrown-web-app" }</sample-request-header><sample-request-body class="hide sample-request-body">http://localhost:8080/jbrownservices/api/ws/v1/airport</sample-request-body></div></td><td>1</td><td>Return Airport Info by IATA or airport code.</td></tr><tr><td>getAirporByIata</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span><span class="uri1">1/airport/{iata}</span><button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request">{ "access_token" : "facebook-token-from-jbrown-web-app" }http://localhost:8080/jbrownservices/api/ws/v1/airport/jfk</sample><sample-request-header class="hide sample-request-header">{ "access_token" : "facebook-token-from-jbrown-web-app" }</sample-request-header><sample-request-body class="hide sample-request-body">http://localhost:8080/jbrownservices/api/ws/v1/airport/jfk</sample-request-body></div></td><td>1</td><td>Return Airport Info by IATA or airport code.</td></tr><tr><td>getDistance</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span><span class="uri1">1/distance/location-a/{countryName1}/location-b/{countryName1}</span><button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request"></sample><sample-request-header class="hide sample-request-header"></sample-request-header><sample-request-body class="hide sample-request-body"></sample-request-body></div></td><td>1</td><td>
 					Calculate the distance between the two locations
-				</td></tr><tr><td>getLineChart</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span>2/ui/linechart<button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request"></sample></div></td><td>2</td><td>Generate Chart Line</td></tr><tr><td>encode</td><td>POST</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span>1/util/encode<button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request"></sample></div></td><td>1</td><td>Generate Chart Line</td></tr><tr><td>getPublicPhotos</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span>1/media/search-images/{pattern}/{size}<button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request">
-				   header=&gt;{
-				     "access_token" : "facebook-token-from-jbrown-web-app"
-				    }
-				    GET Sample URL=&gt;{
-				      http://localhost:8080/jbrownservices/api/ws/v1/media/search-images/raja/50px
-				    }
-				</sample></div></td><td>1</td><td>Find image services</td></tr><tr><td>getAllPhotoSizeConstants</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span>1/media/all-image-size<button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request"></sample></div></td><td>1</td><td>Return the list of available search constants
-				</td></tr><tr><td>textToAudio</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span>1/media/text-to-audio<button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request"></sample></div></td><td>1</td><td>Convert Text to Audio
-				</td></tr><tr><td>setCache</td><td>POST</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span>1/data/cache/set<button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request">
-				   header=&gt;{
-				     "access_token" : "facebook-token-from-jbrown-web-app"
-				    }
-				    POST BODY=&gt;
-				    {
-				     "cache_key" : "Enter-Cache-Key",
-				     "cache_value" : "Enter Cache Value"
-				    }
-				</sample></div></td><td>1</td><td>Cache Store Service</td></tr><tr><td>getCache</td><td>POST</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span>1/data/cache/get<button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request">
-				   header=&gt;{
-				     "access_token" : "facebook-token-from-jbrown-web-app"
-				    }
-				    POST BODY=&gt;
-				    {
-				     "cache_key" : "Enter-Cache-Key"
-				    }
-				</sample></div></td><td>1</td><td>Cache Fetch Service</td></tr><tr><td>getAllQuestions</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span>1/data/quiz/question/all<button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request">
-				   header=&gt;{
-				     "access_token" : "facebook-token-from-jbrown-web-app"
-				    }
-				    GET BODY=&gt;
-				    {
-				    }
-				</sample></div></td><td>1</td><td>Cache Store Service</td></tr></tbody></table><br><div id="confirm" class="modal hide fade"><div class="modal-body"><p class="dialog-msg">-</p></div><div class="modal-footer"><button type="button" data-dismiss="modal" class="btn" data-value="0">Cancel</button></div></div></div></div></body></html>
+				</td></tr><tr><td>getLineChart</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span><span class="uri1">2/ui/linechart</span><button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request"></sample><sample-request-header class="hide sample-request-header"></sample-request-header><sample-request-body class="hide sample-request-body"></sample-request-body></div></td><td>2</td><td>Generate Chart Line</td></tr><tr><td>encode</td><td>POST</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span><span class="uri1">1/util/encode</span><button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request"></sample><sample-request-header class="hide sample-request-header"></sample-request-header><sample-request-body class="hide sample-request-body"></sample-request-body></div></td><td>1</td><td>Generate Chart Line</td></tr><tr><td>getPublicPhotos</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span><span class="uri1">1/media/search-images/{pattern}/{size}</span><button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request">{ "access_token" : "facebook-token-from-jbrown-web-app" }http://localhost:8080/jbrownservices/api/ws/v1/media/search-images/raja/50px</sample><sample-request-header class="hide sample-request-header">{ "access_token" : "facebook-token-from-jbrown-web-app" }</sample-request-header><sample-request-body class="hide sample-request-body">http://localhost:8080/jbrownservices/api/ws/v1/media/search-images/raja/50px</sample-request-body></div></td><td>1</td><td>Find image services</td></tr><tr><td>getAllPhotoSizeConstants</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span><span class="uri1">1/media/all-image-size</span><button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request"></sample><sample-request-header class="hide sample-request-header"></sample-request-header><sample-request-body class="hide sample-request-body"></sample-request-body></div></td><td>1</td><td>Return the list of available search constants
+				</td></tr><tr><td>textToAudio</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span><span class="uri1">1/media/text-to-audio</span><button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request"></sample><sample-request-header class="hide sample-request-header"></sample-request-header><sample-request-body class="hide sample-request-body"></sample-request-body></div></td><td>1</td><td>Convert Text to Audio
+				</td></tr><tr><td>setCache</td><td>POST</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span><span class="uri1">1/data/cache/set</span><button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request">{ "access_token" : "facebook-token-from-jbrown-web-app" }
+				       {
+				         "cache_key" : "Enter-Cache-Key",
+				         "cache_value" : "Enter Cache Value"
+				      }
+				    </sample><sample-request-header class="hide sample-request-header">{ "access_token" : "facebook-token-from-jbrown-web-app" }</sample-request-header><sample-request-body class="hide sample-request-body">
+				       {
+				         "cache_key" : "Enter-Cache-Key",
+				         "cache_value" : "Enter Cache Value"
+				      }
+				    </sample-request-body></div></td><td>1</td><td>Cache Store Service</td></tr><tr><td>getCache</td><td>POST</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span><span class="uri1">1/data/cache/get</span><button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request">
+				      {  "access_token" : "facebook-token-from-jbrown-web-app" }
+				    
+				      {
+				        "cache_key" : "Enter-Cache-Key"
+				      }		    
+				    </sample><sample-request-header class="hide sample-request-header">
+				      {  "access_token" : "facebook-token-from-jbrown-web-app" }
+				    </sample-request-header><sample-request-body class="hide sample-request-body">
+				      {
+				        "cache_key" : "Enter-Cache-Key"
+				      }		    
+				    </sample-request-body></div></td><td>1</td><td>Cache Fetch Service</td></tr><tr><td>getAllQuestions</td><td>GET</td><td><div class="launchSample"><span class="uri">{{Filled by JS}}</span><span class="uri1">1/data/quiz/question/all</span><button class="btn launchSample"><i class="icon-search icon-green"></i></button><sample class="hide sample-request">{  "access_token" : "facebook-token-from-jbrown-web-app" }</sample><sample-request-header class="hide sample-request-header">{  "access_token" : "facebook-token-from-jbrown-web-app" }</sample-request-header><sample-request-body class="hide sample-request-body"></sample-request-body></div></td><td>1</td><td>Cache Store Service</td></tr></tbody></table><br><div id="confirm" class="modal hide fade"><div class="modal-body"><p class="dialog-msg">-</p><table class="table table-condensed"><tr><td class="info"><samp><b>URL:</b></samp></td><td class="active"><samp id="service-uri" class="form-control" rows="1"></samp></td></tr><tr><td class="info"><samp><b>Header:</b></samp></td><td class="active"><samp id="service-description-header" class="form-control" rows="2"></samp></td></tr><tr><td class="info"><samp><b>Body:</b></samp></td><td class="success"><samp id="service-description-body" class="form-control" rows="3"></samp></td></tr></table></div><div class="modal-footer"><button type="button" data-dismiss="modal" class="btn" data-value="0">Cancel</button></div></div></div></div></body></html>

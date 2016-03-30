@@ -19,7 +19,6 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/brown-capsule.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/cmutimelex.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/commons-beanutils-1.9.2.jar"/>
-	<classpathentry kind="lib" path="war/WEB-INF/lib/commons-codec-1.3.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/commons-collections-3.2.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/commons-email-1.1.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/commons-fileupload-1.2.jar"/>
@@ -119,5 +118,7 @@
 	<classpathentry kind="lib" path="war/WEB-INF/lib/XmlSchema-1.4.2.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/xom-1.0b3.jar"/>
 	<classpathentry kind="lib" path="war/WEB-INF/lib/xstream.jar"/>
+	<classpathentry kind="lib" path="libs/appengine-libs/cloud-storage-lib/appengine-gcs-client-0.5.jar"/>
+	<classpathentry kind="lib" path="libs/appengine-libs/cloud-storage-lib/commons-logging-1.1.1.jar"/>
 	<classpathentry kind="output" path="classes"/>
 </classpath>

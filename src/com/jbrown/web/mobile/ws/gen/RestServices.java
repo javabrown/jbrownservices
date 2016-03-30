@@ -5,6 +5,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,6 +46,21 @@ public class RestServices extends BrownServices implements WsInterface,
     return EMPTY_VIEW;
   }
 
+  @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+  public ModelAndView handleError405(HttpServletRequest req, Exception e)   {
+    ResponderI respoder = getResponderFactory().getResponder(
+        ResponderK.INAVLID_REQUEST_RESPONDER);
+    
+    //ModelAndView mav = new ModelAndView("/405");
+    //mav.addObject("exception", e);  
+    //mav.addObject("errorcode", "405");
+    
+    BrownRequestI request = super.getBrownRequest(req);
+    request.getErrors().clear();
+    respoder.respond(request);
+    return EMPTY_VIEW;
+  }
+  
   @Override
   public ModelAndView getUserInfo(String userName, @PathVariable String email,
       HttpServletRequest req, HttpServletResponse res, ModelMap model) {
