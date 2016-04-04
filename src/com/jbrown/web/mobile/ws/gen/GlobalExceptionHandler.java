@@ -1,20 +1,26 @@
 package com.jbrown.web.mobile.ws.gen;
  
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-import org.springframework.web.servlet.NoHandlerFoundException; 
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver;
 
 @ControllerAdvice
-public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
+public class GlobalExceptionHandler extends DefaultHandlerExceptionResolver {
 
-    @Override
-    protected ResponseEntity handleNoHandlerFoundException(NoHandlerFoundException ex,
-            HttpHeaders headers, HttpStatus status, WebRequest request) {
-      System.out.println("Hello");
-       return null;
-    }
+  @Override
+  protected ModelAndView handleHttpRequestMethodNotSupported(
+      HttpRequestMethodNotSupportedException ex, HttpServletRequest request,
+      HttpServletResponse response, Object handler) throws IOException {
+     
+    return super
+        .handleHttpRequestMethodNotSupported(ex, request, response, handler);
+  }
+    
 }
+ 

@@ -66,8 +66,6 @@ public class BrownWsFilter implements BrownFilterI {
 		BrownErrorsI errors = new BrownErrors();
 		BrownRequestI brownRequest = new BrownRequest(request, response,
 				errors, this.brownContext);
-		
-		
 				
 		request.setAttribute(BrownKeysI.BROWN_REQUEST_OBJ_K, brownRequest);
 		

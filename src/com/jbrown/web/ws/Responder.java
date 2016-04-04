@@ -51,10 +51,9 @@ public abstract class Responder implements ResponderI, BrownKeysI {
 			//httpResponse.setContentType(MimeTypesI.PLAIN_TEXT);
 			httpResponse.setContentType(outputFormat.getMimeType());
 			
-			httpResponse.setStatus(HttpServletResponse.SC_OK);
+			//httpResponse.setStatus(HttpServletResponse.SC_OK);
 			PrintWriter writer = httpResponse.getWriter();
-
-
+			
 			writer.print(response.transform(outputFormat, callBack));
 			
 			writer.flush();
