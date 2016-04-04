@@ -10,39 +10,35 @@
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 
- <import resource="responders.xml"/>
-  
- <context:component-scan base-package="com.jbrown.web.ws.gen"/> 
- 
- <mvc:annotation-driven/>
- 
- <mvc:interceptors>
-    <bean class="com.jbrown.web.RestInterceptor"/>
- </mvc:interceptors>
-  
- 
-	      <!-- <mvc:interceptors>
-					   <mvc:interceptor>
-						     <mvc:mapping path="/**" />
-						     <bean class="com.jbrown.web.RestInterceptor" />
-					   </mvc:interceptor>
-				</mvc:interceptors> -->
- 
- 
+	<import resource="responders.xml" />
 
- 
+	<context:component-scan base-package="com.jbrown.web.ws.gen" />
+
+	<mvc:annotation-driven />
+
+	<mvc:interceptors>
+		<bean class="com.jbrown.web.RestInterceptor" />
+	</mvc:interceptors>
+
+
+	<!-- <mvc:interceptors> <mvc:interceptor> <mvc:mapping path="/**" /> <bean 
+		class="com.jbrown.web.RestInterceptor" /> </mvc:interceptor> </mvc:interceptors> -->
 
 
 	<bean id="restService" init-method="init"
-		     class="com.jbrown.web.mobile.ws.gen.RestServices">
+		class="com.jbrown.web.mobile.ws.gen.RestServices">
 		<property name="sharedContext">
-			  <ref bean="brownContext" />
+			<ref bean="brownContext" />
 		</property>
 		<property name="responderFactory">
 			  <ref bean="responderFactory" />
 		</property>
 	</bean>
-	
+
+ <bean id="restExceptionResolver"  class="com.jbrown.web.mobile.ws.gen.RestExceptionResolver">
+      <constructor-arg ref="restService"/>
+ </bean>
+	 
 	<bean
 		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
 		<property name="mediaTypes">
@@ -52,18 +48,18 @@
 			</map>
 		</property>
 		<property name="viewResolvers">
-			<list>
-				<bean class="org.springframework.web.servlet.view.BeanNameViewResolver" />
-				<bean id="viewResolver"
-					class="org.springframework.web.servlet.view.UrlBasedViewResolver">
-					<property name="viewClass"
-						value="org.springframework.web.servlet.view.JstlView" />
-					<property name="prefix" value="/WEB-INF/jsp/" />
-					<property name="suffix" value=".jsp" />
-				</bean>
-			</list>
+			  <list>
+					  <bean class="org.springframework.web.servlet.view.BeanNameViewResolver" />
+ 
+					
+					  <bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+						     <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+						     <property name="prefix" value="/WEB-INF/jsp/" />
+						     <property name="suffix" value=".jsp" />
+					  </bean>
+			  </list>
 		</property>
 	</bean>
-	
+
 
 </beans>
