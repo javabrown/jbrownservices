@@ -35,9 +35,9 @@
 		</property>
 	</bean>
 
- <bean id="restExceptionResolver"  class="com.jbrown.web.mobile.ws.gen.RestExceptionResolver">
+ <!-- bean id="restExceptionResolver"  class="com.jbrown.web.mobile.ws.gen.RestExceptionResolver">
       <constructor-arg ref="restService"/>
- </bean>
+ </bean -->
 	 
 	<bean
 		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">

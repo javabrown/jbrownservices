@@ -227,4 +227,5 @@ public class BrownUtil implements Serializable {
 		Object instance = cls.newInstance(); // Should print "world".
 		System.out.println(instance); // Should print "test.Test@hashcode".
 	}
+  
 }

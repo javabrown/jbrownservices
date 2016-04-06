@@ -1,7 +1,7 @@
 <html><head><META http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" type="text/css" media="screen"><link rel="stylesheet" href="https://cdn.datatables.net/plug-ins/3cfcc339e89/integration/jqueryui/dataTables.jqueryui.css" type="text/css" media="screen"><link rel="stylesheet" href=" http://getbootstrap.com/2.3.2/assets/css/bootstrap.css" type="text/css" media="screen"><link rel="stylesheet" href="http://jschr.github.io/bootstrap-modal/css/bootstrap-modal.css" type="text/css" media="screen"><script src="https://code.jquery.com/jquery-1.11.1.min.js"></script><script src="https://cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script><script src="https://cdn.datatables.net/plug-ins/3cfcc339e89/integration/jqueryui/dataTables.jqueryui.js"></script><script src="http://getbootstrap.com/2.3.2/assets/js/bootstrap.js"></script><script src="http://jschr.github.io/bootstrap-modal/js/bootstrap-modal.js"></script><script src="http://jschr.github.io/bootstrap-modal/js/bootstrap-modalmanager.js"></script><script>
-       		$(document).ready(function() {
-       			 var host = window.location.host ? window.location.host : "localhost:8080";
-   				 var wsHost = window.location.protocol + "//" + host + "/jbrownservices/api/ws/v";
+   $(document).ready(function() {
+        var host = window.location.host ? window.location.host : "localhost:8080";
+   			  var wsHost = window.location.protocol + "//" + host + "/jbrownservices/api/ws/v";
    				 $('.uri').html(wsHost);
    			     prepareDialog();
    			     

@@ -22,9 +22,8 @@ public class InvalidRequestResponder extends Responder {
   @Override
   protected BrownErrorsI validate(BrownRequestI request) {
     BrownErrorsI errors = request.getErrors();
-   
- 
-    request.getHttpServletResponse().setStatus(HttpServletResponse.SC_NOT_FOUND);
+    
+      //request.getHttpServletResponse().setStatus(HttpServletResponse.SC_NOT_FOUND);
    
     
     return errors;

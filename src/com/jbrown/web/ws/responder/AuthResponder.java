@@ -5,11 +5,14 @@ import static com.jbrown.core.util.BrownConstant.FB_ACCESS_TOKEN;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.util.StringUtils;
 
+import com.jbrown.ApplicationProperties;
 import com.jbrown.core.util.BrownKeysI;
 import com.jbrown.core.util.StringUtil;
 import com.jbrown.errors.BrownErrorsI;
+import com.jbrown.errors.BrownMessage;
 import com.jbrown.user.Authenticator;
 import com.jbrown.web.ws.BrownRequestI;
 import com.jbrown.web.ws.Responder;
@@ -69,7 +72,7 @@ public class AuthResponder extends Responder {
   @Override
   protected BrownErrorsI validate(BrownRequestI request) {
     BrownErrorsI errors = request.getErrors();
-
+   
     if (request.getHeadersMap() != null) {
       String token = request.getHeadersMap().get(BrownKeysI.AUTH_CODE_K);
       //String fbAccessToken = request.getHeadersMap().get(FB_ACCESS_TOKEN);
@@ -81,7 +84,8 @@ public class AuthResponder extends Responder {
       // }
 
       if (StringUtil.isEmpty(token)) {
-        errors.add(AUTH_CODE_K + " is missing in request header");
+        errors.addError( new BrownMessage(
+            MANDATORY_FIELDS_MISSING, AUTH_CODE_K + " is missing in request header") );
       }
     }
 

@@ -53,4 +53,6 @@ public interface BrownKeysI {
 
   String QUESTIONS_K = "questions";
   String ALL_QUIZ_QUESTIONS_K = "ALL_QUIZ_QUESTIONS_K";
+  
+  String MANDATORY_FIELDS_MISSING = "MANDATORY_FIELDS_MISSING";
 }

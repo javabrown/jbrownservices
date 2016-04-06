@@ -17,6 +17,7 @@
 	<property name="dir.src" value="src" />
 	<property name="dir.classes" value="war/WEB-INF/classes" />
 	<property name="dir.lib" value="war/WEB-INF/lib" />
+	<property name="dir.conf" value="war/WEB-INF/conf" />
 	<property name="dir.webroot" value="war/" />
 	<property name="dir.serviceclient.classes" value="serviceTestClasses" />
 	
@@ -55,8 +56,16 @@
 		      </fileset>
 	    </copy>
  </target>
+ 
+ <target name="copy-conf-files" description="Copies the conf files to class dir.">
+	    <copy todir="war/WEB-INF/classes" flatten="true">
+		      <fileset dir="${dir.conf}">
+		        <include name="**/*.properties" />
+		      </fileset>
+	    </copy>
+ </target>
 
-	<target name="deploy" depends="clean, copy-jars, mobile-doc-gen, mobile-api-gen, deployOnMac, deployOnWindows">
+	<target name="deploy" depends="clean, copy-jars, copy-conf-files, mobile-doc-gen, mobile-api-gen, deployOnMac, deployOnWindows">
 		<!--<mkdir dir="${dir.classes}" /> <javac srcdir="${dir.src}" destdir="${dir.classes}" 
 			fork="true" debug="true" classpathref="javac.classpath" /> <jar destfile="dist/jbrownservices.war"> 
 			<fileset dir="web" /> </jar> <copy todir="/mysoftwares/tomcat-6/webapps"> 

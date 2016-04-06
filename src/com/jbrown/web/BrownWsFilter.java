@@ -10,11 +10,13 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.jbrown.ApplicationProperties;
 import com.jbrown.core.util.BrownAuthUtil;
 import com.jbrown.core.util.BrownKeysI;
 import com.jbrown.db.dao.DataStore;
 import com.jbrown.errors.BrownErrors;
 import com.jbrown.errors.BrownErrorsI;
+import com.jbrown.errors.BrownMessage;
 import com.jbrown.web.ws.BrownRequest;
 import com.jbrown.web.ws.BrownRequestI;
 
@@ -61,7 +63,7 @@ public class BrownWsFilter implements BrownFilterI {
 	public void preAction(HttpServletRequest request,
 			HttpServletResponse response) {
 		System.out.println("Filtered request");
-		
+		 System.out.println(ApplicationProperties.getInstance().isGAEProduction());
 		//Initialize error object
 		BrownErrorsI errors = new BrownErrors();
 		BrownRequestI brownRequest = new BrownRequest(request, response,
@@ -70,7 +72,7 @@ public class BrownWsFilter implements BrownFilterI {
 		request.setAttribute(BrownKeysI.BROWN_REQUEST_OBJ_K, brownRequest);
 		
 		if(!BrownAuthUtil.isValidUser(brownRequest)){
-			errors.add("INVALID_USER", "Invalid Service User");
+			errors.addError(new BrownMessage("INVALID_USER", "Api Access Denied!!"));
 		}
 	}
 
