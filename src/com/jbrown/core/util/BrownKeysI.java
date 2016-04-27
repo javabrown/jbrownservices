@@ -55,4 +55,13 @@ public interface BrownKeysI {
   String ALL_QUIZ_QUESTIONS_K = "ALL_QUIZ_QUESTIONS_K";
   
   String MANDATORY_FIELDS_MISSING = "MANDATORY_FIELDS_MISSING";
+  
+  String DB_DRIVER = "dbDriver";
+  String DB_URL = "dbURL";
+  String DB_PORT = "dbPort";
+  String DB_USER = "dbUser";
+  String DB_PASSWORD = "dbPassword";
+  
+  String DEV_PREFIX = "dev.";
+  String PROD_PREFIX = "gae.";
 }

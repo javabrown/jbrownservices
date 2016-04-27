@@ -3,8 +3,10 @@ package com.jbrown.web.ws.responder;
 import java.util.HashMap;
 import java.util.Map;
  
+
 import com.jbrown.core.util.BrownAuthUtil;
 import com.jbrown.core.util.BrownKeysI;
+import com.jbrown.core.util.MailUtil;
 import com.jbrown.core.util.StringUtil;
 import com.jbrown.db.dao.UserDao;
 import com.jbrown.errors.BrownErrorsI;
@@ -26,7 +28,7 @@ public class LoginResponder extends Responder {
 		Map<String, Object> result = new HashMap<String, Object>();
 		result.put(RESPONSE_K, authCode != null);
 		result.put(AUTH_CODE_K, authCode);
-
+		//MailUtil.sendEmail();
 		return result;
 	}
 

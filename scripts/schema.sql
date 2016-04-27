@@ -1,10 +1,11 @@
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (                   
-          `id` int(11) NOT NULL AUTO_INCREMENT,  
-          `name` varchar(250) DEFAULT NULL,      
-          `email` varchar(50) NOT NULL,          
-          `phone` varchar(50) DEFAULT NULL,      
-          `password` varchar(50) DEFAULT NULL,   
+          `id` INT(11) NOT NULL AUTO_INCREMENT,  
+          `name` VARCHAR(250) DEFAULT NULL,      
+          `email` VARCHAR(50) NOT NULL,          
+          `phone` VARCHAR(50) DEFAULT NULL,      
+          `password` VARCHAR(50) DEFAULT NULL,
+          `domain` VARCHAR(60) DEFAULT NULL,
           PRIMARY KEY (`id`,`email`),            
           UNIQUE KEY `id` (`id`)                 
-        ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
+        ) ENGINE=INNODB DEFAULT CHARSET=utf8;

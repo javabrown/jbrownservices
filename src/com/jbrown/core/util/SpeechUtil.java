@@ -16,121 +16,118 @@ import com.sun.speech.freetts.audio.SingleFileAudioPlayer;
 
 public class SpeechUtil {
 
-	public SpeechUtil() {
-	}
+  public SpeechUtil() {
+  }
 
-	public static void main(String[] args) throws Exception {
-		new SpeechUtil().speak3();
+  public static void main(String[] args) throws Exception {
+    new SpeechUtil().speak3();
 
-	}
+  }
 
-	public void speak2() throws Exception {
-		try {
-			System.setProperty("freetts.voices",
-					"com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory");
+  public void speak2() throws Exception {
+    try {
+      System.setProperty("freetts.voices",
+          "com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory");
 
-			Central.registerEngineCentral("com.sun.speech.freetts.jsapi.FreeTTSEngineCentral");
-			Synthesizer synthesizer = Central
-					.createSynthesizer(new SynthesizerModeDesc(Locale.US));
-			synthesizer.allocate();
-			synthesizer.resume();
-			synthesizer.speakPlainText("Can you hear me now?", null);
-			synthesizer.waitEngineState(Synthesizer.QUEUE_EMPTY);
+      Central
+          .registerEngineCentral("com.sun.speech.freetts.jsapi.FreeTTSEngineCentral");
+      Synthesizer synthesizer = Central
+          .createSynthesizer(new SynthesizerModeDesc(Locale.US));
+      synthesizer.allocate();
+      synthesizer.resume();
+      synthesizer.speakPlainText("Can you hear me now?", null);
+      synthesizer.waitEngineState(Synthesizer.QUEUE_EMPTY);
 
-			synthesizer.deallocate();
+      synthesizer.deallocate();
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
 
-	public void speak3(){
-		FreeTTS freetts;
-	       AudioPlayer audioPlayer = null;
-	            String voiceName = "kevin16";
-  
-	            VoiceManager voiceManager = VoiceManager.getInstance();
-	            Voice helloVoice = voiceManager.getVoice(voiceName);
+  public void speak3() {
+    FreeTTS freetts;
+    AudioPlayer audioPlayer = null;
+    String voiceName = "kevin16";
 
-	            if (helloVoice == null) {
-	                System.err.println(
-	                    "Cannot find a voice named "
-	                    + voiceName + ".  Please specify a different voice.");
-	                System.exit(1);
-	            }
- 
-	            helloVoice.allocate();
- 
-	           audioPlayer = new SingleFileAudioPlayer("C:/test/test",Type.WAVE);
-	           
-	           helloVoice.setAudioPlayer(audioPlayer);
-//helloVoice.dump(new PrintWriter(arg0, arg1), pad, title);
+    VoiceManager voiceManager = VoiceManager.getInstance();
+    Voice helloVoice = voiceManager.getVoice(voiceName);
 
+    if (helloVoice == null) {
+      System.err.println("Cannot find a voice named " + voiceName
+          + ".  Please specify a different voice.");
+      System.exit(1);
+    }
 
-	            helloVoice.speak("Thank you for giving me a voice. "
-	                             + "I'm so glad to say hello to this world.");
- 
-	            helloVoice.deallocate();
-	 
-	            audioPlayer.close();
-	}
-	
-	public void speak1() throws Exception {
-		Voice voice;
-		FreeTTS freetts;
+    helloVoice.allocate();
 
-		{
-			voice = VoiceManager.getInstance().getVoice("kevin16");
-			
-			if (voice != null) {
-				voice.allocate();
-			}
-			
-			freetts = new FreeTTS(voice);
-			voice.speak("hello,world");
+    audioPlayer = new SingleFileAudioPlayer("C:/test/test", Type.WAVE);
 
-			freetts.startup();
-			// freetts.urlToSpeech("http://10.0.0.109:8080/");
-			freetts.setAudioFile("c:\\test\\test.wav");
-		 
-			freetts.shutdown();
-		}
-	}
+    helloVoice.setAudioPlayer(audioPlayer);
+    // helloVoice.dump(new PrintWriter(arg0, arg1), pad, title);
 
-	public void speak() throws Exception {
-		VoiceManager voiceManager = VoiceManager.getInstance();
+    helloVoice.speak("Hi Maulik this is my test program so glad to say hello to this world.");
 
-		// Get all available voices
-		Voice[] voices = voiceManager.getVoices();
-		for (int i = 0; i < voices.length; i++) {
-			System.out.println(voices[i].getName());
-		}
+    helloVoice.deallocate();
 
-		String voiceName = "kevin16";
-		voiceManager = null;
-		Voice voice = null;
+    audioPlayer.close();
+  }
 
-		voiceManager = VoiceManager.getInstance();
-		voice = voiceManager.getVoice(voiceName);
+  public void speak1() throws Exception {
+    Voice voice;
+    FreeTTS freetts;
 
-		voice.setPitch((float) 4.00);
-		voice.setPitchShift((float) .005);
-		voice.setPitchRange((float) 0.01);
-		// "business", "casual", "robotic", "breathy"
-		voice.setStyle("business");
+    {
+      voice = VoiceManager.getInstance().getVoice("kevin16");
 
-		// allocate the resources for the voice
-		voice.allocate();
+      if (voice != null) {
+        voice.allocate();
+      }
 
-		// Create input stream from file
-		java.io.InputStream in = new java.io.FileInputStream(
-				new java.io.File(
-						"C:/git-repo/jbrownservices/src/com/jbrown/core/util/Pair.java"));
-		voice.speak(in);
+      freetts = new FreeTTS(voice);
+      voice.speak("hello,world");
 
-		// voice.dump(output, pad, title); look into it later to save the file
-		voice.deallocate();
+      freetts.startup();
+      // freetts.urlToSpeech("http://10.0.0.109:8080/");
+      freetts.setAudioFile("c:\\test\\test.wav");
 
-	}
+      freetts.shutdown();
+    }
+  }
+
+  public void speak() throws Exception {
+    VoiceManager voiceManager = VoiceManager.getInstance();
+
+    // Get all available voices
+    Voice[] voices = voiceManager.getVoices();
+    for (int i = 0; i < voices.length; i++) {
+      System.out.println(voices[i].getName());
+    }
+
+    String voiceName = "kevin16";
+    voiceManager = null;
+    Voice voice = null;
+
+    voiceManager = VoiceManager.getInstance();
+    voice = voiceManager.getVoice(voiceName);
+
+    voice.setPitch((float) 4.00);
+    voice.setPitchShift((float) .005);
+    voice.setPitchRange((float) 0.01);
+    // "business", "casual", "robotic", "breathy"
+    voice.setStyle("business");
+
+    // allocate the resources for the voice
+    voice.allocate();
+
+    // Create input stream from file
+    java.io.InputStream in = new java.io.FileInputStream(new java.io.File(
+        "C:/git-repo/jbrownservices/src/com/jbrown/core/util/Pair.java"));
+    voice.speak(in);
+
+    // voice.dump(output, pad, title); look into it later to save the file
+    voice.deallocate();
+
+  }
 
 }

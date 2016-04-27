@@ -10,6 +10,7 @@ import org.springframework.util.StringUtils;
 
 import com.jbrown.ApplicationProperties;
 import com.jbrown.core.util.BrownKeysI;
+import com.jbrown.core.util.MailUtil;
 import com.jbrown.core.util.StringUtil;
 import com.jbrown.errors.BrownErrorsI;
 import com.jbrown.errors.BrownMessage;
@@ -65,7 +66,9 @@ public class AuthResponder extends Responder {
     String result = new Authenticator().registerNewUser(name, email, phone,
         password, request.getDomain());
     map.put(RESPONSE_K, result);
-
+    
+    MailUtil.sendEmail();
+    
     return map;
   }
 

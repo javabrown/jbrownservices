@@ -2,8 +2,11 @@ package com.jbrown;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Properties;
+import static com.jbrown.core.util.BrownKeysI.*;
 
 import com.google.appengine.api.utils.SystemProperty;
 
@@ -30,13 +33,44 @@ public class ApplicationProperties {
       return _instance;
   }
   
-  
+  public Map<String, String> getDbPropertiesMap() {
+    Map<String, String> map = new HashMap<String, String>();
+    
+    String prefix = isGAEProduction() ? PROD_PREFIX : DEV_PREFIX;
+    
+    if(!isGAEProduction()) {
+      String dbDriver = getDevProperty(prefix + DB_DRIVER);
+      String dbUrl = getDevProperty(prefix + DB_URL);
+      String dbPort = getDevProperty(prefix + DB_PORT);
+      String dbUser = getDevProperty(prefix + DB_USER);
+      String dbPassword = getDevProperty(prefix + DB_PASSWORD);
+      
+      map.put(DB_DRIVER, dbDriver);
+      map.put(DB_URL, dbUrl);
+      map.put(DB_PORT, dbPort);
+      map.put(DB_USER, dbUser);
+      map.put(DB_PASSWORD, dbPassword);
+      
+      System.out.printf("***[%s, %s, %s, %s]**", dbDriver, dbUrl, dbPort, dbUser);
+   }
+   else {
+      System.err.printf("Data File in GAE Production Environment is Pending");
+   }
+   
+    return map;
+  }
+//  
+//  String DB_DRIVER = "dbDriver";
+//  String DB_URL = "dbURL";
+//  String DB_USER = "dbUser";
+//  String DB_PASSWORD = "dbPassword";
+//  
   private void init(){
     if(!isGAEProduction()){
        String propValue = getDevProperty("dbDriver");
        System.out.printf("***[%s]**", propValue);
     }
-    else{
+    else {
       System.out.printf("***[%s]**", "Prod Found");
     }
     
